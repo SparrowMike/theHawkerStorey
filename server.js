@@ -1,5 +1,4 @@
 const express = require("express");
-const dummy = require("./models/dummy.js");
 require("dotenv").config();
 
 const app = express();
