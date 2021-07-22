@@ -116,6 +116,9 @@ export default function Navbar() {
             <MenuItem component={RouterLink} to="/About">
               <Typography variant="h6">About</Typography>
             </MenuItem>
+            <MenuItem component={RouterLink} to="/">
+              <Typography variant="h6">Login</Typography>
+            </MenuItem>
           </Toolbar>
         </AppBar>
       ) : (
