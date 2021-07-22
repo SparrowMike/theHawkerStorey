@@ -12,4 +12,5 @@
 - cd front_end
 - npm install
 - npm i react-router react-router-dom
+- npm install @material-ui/core @material-ui/icons
 - npm run start
