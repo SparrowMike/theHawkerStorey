@@ -17,14 +17,21 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { useMediaQuery } from "@material-ui/core";
+
+import { MenuItem, TextField } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
+import FastfoodIcon from "@material-ui/icons/Fastfood";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    margin: "40px",
   },
   appBar: {
+    borderTop: "50px",
     color: "black",
     backgroundColor: "#fafafa",
     transition: theme.transitions.create(["margin", "width"], {
@@ -84,6 +91,8 @@ export default function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -95,27 +104,43 @@ export default function Navbar() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap className={classes.title}>
-            The Hawkers Storey
-          </Typography>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerOpen}
-            className={clsx(open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      {!isMobile ? (
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <Typography variant="h6" noWrap className={classes.title}>
+              The Hawker Storey
+            </Typography>
+            <MenuItem component={RouterLink} to="/">
+              <Typography variant="h6">Home</Typography>
+            </MenuItem>
+            <MenuItem component={RouterLink} to="/About">
+              <Typography variant="h6">About</Typography>
+            </MenuItem>
+          </Toolbar>
+        </AppBar>
+      ) : (
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            <Typography variant="h6" noWrap className={classes.title}>
+              <FastfoodIcon />
+            </Typography>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={handleDrawerOpen}
+              className={clsx(open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      )}
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -146,7 +171,6 @@ export default function Navbar() {
           ))}
         </List>
         <Divider />
-
         <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem button key={text}>
