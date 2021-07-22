@@ -9,6 +9,12 @@ function App() {
         <Route path="/" exact>
           <Navbar />
           <h1>Main Component Route. See App.js</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo
+            perspiciatis dolorem suscipit est voluptatum dicta, eaque non
+            dolores qui ea vero, nulla voluptatem ipsam inventore ducimus. Velit
+            cumque animi assumenda.
+          </p>
         </Route>
         <Route path="/about">
           <h1>About</h1>
