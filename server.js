@@ -23,10 +23,24 @@ app.use(
 app.use(express.json());
 app.use(express.static("public"));
 
-const dummyController = require("./controllers/dummy.js");
-app.use("/v1/dummy", dummyController);
+//! available on > http://localhost:4000/v1/posts
+const postsController = require("./controllers/posts.js");
+app.use("/v1/posts", postsController);
 
+// const dishesController = require("./controllers/dishes.js");
+// app.use("/v1/dishes", dishesController);
 
+// const hawkerCentreController = require("./controllers/hawkerCentre.js");
+// app.use("/v1/hawkerCentre", hawkerCentreController);
+
+// const hawkerStallsController = require("./controllers/duhawkerStallsmmy.js");
+// app.use("/v1/hawkerStalls", hawkerStallsController);
+
+// const usersController = require("./controllers/users.js");
+// app.use("/v1/users", usersController);
+
+// const dishesController = require("./controllers/dishes.js");
+// app.use("/v1/dishes", dishesController);
 
 app.listen(PORT, () => {
   console.log("Listening on the port", PORT);
