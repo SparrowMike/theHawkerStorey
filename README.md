@@ -1,13 +1,11 @@
-1. Git clone
-
-2. Back-End
+### 1. Back-End
 
 - cd theHawkerStorey
 - touch .env (copy everything from .env.example)
 - npm i express dotenv nodemon mongoose bcrypt express-session cors
 - run app with "nodemon" then go => localhost:4000/v1/dummy
 
-3. Front-End
+### 2. Front-End
 
 - cd front_end
 - npm install
@@ -15,7 +13,9 @@
 - npm install @material-ui/core @material-ui/icons
 - npm run start
 
-4. GIT commands
+### 3. GIT commands
+
+#### Must Know GIT
 
 - git branch <== to check branch
 - git branch <branchName> <== to create new branch
@@ -28,7 +28,7 @@
 - git push -u origin <branchName>
 - go to the link from terminal and create Pull request <==> starts with ==> "Create a pull request for...."
 
-5. Usefull GIT commands
+#### Usefull GIT commands
 
 - git status
 - git log
@@ -36,8 +36,7 @@
 - git diff <== show the difference
 - git branch -d <branchName> <== delete branch locally
 
-6. GIT MERGE, carefully..
+#### GIT merge instead of PULL
 
 - git checkout master
-- git fetch <== Before merging, you should update your local dev branch
 - git merge <branchName>
