@@ -14,3 +14,17 @@
 - npm i react-router react-router-dom
 - npm install @material-ui/core @material-ui/icons
 - npm run start
+
+4. GIT commands
+
+- git branch <== to check branch
+- git checkout -b <newBranchName> <== simultaneously creates and checks out branch
+- git checkout <branchName> <== to switch branch
+- git diff <== show the difference
+- git add <fileYouWorkedOn> <== example ==> git add server.js
+- git commit -m "you know what to do ^.^"
+- git push <== then copy command provided in terminal
+ OR
+- git push -u origin <branchName>
+- go to the link from terminal and create Pull request 
+
