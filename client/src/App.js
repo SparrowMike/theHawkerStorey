@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Main from "./components/main";
+import SignUp from "./components/singup";
+import SignIn from "./components/singin";
 
 function App() {
   return (
@@ -9,11 +11,15 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Navbar />
-          {/* <h1>Hi There! 🙋🏻‍♂️</h1> */}
           <Main />
         </Route>
-        <Route path="/about">
-          <h1>About</h1>
+        <Route path="/signup">
+          <Navbar />
+          <SignUp />
+        </Route>
+        <Route path="/login">
+          <Navbar />
+          <SignIn />
         </Route>
       </Switch>
     </Router>
