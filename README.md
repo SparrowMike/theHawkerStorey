@@ -7,7 +7,7 @@
 
 ### 2. Front-End
 
-- cd front_end
+- cd client
 - npm install
 - npm i react-router react-router-dom
 - npm install @material-ui/core @material-ui/icons
