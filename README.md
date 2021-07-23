@@ -40,3 +40,9 @@
 
 - git checkout master
 - git merge <branchName>
+
+#### GIT rebase (undo from a current featuer branch and reset to master)
+https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+- git checkout <experiment>
+- git rebase master
+
