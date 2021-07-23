@@ -34,3 +34,10 @@
 - git log
 - git log --graph --oneline --all <== show tree-view log
 - git diff <== show the difference
+- git branch -d <branchName> <== delete branch locally
+
+6. GIT MERGE, carefully..
+
+- git checkout master
+- git fetch <== Before merging, you should update your local dev branch
+- git merge <branchName>
