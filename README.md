@@ -34,3 +34,15 @@
 - git log
 - git log --graph --oneline --all <== show tree-view log
 - git diff <== show the difference
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  HERE FOR CONFLICT!!
