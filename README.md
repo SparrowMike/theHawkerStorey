@@ -24,7 +24,6 @@
 - git add <fileYouWorkedOn> <== example ==> git add server.js
 - git commit -m "you know what to do ^.^"
 - git push <== then copy command provided in terminal
- OR
+  OR
 - git push -u origin <branchName>
-- go to the link from terminal and create Pull request 
-
+- go to the link from terminal and create Pull request <==> starts with ==> "Create a pull request for...."
