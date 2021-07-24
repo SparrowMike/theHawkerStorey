@@ -55,6 +55,18 @@ router.get("/seed", (req, res) => {
 
 
 //! dave imageUploader test
-
+router.post('/api/upload', async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(
+      fileStr, {
+        upload_preset: "hawkerstorey-default"
+      });
+    console.log(uploadedResponse)
+    res.json({ msg: "UPLOADED" })
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 module.exports = router;

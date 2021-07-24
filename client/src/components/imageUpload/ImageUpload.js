@@ -33,13 +33,6 @@ const ImageUpload = ({ acceptedFiles }) => {
     uploadImage(previewSource);
   }
 
-  const handleSubmitFile = (acceptedFiles) => {
-    previewFile(acceptedFiles)
-    console.log("submitting")
-    if (!acceptedFiles) return;
-    uploadImage(acceptedFiles);
-  }
-
   const uploadImage = async (base64EncodedImage) => {
     console.log(base64EncodedImage)
     try {
@@ -77,7 +70,7 @@ const ImageUpload = ({ acceptedFiles }) => {
   return (
     <>
       <h1>Upload Form</h1>
-      <form onSubmit={(e) => handleUpload(e, acceptedFiles)}>
+      <form onSubmit={handleSubmitFile}>
         <input type="file" name="image" onChange={handleFile} value={acceptedFiles} />
         <button type="submit">Submit</button>
       </form>
