@@ -67,13 +67,15 @@ router.get("/seed", (req, res) => {
     ],
     (err, data) => {
       res.redirect("/v1/posts");
-=======
+    })
+}
+)
 // create a post
 router.post("/", (req, res) => {
   Posts.create(req.body, (error, createdPost) => {
     if (error) {
       res.status(400).json({ error: error.message })
-    } 
+    }
     res.status(200).send(createdPost)
   })
 })
