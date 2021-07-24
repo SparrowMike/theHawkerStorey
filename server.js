@@ -61,8 +61,8 @@ mongoose.connection.once("open", () => {
 const postsController = require("./controllers/posts.js");
 app.use("/v1/posts", postsController);
 
-const hawkerStallsController = require("./controllers/hawkerStalls");
-app.use("/v1/hawkerstalls", hawkerStallsController)
+const hawkersController = require("./controllers/hawkers");
+app.use("/v1/hawkers", hawkersController)
 
 const dishes = require("./models/dishes.js");
 // const dishesController = require("./controllers/dishes.js");

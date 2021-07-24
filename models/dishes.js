@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema
 
-const dishesSchema = mongoose.Schema({
+const dishesSchema = new Schema({
   name: { type: String, required: true },
   cuisine: { type: String, required: true },
 
@@ -8,4 +9,6 @@ const dishesSchema = mongoose.Schema({
   //! + hawker centre name (query from hc_id)
 });
 
-module.exports = mongoose.model("Dishes", dishesSchema);
+const Dishes = mongoose.model("Dishes", dishesSchema);
+
+module.exports = Dishes;
