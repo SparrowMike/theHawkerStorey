@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,14 +14,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery, Button } from "@material-ui/core";
 
 import { MenuItem } from "@material-ui/core";
-// import { MenuItem, TextField } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 
@@ -34,6 +31,10 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import dishName from "./../data/dishName";
 import hawkerStalls from "./../data/hawkerStalls";
 import hawkerCentre from "./../data/hawkerCentre";
+
+import { DropzoneArea } from "material-ui-dropzone";
+import Rating from "@material-ui/lab/Rating";
+import { Box } from "@material-ui/core";
 
 const drawerWidth = 240;
 
@@ -104,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
+    width: "75vw",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -112,20 +114,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(4);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  //*=================DEALS WITH MOBILE VIEW DRAWER==================
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
   //*=================DEALS WITH POST MODAL==================
-  const [openPost, setOpenPost] = React.useState(false);
+  const [openPost, setOpenPost] = useState(false);
   const handleOpenPost = () => {
     setOpenPost(true);
   };
@@ -136,6 +139,7 @@ export default function Navbar() {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      {/* ====================NAVBAR FOR NONMOBILE====================*/}
       {!isMobile ? (
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
@@ -196,6 +200,8 @@ export default function Navbar() {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
+            {/* ====================NAVBAR FOR MOBILE====================*/}
+
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
@@ -204,30 +210,57 @@ export default function Navbar() {
           </IconButton>
         </div>
         <Divider />
+
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem
+            button
+            component={RouterLink}
+            onClick={handleDrawerClose}
+            to="/"
+          >
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem
+            button
+            component={RouterLink}
+            onClick={handleDrawerClose}
+            to="/"
+          >
+            <ListItemText primary="Hawker" />
+          </ListItem>
+          <ListItem
+            button
+            component={RouterLink}
+            onClick={handleDrawerClose}
+            to="/"
+          >
+            <ListItemText primary="Cuisine" />
+          </ListItem>
+          <ListItem
+            button
+            component={RouterLink}
+            onClick={handleDrawerClose}
+            to="/login"
+          >
+            <ListItemText primary="Login" />
+          </ListItem>
+          <ListItem
+            button
+            component={RouterLink}
+            onClick={handleDrawerClose}
+            to="/signup"
+          >
+            <ListItemText primary="Sign Up" />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button onClick={handleOpenPost}>
+            <ListItemText primary="Post" />
+          </ListItem>
         </List>
       </Drawer>
-
-      {/* ====================MODAL FOR POST====================*/}
+      {/* ====================MODAL FOR POST==================== */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -243,7 +276,7 @@ export default function Navbar() {
         <Fade in={openPost}>
           <div className={classes.paper}>
             <React.Fragment>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 Add New Post
               </Typography>
               <Grid container spacing={3}>
@@ -252,7 +285,6 @@ export default function Navbar() {
                     id="Hawker Centre"
                     options={hawkerCentre}
                     getOptionLabel={(option) => option}
-                    style={{ width: 300 }}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -267,7 +299,6 @@ export default function Navbar() {
                     id="Hawker Stall"
                     options={hawkerStalls}
                     getOptionLabel={(option) => option}
-                    style={{ width: 300 }}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -277,12 +308,20 @@ export default function Navbar() {
                     )}
                   />
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
+                  <DropzoneArea
+                    acceptedFiles={["image/*"]}
+                    dropzoneText={"Drag and drop an image here or click"}
+                    filesLimit={1}
+                    onChange={(files) => console.log("Files:", files)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
                   <Autocomplete
                     id="Dish Name"
                     options={dishName}
                     getOptionLabel={(option) => option}
-                    style={{ width: 300 }}
+                    // style={{ width: "50vw" }}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -291,6 +330,31 @@ export default function Navbar() {
                       />
                     )}
                   />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Review"
+                    multiline
+                    rows={4}
+                    style={{ width: "100%" }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Rating
+                    size="large"
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(event, newValue) => {
+                      setRating(newValue);
+                    }}
+                  />
+                  <Box textAlign="right">
+                    <Button variant="contained" color="primary">
+                      Submit
+                    </Button>
+                  </Box>
                 </Grid>
               </Grid>
             </React.Fragment>
