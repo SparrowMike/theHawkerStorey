@@ -64,9 +64,8 @@ app.use("/v1/posts", postsController);
 const hawkersController = require("./controllers/hawkers");
 app.use("/v1/hawkers", hawkersController)
 
-const dishes = require("./models/dishes.js");
-// const dishesController = require("./controllers/dishes.js");
-// app.use("/v1/dishes", dishesController);
+const dishesController = require("./controllers/dishes.js");
+app.use("/v1/dishes", dishesController);
 
 // const hawkerCentreController = require("./controllers/hawkerCentre.js");
 // app.use("/v1/hawkerCentre", hawkerCentreController);
@@ -74,8 +73,8 @@ const dishes = require("./models/dishes.js");
 // const hawkerStallsController = require("./controllers/duhawkerStallsmmy.js");
 // app.use("/v1/hawkerStalls", hawkerStallsController);
 
-// const usersController = require("./controllers/users.js");
-// app.use("/v1/users", usersController);
+const usersController = require("./controllers/users.js");
+app.use("/v1/users", usersController);
 
 // const dishesController = require("./controllers/dishes.js");
 // app.use("/v1/dishes", dishesController);
