@@ -26,6 +26,8 @@ import Fade from "@material-ui/core/Fade";
 
 import Post from "./post";
 
+
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -105,6 +107,8 @@ export default function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(4);
+  const [uploadFiles, setUploadFiles] = useState("")
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -156,28 +160,28 @@ export default function Navbar() {
           </Toolbar>
         </AppBar>
       ) : (
-        <AppBar
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        >
-          <Toolbar>
-            <Typography variant="h6" noWrap className={classes.title}>
-              <FastfoodIcon />
-            </Typography>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="end"
-              onClick={handleDrawerOpen}
-              className={clsx(open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      )}
+          <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: open,
+            })}
+          >
+            <Toolbar>
+              <Typography variant="h6" noWrap className={classes.title}>
+                <FastfoodIcon />
+              </Typography>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="end"
+                onClick={handleDrawerOpen}
+                className={clsx(open && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        )}
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -194,8 +198,8 @@ export default function Navbar() {
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
-              <ChevronRightIcon />
-            )}
+                <ChevronRightIcon />
+              )}
           </IconButton>
         </div>
         <Divider />
@@ -263,6 +267,94 @@ export default function Navbar() {
         }}
       >
         <Fade in={openPost}>
+          <div className={classes.paper}>
+            <React.Fragment>
+              <Typography variant="h4" gutterBottom>
+                Add New Post
+              </Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6}>
+                  <Autocomplete
+                    id="Hawker Centre"
+                    options={hawkerCentre}
+                    getOptionLabel={(option) => option}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Hawker Centre"
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Autocomplete
+                    id="Hawker Stall"
+                    options={hawkerStalls}
+                    getOptionLabel={(option) => option}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Hawker Stall"
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <DropzoneArea
+                    acceptedFiles={["image/*"]}
+                    dropzoneText={"Drag and drop an image here or click"}
+                    filesLimit={1}
+                    onChange={(files) => {
+                      setUploadFiles(files)
+                      console.log("Files:", files)
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Autocomplete
+                    id="Dish Name"
+                    options={dishName}
+                    getOptionLabel={(option) => option}
+                    // style={{ width: "50vw" }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Dish Name"
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Review"
+                    multiline
+                    rows={4}
+                    style={{ width: "100%" }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Rating
+                    size="large"
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(event, newValue) => {
+                      setRating(newValue);
+                    }}
+                  />
+                  <Box textAlign="right">
+                    <Button variant="contained" color="primary">
+                      Submit
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+            </React.Fragment>
+          </div>
           <Post />
         </Fade>
       </Modal>

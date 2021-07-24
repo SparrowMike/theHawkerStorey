@@ -27,11 +27,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
   })
-  );
-  app.use(express.json());
-  app.use(express.static("public"));
-  const methodOverride = require("method-override");
-  
+);
+app.use(express.json());
+app.use(express.static("public"));
+const methodOverride = require("method-override");
+
 
 // =======================================
 //            MONGOOSE CONNECTION
@@ -82,6 +82,22 @@ app.use("/v1/users", usersController);
 // =======================================
 //              LISTENER
 // =======================================
+//! dave imageUploader test
+app.post('/api/upload', async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(
+      fileStr, {
+        upload_preset: "hawkerstorey-default"
+      });
+    console.log(uploadedResponse)
+    res.json({ msg: "UPLOADED" })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ err: 'Something went wrong' });
+  }
+})
+
 
 app.listen(PORT, () => {
   console.log("Listening on the port", PORT);
