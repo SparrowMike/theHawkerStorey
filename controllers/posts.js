@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const Posts = require("../models/posts")
 
 router.get("/", (req, res) => {
   res.send("Hello World");
 });
 
 router.get("/seed", (req, res) => {
-  Post.create(
+  Posts.create(
     [
       {
         image_url: "https://asianfoodnetwork.com/content/dam/afn/global/en/articles/5-must-try-food-in-one-of-singapore%27s-most-awarded-hawker-centers/curry%20mee.png",
@@ -46,7 +47,7 @@ router.get("/seed", (req, res) => {
 
     ],
     (err, data) => {
-      res.redirect("/");
+      res.redirect("/v1/posts");
     }
   );
 });

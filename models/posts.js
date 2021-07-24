@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const postsSchema = new mongoose.Schema({
   image_url: { type: String, required: true },
   review: { type: String, required: true },
@@ -18,4 +19,6 @@ const postsSchema = new mongoose.Schema({
   //! NEED TO RELOOK AT THIS ONE
 });
 
-module.exports = mongoose.model("Posts", postsSchema);
+const Posts = mongoose.model("Posts", postsSchema);
+
+module.exports = Posts;
