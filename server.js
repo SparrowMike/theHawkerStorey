@@ -6,31 +6,32 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
-require("dotenv").config();
-const methodOverride = require("method-override");
 const cors = require("cors");
 
 // =======================================
 //              CONFIGURATIONS
 // =======================================
+require("dotenv").config();
 const PORT = process.env.PORT;
 const mongodbURI = process.env.MONGODB_URI;
 
 
 // =======================================
-//         BODY PARSER/MIDDLEWARE
+//        BODY PARSER, MIDDLEWARE
 // =======================================
 app.use(cors());
+
 app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
   })
-);
-app.use(express.json());
-app.use(express.static("public"));
-
+  );
+  app.use(express.json());
+  app.use(express.static("public"));
+  const methodOverride = require("method-override");
+  
 
 // =======================================
 //            MONGOOSE CONNECTION
