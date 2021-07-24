@@ -5,8 +5,8 @@ const postsSchema = new mongoose.Schema({
   image_url: { type: String, required: true },
   review: { type: String, required: true },
   rating: { type: Number, required: true },
-  timestamp: { Date },
-  posted_by: { Date }, //! Reference (USERS id)
+  timestamp: { type: Date, default: Date.now },
+  posted_by: { type: Schema.Types.ObjectId, ref: "Users"}, //"Users" references User Schema
   liked_by: String,
   hc_id: String,
   hs_id: String,

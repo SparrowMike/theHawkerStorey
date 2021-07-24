@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const usersSchema = mongoose.Schema({
+const usersSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   email: { type: String },
@@ -11,4 +11,5 @@ const usersSchema = mongoose.Schema({
   //! + cuisine that they like (query from DISHES cuisine)
 });
 
-module.exports = mongoose.model("Users", usersSchema);
+const Users = mongoose.model("Users", usersSchema)
+module.exports = Users;

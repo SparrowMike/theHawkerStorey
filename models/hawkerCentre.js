@@ -1,11 +1,16 @@
 const mongoose = require("mongoose");
 
-const hawkerCentreSchema = mongoose.Schema({
+const hawkerCentreSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  address: { type: String }, //! Nested Object of String, required: True
-  name: { type: String },
+  address: {                                          //! Nested Object of String, required: True
+    street_address: {type: String, required: true },
+    postal_code: {type: Number, required: true}
+   }, 
+  description: { type: String },
 
   //! + show all hawker stalls relating to  (query from post_id)
 });
 
-module.exports = mongoose.model("HawkerCentre", hawkerCentreSchema);
+const HawkerCentre = mongoose.model("HawkerCentre", hawkerCentreSchema);
+
+module.exports = HawkerCentre
