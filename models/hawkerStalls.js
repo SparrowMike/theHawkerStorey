@@ -8,7 +8,7 @@ const hawkerStallsSchema = mongoose.Schema({
   score: { type: Number },
   image_url: { type: String },
   dishes: [{ type: String }], //! Reference (DISH id)
-  hawker_centre: "Maxwell Food Centre", //! Reference (HAWKER CENTRE id)
+  hawker_centre: {type: String}, //! Reference (HAWKER CENTRE id)
 
   //! + all user posts that reviewed stall (query from post_id)
 });
