@@ -27,11 +27,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
   })
-  );
-  app.use(express.json());
-  app.use(express.static("public"));
-  const methodOverride = require("method-override");
-  
+);
+app.use(express.json());
+app.use(express.static("public"));
+const methodOverride = require("method-override");
+
 
 // =======================================
 //            MONGOOSE CONNECTION

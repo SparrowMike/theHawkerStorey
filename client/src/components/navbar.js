@@ -36,6 +36,10 @@ import { DropzoneArea } from "material-ui-dropzone";
 import Rating from "@material-ui/lab/Rating";
 import { Box } from "@material-ui/core";
 
+//!dave testing imageUpload
+import ImageUpload from "./imageUpload/ImageUpload"
+
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -116,6 +120,7 @@ export default function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(4);
+  const [uploadFiles, setUploadFiles] = useState("")
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -167,28 +172,28 @@ export default function Navbar() {
           </Toolbar>
         </AppBar>
       ) : (
-        <AppBar
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        >
-          <Toolbar>
-            <Typography variant="h6" noWrap className={classes.title}>
-              <FastfoodIcon />
-            </Typography>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="end"
-              onClick={handleDrawerOpen}
-              className={clsx(open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      )}
+          <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: open,
+            })}
+          >
+            <Toolbar>
+              <Typography variant="h6" noWrap className={classes.title}>
+                <FastfoodIcon />
+              </Typography>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="end"
+                onClick={handleDrawerOpen}
+                className={clsx(open && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        )}
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -205,8 +210,8 @@ export default function Navbar() {
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
-              <ChevronRightIcon />
-            )}
+                <ChevronRightIcon />
+              )}
           </IconButton>
         </div>
         <Divider />
@@ -313,8 +318,13 @@ export default function Navbar() {
                     acceptedFiles={["image/*"]}
                     dropzoneText={"Drag and drop an image here or click"}
                     filesLimit={1}
-                    onChange={(files) => console.log("Files:", files)}
+                    onChange={(files) => {
+                      setUploadFiles(files)
+                      console.log("Files:", files)
+                    }}
                   />
+                  //! ImageUpload test
+                  <ImageUpload acceptedFiles={uploadFiles}/>
                 </Grid>
                 <Grid item xs={12}>
                   <Autocomplete
