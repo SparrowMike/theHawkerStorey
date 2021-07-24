@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema
 
-const hawkerStallsSchema = new mongoose.Schema({
+const hawkerStallsSchema = new Schema({
   name: { type: String, required: true },
   operating_hours: { type: String, required: true },
   closed_days: { type: String, required: true },

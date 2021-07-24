@@ -18,13 +18,35 @@ router.get("/:hawkercentrename/stalls", (req, res)=> {
 //? seed hawker centres
 //localhost:4000/v1/hawkers/seed
 router.get("/seed", (req,res)=> {
-
+  // HawkerCentre.remove({}, (err, hawkerCentres)=>{
+    HawkerCentre.create([
+      {
+        name: "Maxwell Food Centre",
+        address: {
+          street_address: "1, Kadayanallur Street",
+          postal_code: "069184",
+          description: "We wouldn’t believe anyone who say they haven’t been here, but if you really haven’t, here are the highlights from Singapore’s favourite tourist-approved hawker centre. Starting with Tian Tian Chicken Rice (Anthony Bourdain-approved, mind you), you should take note of other favourites like Zhen Zhen Porridge, and Maxwell Fuzhou Oyster Cake."
+        },
+    },
+    {
+      name: "Adam Road Food Centre",
+      address: {
+        street_address: "2, Adam Road",
+        postal_code: "289877",
+        description: "Small but mighty, Adam Road FC counts famous stalls such as Selera Nasi Lemak as tenants."
+      },
+  }
+    ],
+    (err, data)=>{
+      res.redirect("/v1/hawkers")
+    })
+  // })
 })
 
 //? seed hawkerstalls
 //localhost:4000/v1/hawkers/stalls/seed
 router.get("/stalls/seed", (req, res) => {
-  HawkerStalls.remove({}, (err, hawkerStalls) => {
+  // HawkerStalls.remove({}, (err, hawkerStalls) => {
     HawkerStalls.create([
       {
         name: "No1 Maxwell",
@@ -37,7 +59,7 @@ router.get("/stalls/seed", (req, res) => {
         hawker_centre: "Maxwell Food Centre",
       },
     ]);
-  });
+  // });
 });
 
 module.exports = router;
