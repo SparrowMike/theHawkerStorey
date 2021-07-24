@@ -18,7 +18,7 @@ router.get("/:hawkercentrename/stalls", (req, res)=> {
 //? seed hawker centres
 //localhost:4000/v1/hawkers/seed
 router.get("/seed", (req,res)=> {
-  // HawkerCentre.remove({}, (err, hawkerCentres)=>{
+  HawkerCentre.remove({}, (err, hawkerCentres)=>{
     HawkerCentre.create([
       {
         name: "Maxwell Food Centre",
@@ -40,13 +40,13 @@ router.get("/seed", (req,res)=> {
     (err, data)=>{
       res.redirect("/v1/hawkers")
     })
-  // })
+  })
 })
 
 //? seed hawkerstalls
 //localhost:4000/v1/hawkers/stalls/seed
 router.get("/stalls/seed", (req, res) => {
-  // HawkerStalls.remove({}, (err, hawkerStalls) => {
+  HawkerStalls.remove({}, (err, hawkerStalls) => {
     HawkerStalls.create([
       {
         name: "No1 Maxwell",
@@ -55,11 +55,34 @@ router.get("/stalls/seed", (req, res) => {
         unit_number: "01-01",
         score: 5,
         image_url: "https://cache-wak-wak-hawker-com.s3-ap-southeast-1.amazonaws.com/data/images/stall/64/864/block/LQO1R82f328jzczp.jpg?v=1612194949",
-        dishes: ["Hokkien Mee", "Wanton Mee", "Laksa"],
-        hawker_centre: "Maxwell Food Centre",
+        // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
+        // hawker_centre: {type: Schema.Types.ObjectId, ref: "HawkerCentre"},
       },
-    ]);
-  // });
+      {
+        name: "Traditional Chinese Claypot",
+        operating_hours: "0900 - 1800",
+        closed_days: "Monday",
+        unit_number: "01-02",
+        score: 10,
+        image_url: "https://hawkerpedia.s3.ap-southeast-1.amazonaws.com/highlight-item/20201123/h1EP4JHfZvdp_RTmMYVaOsywA_traditionalchineseclaypot_sf.jpg",
+        // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
+        // hawker_centre: {type: Schema.Types.ObjectId, ref: "HawkerCentre"},
+      },
+      {
+        name: "Ah Tai Hainanese Chicken Rice",
+        operating_hours: "1100 - 1930",
+        closed_days: "Tuesday",
+        unit_number: "01-07",
+        score: 10,
+        image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
+        // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
+        // hawker_centre: {type: Schema.Types.ObjectId, ref: "HawkerCentre"},
+      },
+    ],
+    (err, data)=>{
+      res.redirect("/v1/hawkers")
+    })
+  });
 });
 
 module.exports = router;
