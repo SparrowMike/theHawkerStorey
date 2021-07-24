@@ -15,33 +15,23 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { useMediaQuery, Button } from "@material-ui/core";
+import { useMediaQuery, MenuItem } from "@material-ui/core";
 
-import { MenuItem } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 
-import dishName from "./../data/dishName";
-import hawkerStalls from "./../data/hawkerStalls";
-import hawkerCentre from "./../data/hawkerCentre";
-
-import { DropzoneArea } from "material-ui-dropzone";
-import Rating from "@material-ui/lab/Rating";
-import { Box } from "@material-ui/core";
+import Post from "./post";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    margin: "40px",
+    margin: "20px",
   },
   appBar: {
     borderTop: "50px",
@@ -115,7 +105,6 @@ export default function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [rating, setRating] = useState(4);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -274,91 +263,7 @@ export default function Navbar() {
         }}
       >
         <Fade in={openPost}>
-          <div className={classes.paper}>
-            <React.Fragment>
-              <Typography variant="h4" gutterBottom>
-                Add New Post
-              </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <Autocomplete
-                    id="Hawker Centre"
-                    options={hawkerCentre}
-                    getOptionLabel={(option) => option}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Hawker Centre"
-                        variant="outlined"
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Autocomplete
-                    id="Hawker Stall"
-                    options={hawkerStalls}
-                    getOptionLabel={(option) => option}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Hawker Stall"
-                        variant="outlined"
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <DropzoneArea
-                    acceptedFiles={["image/*"]}
-                    dropzoneText={"Drag and drop an image here or click"}
-                    filesLimit={1}
-                    onChange={(files) => console.log("Files:", files)}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Autocomplete
-                    id="Dish Name"
-                    options={dishName}
-                    getOptionLabel={(option) => option}
-                    // style={{ width: "50vw" }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Dish Name"
-                        variant="outlined"
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    id="outlined-multiline-static"
-                    label="Review"
-                    multiline
-                    rows={4}
-                    style={{ width: "100%" }}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Rating
-                    size="large"
-                    name="simple-controlled"
-                    value={rating}
-                    onChange={(event, newValue) => {
-                      setRating(newValue);
-                    }}
-                  />
-                  <Box textAlign="right">
-                    <Button variant="contained" color="primary">
-                      Submit
-                    </Button>
-                  </Box>
-                </Grid>
-              </Grid>
-            </React.Fragment>
-          </div>
+          <Post />
         </Fade>
       </Modal>
     </div>
