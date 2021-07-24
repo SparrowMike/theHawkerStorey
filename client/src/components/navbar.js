@@ -15,26 +15,16 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { useMediaQuery, Button } from "@material-ui/core";
+import { useMediaQuery, MenuItem } from "@material-ui/core";
 
-import { MenuItem } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 
-import dishName from "./../data/dishName";
-import hawkerStalls from "./../data/hawkerStalls";
-import hawkerCentre from "./../data/hawkerCentre";
-
-import { DropzoneArea } from "material-ui-dropzone";
-import Rating from "@material-ui/lab/Rating";
-import { Box } from "@material-ui/core";
+import Post from "./post";
 
 
 
@@ -43,7 +33,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    margin: "40px",
+    margin: "20px",
   },
   appBar: {
     borderTop: "50px",
@@ -365,6 +355,7 @@ export default function Navbar() {
               </Grid>
             </React.Fragment>
           </div>
+          <Post />
         </Fade>
       </Modal>
     </div>
