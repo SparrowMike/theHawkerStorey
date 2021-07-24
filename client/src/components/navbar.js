@@ -36,8 +36,6 @@ import { DropzoneArea } from "material-ui-dropzone";
 import Rating from "@material-ui/lab/Rating";
 import { Box } from "@material-ui/core";
 
-//!dave testing imageUpload
-import ImageUpload from "./imageUpload/ImageUpload"
 
 
 const drawerWidth = 240;
@@ -323,8 +321,6 @@ export default function Navbar() {
                       console.log("Files:", files)
                     }}
                   />
-                  //! ImageUpload test
-                  <ImageUpload acceptedFiles={uploadFiles}/>
                 </Grid>
                 <Grid item xs={12}>
                   <Autocomplete

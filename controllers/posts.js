@@ -1,7 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Posts = require("../models/posts")
+
+//* for image upload //*
 const { cloudinary } = require('../utils/cloudinary')
+const cors = require('cors');
+router.use(express.static('public'));
+router.use(express.json({ limit: '50mb' }));
+router.use(express.urlencoded({ limit: '50mb', extended: true }));
+router.use(cors());
+
 
 router.get("/", (req, res) => {
   res.send("Hello World");
@@ -54,8 +62,8 @@ router.get("/seed", (req, res) => {
 });
 
 
-//! dave imageUploader test
-router.post('/api/upload', async (req, res) => {
+// //! dave imageUploader test
+router.post('/', async (req, res) => {
   try {
     const fileStr = req.body.data;
     const uploadedResponse = await cloudinary.uploader.upload(
@@ -66,6 +74,7 @@ router.post('/api/upload', async (req, res) => {
     res.json({ msg: "UPLOADED" })
   } catch (error) {
     console.log(error)
+    res.status(500).json({ err: 'Something went wrong' });
   }
 })
 

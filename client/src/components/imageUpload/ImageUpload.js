@@ -8,7 +8,6 @@ const ImageUpload = ({ acceptedFiles }) => {
   // const URL = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/upload`
   const URL = `https://api.cloudinary.com/v1_1/hawkerstorey/upload`
 
-  const [fileInputState, setFileInputState] = useState('')
   const [previewSource, setPreviewSource] = useState('')
 
   const handleFile = (e) => {
@@ -36,7 +35,8 @@ const ImageUpload = ({ acceptedFiles }) => {
   const uploadImage = async (base64EncodedImage) => {
     console.log(base64EncodedImage)
     try {
-      await fetch('/api/upload', {
+      await fetch('v1/posts/', {
+        mode: 'cors',
         method: "POST",
         body: JSON.stringify({ data: base64EncodedImage }),
         header: { 'Content-type': 'application/json' }

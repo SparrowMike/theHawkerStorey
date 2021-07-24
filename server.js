@@ -83,6 +83,22 @@ const dishes = require("./models/dishes.js");
 // =======================================
 //              LISTENER
 // =======================================
+//! dave imageUploader test
+app.post('/api/upload', async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(
+      fileStr, {
+        upload_preset: "hawkerstorey-default"
+      });
+    console.log(uploadedResponse)
+    res.json({ msg: "UPLOADED" })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ err: 'Something went wrong' });
+  }
+})
+
 
 app.listen(PORT, () => {
   console.log("Listening on the port", PORT);
