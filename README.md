@@ -11,6 +11,8 @@
 - npm install
 - npm i react-router react-router-dom
 - npm install @material-ui/core @material-ui/icons
+- npm install @material-ui/lab 
+- npm install --save material-ui-dropzone
 - npm run start
 
 ### 3. GIT commands
