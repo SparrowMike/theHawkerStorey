@@ -10,7 +10,7 @@ const postsSchema = new Schema({
   liked_by: [String], //? do we need this? - ame
   hc_id: String, //? to delete? - ame
   hs_id: String, //? to delete - ame
-  dishes_id: { type: String, required: true }, //? to delete? - ame
+  dishes_id: [{ type: String, required: true }], //? to delete? - ame
 
   //! + hawker centre they are referring to (query from HAWKER CENTRE id)
   //! + hawker stall they are referring to (query from HAWKER STALL id)

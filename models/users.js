@@ -7,7 +7,7 @@ const usersSchema = new Schema({
   email: { type: String, unique: true },
   user_postal_code: { type: String },
   favourite_dishes: [String],
-  posts_history: {type: Schema.Types.ObjectId, ref: "Posts"}, //! Reference (POSTS id)
+  posts_history: [{type: Schema.Types.ObjectId, ref: "Posts"}], //! Reference (POSTS id)
 
   //! + cuisine that they like (query from DISHES cuisine)
 });
