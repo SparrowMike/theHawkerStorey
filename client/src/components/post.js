@@ -75,11 +75,6 @@ export default function Post() {
               onChange={(files) => console.log("Files:", files)}
             />
           </Grid>
-
-          <Grid item xs={12}>
-            REACT DROPZONE
-          </Grid>
-
           <Grid item xs={12}>
             <Autocomplete
               id="Dish Name"
