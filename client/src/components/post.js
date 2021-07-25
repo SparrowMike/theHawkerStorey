@@ -17,6 +17,9 @@ import { DropzoneArea } from "material-ui-dropzone";
 import Rating from "@material-ui/lab/Rating";
 import { Box, Button } from "@material-ui/core";
 
+//! dave imageupload test
+import ImageUpload from "./imageUpload/ImageUpload"
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -74,6 +77,7 @@ export default function Post() {
               filesLimit={1}
               onChange={(files) => console.log("Files:", files)}
             />
+            <ImageUpload />
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
