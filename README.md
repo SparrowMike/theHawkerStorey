@@ -1,3 +1,4 @@
+# Dependencies and Installation Guide
 ### 1. Back-End
 
 - cd theHawkerStorey
@@ -50,3 +51,16 @@
 
 - https://git-scm.com/book/en/v2/Git-Branching-Rebasing
 - https://www.youtube.com/watch?v=aJnFGMclhU8
+
+***
+# Project Features
+### Cloudinary Image Uploader
+```
+npm i cloudinary multer path
+update .env file with your API keys:
+CLOUDINARY_CLOUD_NAME
+CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET
+CLOUDINARY_UPLOAD_PRESET (optional - preset for unsigned uploading)
+```
+
