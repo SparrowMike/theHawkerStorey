@@ -5,17 +5,21 @@ import React, { useState } from 'react'
 //? check post linkage to backend
 
 const ImageUpload = ({ acceptedFiles }) => {
-  // const URL = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/upload`
-  const URL = `https://api.cloudinary.com/v1_1/hawkerstorey/upload`
+  const [fileInputState, setFileInputState] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
 
-  const [previewSource, setPreviewSource] = useState('')
-
-  const handleFile = (e) => {
+  //* this function sets the state to the image the user wants to upload
+  const handleFileInputChange = (e) => {
     const file = e.target.files[0]
     previewFile(file)
+    setSelectedFile(file)
+    console.log(file, e.target.value)
+    setFileInputState(e.target.value)
   }
 
-  // //* helper function to show user a preview of the image about to be submitted
+  //* helper function to show user a preview of the image about to be submitted. 
+  //! can remove when we transfer to form submitcan remove when mike code is linked to this
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -24,60 +28,57 @@ const ImageUpload = ({ acceptedFiles }) => {
     }
   }
 
-  // //* checks that there is an image when submit is clicked and uploads
+  //* checks that there is an image when submit is clicked and uploads. 
+  //! to transfer this to form submit button when ready
   const handleSubmitFile = (e) => {
-    console.log("submitting")
     e.preventDefault()
-    if (!previewSource) return;
-    uploadImage(previewSource);
-  }
+    console.log("submitting")
+    if (!selectedFile) return;
 
-  const uploadImage = async (base64EncodedImage) => {
-    console.log(base64EncodedImage)
-    try {
-      await fetch('v1/posts/', {
-        mode: 'cors',
-        method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
-        header: { 'Content-type': 'application/json' }
-      }
-
-      )
-    } catch (err) {
-      console.log(err)
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile)
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+    }
+    reader.onerror = () => {
+      console.error("Something went wrong")
     }
   }
 
-  // //! test upload via URL
-  // // acceptedFiles.forEach(async (file) => {
-  // const handleUpload = async (e, file) => {
-  //   e.preventDefault()
-  //   const formData = new FormData()
-  //   formData.append("file", file)
-  //   formData.append("upload_preset",
-  //     process.env.CLOUDINARY_UPLOAD_PRESET
-  //   )
-
-  //   const response = await fetch(URL, {
-  //     method: "post",
-  //     body: formData
-  //   });
-
-  //   const data = await response.json()
-  //   console.log(data)
-  // }
+  //* convert image binary into string (base64EndcodedImage) and calls fetch route
+  //! to change fetch route to post controller route when we move code from server.js to posts
+  const uploadImage = async (base64EncodedImage) => {
+    console.log("Attempting upload - ", base64EncodedImage)
+    try {
+      await fetch('/upload', {
+        method: 'POST',
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      setFileInputState('');
+      setPreviewSource('');
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <>
-      <h1>Upload Form</h1>
+      <h1>Upload an Image</h1>
       <form onSubmit={handleSubmitFile}>
-        <input type="file" name="image" onChange={handleFile} value={acceptedFiles} />
+        <input
+          id="fileInput"
+          type="file"
+          name="image"
+          onChange={handleFileInputChange}
+          value={fileInputState}
+        />
         <button type="submit">Submit</button>
       </form>
       {
         previewSource && (
           <img src={previewSource}
-            alt="chosen image"
+            alt="chosen"
             style={{ height: "300px" }} />
         )
       }

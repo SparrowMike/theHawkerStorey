@@ -8,28 +8,76 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-import dishName from "../data/dishName";
-import hawkerStalls from "../data/hawkerStalls";
-import hawkerCentre from "../data/hawkerCentre";
+import dishNameDATA from "./../data/dishName";
+import hawkerStallsDATA from "./../data/hawkerStalls";
+import hawkerCentreDATA from "./../data/hawkerCentre";
 
 import { DropzoneArea } from "material-ui-dropzone";
 
 import Rating from "@material-ui/lab/Rating";
 import { Box, Button } from "@material-ui/core";
 
+//! dave imageupload test
+// import ImageUpload from "./imageUpload/ImageUpload";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
-    width: "75vw",
+    width: "70vw",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
 }));
 
-export default function Post() {
+export default function Post({ handleClosePost }) {
   const classes = useStyles();
+
+  const [hawkerCentre, setHawkerCentre] = useState("");
+  const [hawkerStall, setHawkerStall] = useState("");
+  const [image, setImage] = useState("");
+  const [dishName, setDishName] = useState("");
+  const [review, setReview] = useState("");
   const [rating, setRating] = useState(4);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("hawkerCentre", hawkerCentre);
+    console.log("hawkerStall", hawkerStall);
+    console.log("image", image);
+    console.log("dishName", dishName);
+    console.log("review", review);
+    console.log("rating", rating);
+
+    //* code for image upload
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+      console.error("Something went wrong");
+    };
+
+    handleClosePost();
+  };
+
+  //* convert image binary into string (base64EndcodedImage) and calls fetch route
+  //! to change fetch route to post controller route when we move code from server.js to posts
+  const uploadImage = async (base64EncodedImage) => {
+    console.log("Attempting upload - ", base64EncodedImage);
+    try {
+      await fetch("/upload", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-Type": "application/json" },
+      });
+      setImage("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className={classes.paper}>
@@ -41,8 +89,11 @@ export default function Post() {
           <Grid item xs={12} md={6}>
             <Autocomplete
               id="Hawker Centre"
-              options={hawkerCentre}
+              options={hawkerCentreDATA}
               getOptionLabel={(option) => option}
+              onChange={(event, newValue) => {
+                setHawkerCentre(newValue);
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -55,8 +106,11 @@ export default function Post() {
           <Grid item xs={12} md={6}>
             <Autocomplete
               id="Hawker Stall"
-              options={hawkerStalls}
+              options={hawkerStallsDATA}
               getOptionLabel={(option) => option}
+              onChange={(event, newValue) => {
+                setHawkerStall(newValue);
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -72,14 +126,20 @@ export default function Post() {
               acceptedFiles={["image/*"]}
               dropzoneText={"Drag and drop an image here or click"}
               filesLimit={1}
-              onChange={(files) => console.log("Files:", files)}
+              onChange={(files) => {
+                setImage(files[0]);
+              }}
             />
+            {/* <ImageUpload /> */}
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
               id="Dish Name"
-              options={dishName}
+              options={dishNameDATA}
               getOptionLabel={(option) => option}
+              onChange={(event, newValue) => {
+                setDishName(newValue);
+              }}
               // style={{ width: "50vw" }}
               renderInput={(params) => (
                 <TextField {...params} label="Dish Name" variant="outlined" />
@@ -94,6 +154,9 @@ export default function Post() {
               rows={4}
               style={{ width: "100%" }}
               variant="outlined"
+              onChange={(event) => {
+                setReview(event.target.value);
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -106,7 +169,11 @@ export default function Post() {
               }}
             />
             <Box textAlign="right">
-              <Button variant="contained" color="primary">
+              <Button
+                onClick={handleSubmit}
+                variant="contained"
+                color="primary"
+              >
                 Submit
               </Button>
             </Box>
