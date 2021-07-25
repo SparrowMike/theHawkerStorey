@@ -262,7 +262,7 @@ export default function Navbar() {
       >
         <div className={classes.modalContainer}>
           <Fade in={openPost}>
-            <Post />
+            <Post handleClosePost={handleClosePost} />
           </Fade>
         </div>
       </Modal>
