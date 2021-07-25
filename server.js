@@ -7,6 +7,7 @@ const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
 const cors = require("cors");
+const { cloudinary } = require('./utils/cloudinary')
 
 // =======================================
 //              CONFIGURATIONS
@@ -82,19 +83,20 @@ app.use("/v1/users", usersController);
 // =======================================
 //              LISTENER
 // =======================================
-//! dave imageUploader test
-app.post('/api/upload', async (req, res) => {
+//! temporary area for testing cloudinary upload. 
+//! to change fetch route in ImageUpload.js when we move the code from server.js to posts controller
+app.post('/upload', async (req, res) => {
   try {
     const fileStr = req.body.data;
     const uploadedResponse = await cloudinary.uploader.upload(
       fileStr, {
-        upload_preset: "hawkerstorey-default"
+        upload_preset: "hawkerstorey-preset"
       });
-    console.log(uploadedResponse)
-    res.json({ msg: "UPLOADED" })
+    res.json({ msg: uploadedResponse })
+    console.log("WE SENT IT TO THE CLOUD!!", uploadedResponse);
   } catch (error) {
     console.log(error)
-    res.status(500).json({ err: 'Something went wrong' });
+    res.status(500).json({ err: 'Uh oh. Something went wrong' });
   }
 })
 
