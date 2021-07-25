@@ -18,7 +18,7 @@ import Rating from "@material-ui/lab/Rating";
 import { Box, Button } from "@material-ui/core";
 
 //! dave imageupload test
-import ImageUpload from "./imageUpload/ImageUpload"
+// import ImageUpload from "./imageUpload/ImageUpload";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,6 +33,40 @@ const useStyles = makeStyles((theme) => ({
 export default function Post() {
   const classes = useStyles();
   const [rating, setRating] = useState(4);
+  const [selectedFile, setSelectedFile] = useState("");
+
+  //* checks that there is an image when submit is clicked and uploads.
+  //! to transfer this to form submit button when ready
+  const handleSubmitFile = () => {
+    // e.preventDefault();
+    console.log("submitting", selectedFile);
+    if (!selectedFile) return;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+      console.error("Something went wrong");
+    };
+  };
+
+  //* convert image binary into string (base64EndcodedImage) and calls fetch route
+  //! to change fetch route to post controller route when we move code from server.js to posts
+  const uploadImage = async (base64EncodedImage) => {
+    console.log("Attempting upload - ", base64EncodedImage);
+    try {
+      await fetch("/upload", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-Type": "application/json" },
+      });
+      setSelectedFile("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className={classes.paper}>
@@ -75,9 +109,12 @@ export default function Post() {
               acceptedFiles={["image/*"]}
               dropzoneText={"Drag and drop an image here or click"}
               filesLimit={1}
-              onChange={(files) => console.log("Files:", files)}
+              onChange={(files) => {
+                setSelectedFile(files[0]);
+                console.log("Files:", files[0]);
+              }}
             />
-            <ImageUpload />
+            {/* <ImageUpload /> */}
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
@@ -110,7 +147,11 @@ export default function Post() {
               }}
             />
             <Box textAlign="right">
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmitFile}
+              >
                 Submit
               </Button>
             </Box>
