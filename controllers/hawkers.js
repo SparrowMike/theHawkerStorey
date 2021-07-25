@@ -7,13 +7,24 @@ const HawkerCentre = require("../models/hawkerCentre")
 //? Gets all hawker centres
 //localhost:4000/v1/hawkers
 router.get("/", (req, res) => {
-  res.send("hawker centre");
+  HawkerCentre.find({}, (err, foundHawkerCentres)=>{
+    if(err){
+      res.status(400).json({ error: err.message });
+    };
+    res.status(200).json(foundHolidays);
+  })
 });
 
 //? Gets all hawkerstalls in hawker centre
 //localhost:4000/v1/maxwell%food%centre/stalls
 router.get("/:hawkercentrename/stalls", (req, res)=> {
-  res.send("hawkerstalls in hawkercentre")
+  const name = req.params.name
+  HawkerStalls.find({hawker_centre: name}, (err, hawkerCentre)=>{ //!not too sure, need to research more
+    if(err){
+      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+    }
+    res.status(StatusCodes.OK).json(hawkerCentre);
+  })
 })
 
 //? seed hawker centres

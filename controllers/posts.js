@@ -1,10 +1,11 @@
 const express = require("express");
+const app = express();
 const router = express.Router();
 const { StatusCodes } = require("http-status-codes");
 const Posts = require("../models/posts");
 const session = require("express-session");
 
-const sessionsController = require("./controllers/sessions");
+const sessionsController = require("./sessions");
 app.use("/sessions", sessionsController);
 
 //localhost:4000/v1/posts -> shows all the posts from different users

@@ -48,4 +48,4 @@ router.delete("/", (req,res)=>{
   });
 });
 
-module.exports = sessions
+module.exports = router
