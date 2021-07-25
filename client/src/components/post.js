@@ -18,7 +18,7 @@ import Rating from "@material-ui/lab/Rating";
 import { Box, Button } from "@material-ui/core";
 
 //! dave imageupload test
-import ImageUpload from "./imageUpload/ImageUpload";
+// import ImageUpload from "./imageUpload/ImageUpload";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Post() {
+export default function Post({ handleClosePost }) {
   const classes = useStyles();
 
   const [hawkerCentre, setHawkerCentre] = useState("");
@@ -49,6 +49,34 @@ export default function Post() {
     console.log("dishName", dishName);
     console.log("review", review);
     console.log("rating", rating);
+
+    //* code for image upload
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+      console.error("Something went wrong");
+    };
+
+    handleClosePost();
+  };
+
+  //* convert image binary into string (base64EndcodedImage) and calls fetch route
+  //! to change fetch route to post controller route when we move code from server.js to posts
+  const uploadImage = async (base64EncodedImage) => {
+    console.log("Attempting upload - ", base64EncodedImage);
+    try {
+      await fetch("/upload", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-Type": "application/json" },
+      });
+      setImage("");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -99,10 +127,10 @@ export default function Post() {
               dropzoneText={"Drag and drop an image here or click"}
               filesLimit={1}
               onChange={(files) => {
-                setImage(files);
+                setImage(files[0]);
               }}
             />
-            <ImageUpload />
+            {/* <ImageUpload /> */}
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
