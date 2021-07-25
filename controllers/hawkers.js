@@ -17,9 +17,9 @@ router.get("/", (req, res) => {
 
 //? Gets all hawkerstalls in hawker centre
 //localhost:4000/v1/maxwell%food%centre/stalls
-router.get("/:hawkercentrename/stalls", (req, res)=> {
-  const name = req.params.name
-  HawkerStalls.find({hawker_centre: name}, (err, hawkerCentre)=>{ //!not too sure, need to research more
+router.get("/:hawker_centre/stalls", (req, res)=> { //!not too sure due to the spacing between HC name
+  const hawkerCentre = req.params.hawker_centre
+  HawkerStalls.find({name: hawkerCentre}, (err, hawkerCentre)=>{ //!not too sure, need to research more on REF
     if(err){
       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
     }
@@ -96,5 +96,55 @@ router.get("/stalls/seed", (req, res) => {
     })
   });
 });
+
+//? delete a hawker centre
+router.delete("/:id", (req,res)=>{
+  HawkerCentre.findByIdAndRemove(req.params.id, (err, deletedCentre)=>{
+    if(err){
+      res.status(400).json({ error: err.message });
+    }
+    res.status(200).json(deletedCentre);
+  })
+})
+
+//? update a hawker centre
+router.put("/:id", (req,res)=>{
+  HawkerCentre.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {new: true},
+    (err, updatedCentre)=>{
+      if(err){
+        res.status(400).json({error: err.message});
+      }
+      res.status(200).json(updatedCentre)
+    }
+  )
+})
+
+//? delete a hawker stall 
+router.delete("/:id", (req,res)=>{ //!not sure if should be /:hawkercentrename/:id ???
+  HawkerStalls.findByIdAndRemove(req.params.id, (err, deletedStall)=>{
+    if(err){
+      res.status(400).json({ error: err.message });
+    }
+    res.status(200).json(deletedStall);
+  })
+})
+
+//? update a hawker stall 
+router.put("/:id", (req,res)=>{ //!not sure if should be /:hawkercentrename/:id ???
+  HawkerStall.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {new: true},
+    (err, updatedStall)=>{
+      if(err){
+        res.status(400).json({error: err.message});
+      }
+      res.status(200).json(updatedStall)
+    }
+  )
+})
 
 module.exports = router;
