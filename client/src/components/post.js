@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Post({ handleClosePost }) {
   const classes = useStyles();
 
