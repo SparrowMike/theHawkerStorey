@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { StatusCodes } = require("http-status-codes");
-const Posts = require("../models/posts")
+const Posts = require("../models/posts");
+const session = require("express-session");
 
+const sessionsController = require("./controllers/sessions");
+app.use("/sessions", sessionsController);
 
 //localhost:4000/v1/posts -> shows all the posts from different users
 router.get("/", (req, res) => {
@@ -15,6 +18,7 @@ router.get("/", (req, res) => {
 });
 
 // shows post by ID
+//localhost:4000/v1/posts/:postsid
 router.get("/:id", (req, res) => {
   const id = req.params.id
   Posts.findById(id, (err, post) => {
@@ -70,8 +74,18 @@ router.get("/seed", (req, res) => {
     })
 }
 )
+
+const isAuthenticated = (req, res, next) => {
+  if (req.session.currentUser) {
+    return next();
+  } else {
+    res.redirect("/sessions/new");
+  }
+};
+
 // create a post
-router.post("/", (req, res) => {
+//localhost:4000/v1/posts/new (ame: @potcheeks, changed the url to /new for authentication)
+router.post("/new", isAuthenticated, (req, res) => {
   Posts.create(req.body, (error, createdPost) => {
     if (error) {
       res.status(400).json({ error: error.message })
