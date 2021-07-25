@@ -3,6 +3,8 @@ const router = express.Router();
 const {StatusCodes} = require("http-status-codes")
 const HawkerStalls = require("../models/hawkerStalls");
 const HawkerCentre = require("../models/hawkerCentre")
+const mongoose = require("mongoose");
+const toId = mongoose.Types.ObjectId
 
 //? Gets all hawker centres
 //localhost:4000/v1/hawkers
@@ -17,15 +19,42 @@ router.get("/", (req, res) => {
 
 //? Gets all hawkerstalls in hawker centre
 //localhost:4000/v1/maxwell%20food%20centre/stalls
-router.get("/:hawker_centre/stalls", (req, res)=> { //!not too sure due to the spacing between HC name
-  const hawkerCentre = req.params.hawker_centre
-  HawkerStalls.find({hawker_centre: hawkerCentre}, (err, hawkerCentre)=>{ //!not too sure, need to research more on REF
+// router.get("/:hawker_centre/stalls", (req, res)=> { //!not too sure due to the spacing between HC name
+//   const hawkerCentre = req.params.hawker_centre
+//   HawkerStalls.find({hawker_centre: hawkerCentre}, (err, hawkerCentre)=>{ //!not too sure, need to research more on REF
+//     if(err){
+//       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+//     }
+//     res.status(StatusCodes.OK).json(hawkerCentre);
+//   })
+// })
+
+//? Gets all hawkerstalls from all hawker centres
+router.get("/stalls", (req, res)=> { 
+  HawkerStalls.find({}, (err, hawkerStalls)=>{
     if(err){
       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
     }
-    res.status(StatusCodes.OK).json(hawkerCentre);
+    res.status(StatusCodes.OK).json(hawkerStalls);
   })
 })
+
+router.get("/:id/stalls", (req, res)=> { 
+  const id = req.params.id
+  HawkerStalls.find({hawker_centre: id}, (err, hawkerStalls)=>{
+    if(err){
+      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+    }
+    res.status(StatusCodes.OK).json(hawkerStalls);
+  })
+})
+
+// router.get("/:hawker_centre/see", (req, res)=> { 
+//   req.params.hawker_centre = toId(req.params.hawker_centre)
+//   const hawkerCentre = HawkerStalls.find({}).populate();
+//   res.send(hawkerCentre)
+// })
+
 
 //? seed hawker centres
 //localhost:4000/v1/hawkers/seed
@@ -68,7 +97,7 @@ router.get("/stalls/seed", (req, res) => {
         score: 5,
         image_url: "https://cache-wak-wak-hawker-com.s3-ap-southeast-1.amazonaws.com/data/images/stall/64/864/block/LQO1R82f328jzczp.jpg?v=1612194949",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        // hawker_centre: {type: Schema.Types.ObjectId, ref: "HawkerCentre"},
+        hawker_centre: "60fbdc1cef552a1790866fd9",
       },
       {
         name: "Traditional Chinese Claypot",
@@ -78,7 +107,7 @@ router.get("/stalls/seed", (req, res) => {
         score: 10,
         image_url: "https://hawkerpedia.s3.ap-southeast-1.amazonaws.com/highlight-item/20201123/h1EP4JHfZvdp_RTmMYVaOsywA_traditionalchineseclaypot_sf.jpg",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        // hawker_centre: {type: Schema.Types.ObjectId, ref: "HawkerCentre"},
+        hawker_centre: "60fbdc1cef552a1790866fd9",
       },
       {
         name: "Ah Tai Hainanese Chicken Rice",
@@ -88,7 +117,7 @@ router.get("/stalls/seed", (req, res) => {
         score: 10,
         image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        // hawker_centre: {type: Schema.Types.ObjectId, ref: "HawkerCentre"},
+        hawker_centre: "60fbdc1cef552a1790866fd9",
       },
     ],
     (err, data)=>{
@@ -108,7 +137,7 @@ router.delete("/:id", (req,res)=>{
 })
 
 //? update a hawker centre
-router.put("/:id", (req,res)=>{
+router.put("/:id", (req,res)=>{ //id = hawker centre id
   HawkerCentre.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -123,7 +152,7 @@ router.put("/:id", (req,res)=>{
 })
 
 //? delete a hawker stall 
-router.delete("/:id", (req,res)=>{ //!not sure if should be /:hawkercentrename/:id ???
+router.delete("/:id", (req,res)=>{ 
   HawkerStalls.findByIdAndRemove(req.params.id, (err, deletedStall)=>{
     if(err){
       res.status(400).json({ error: err.message });
@@ -133,7 +162,7 @@ router.delete("/:id", (req,res)=>{ //!not sure if should be /:hawkercentrename/:
 })
 
 //? update a hawker stall 
-router.put("/:id", (req,res)=>{ //!not sure if should be /:hawkercentrename/:id ???
+router.put("/:id", (req,res)=>{ 
   HawkerStalls.findByIdAndUpdate(
     req.params.id,
     req.body,

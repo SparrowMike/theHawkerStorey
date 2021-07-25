@@ -8,9 +8,9 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-import dishName from "./../data/dishName";
-import hawkerStalls from "./../data/hawkerStalls";
-import hawkerCentre from "./../data/hawkerCentre";
+import dishName from "../data/dishName";
+import hawkerStalls from "../data/hawkerStalls";
+import hawkerCentre from "../data/hawkerCentre";
 
 import { DropzoneArea } from "material-ui-dropzone";
 
