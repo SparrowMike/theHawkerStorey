@@ -11,15 +11,15 @@ router.get("/", (req, res) => {
     if(err){
       res.status(400).json({ error: err.message });
     };
-    res.status(200).json(foundHolidays);
+    res.status(200).json(foundHawkerCentres);
   })
 });
 
 //? Gets all hawkerstalls in hawker centre
-//localhost:4000/v1/maxwell%food%centre/stalls
+//localhost:4000/v1/maxwell%20food%20centre/stalls
 router.get("/:hawker_centre/stalls", (req, res)=> { //!not too sure due to the spacing between HC name
   const hawkerCentre = req.params.hawker_centre
-  HawkerStalls.find({name: hawkerCentre}, (err, hawkerCentre)=>{ //!not too sure, need to research more on REF
+  HawkerStalls.find({hawker_centre: hawkerCentre}, (err, hawkerCentre)=>{ //!not too sure, need to research more on REF
     if(err){
       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
     }
@@ -134,7 +134,7 @@ router.delete("/:id", (req,res)=>{ //!not sure if should be /:hawkercentrename/:
 
 //? update a hawker stall 
 router.put("/:id", (req,res)=>{ //!not sure if should be /:hawkercentrename/:id ???
-  HawkerStall.findByIdAndUpdate(
+  HawkerStalls.findByIdAndUpdate(
     req.params.id,
     req.body,
     {new: true},
