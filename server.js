@@ -67,17 +67,10 @@ app.use("/v1/hawkers", hawkersController)
 const dishesController = require("./controllers/dishes.js");
 app.use("/v1/dishes", dishesController);
 
-// const hawkerCentreController = require("./controllers/hawkerCentre.js");
-// app.use("/v1/hawkerCentre", hawkerCentreController);
-
-// const hawkerStallsController = require("./controllers/duhawkerStallsmmy.js");
-// app.use("/v1/hawkerStalls", hawkerStallsController);
-
 const usersController = require("./controllers/users.js");
 app.use("/v1/users", usersController);
 
-// const dishesController = require("./controllers/dishes.js");
-// app.use("/v1/dishes", dishesController);
+
 
 // =======================================
 //              LISTENER

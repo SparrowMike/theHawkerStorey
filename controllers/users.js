@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { StatusCodes } = require("http-status-codes");
+const bcrypt = require("bcrypt");
 const Users = require("../models/users")
+
 
 //? Gets all user profiles 
 //localhost:4000/v1/users/
@@ -47,6 +49,7 @@ router.get("/seed", (req,res)=> {
 })
 
 // shows user by ID
+//localhost:4000/v1/users/:userid
 router.get("/:id", (req, res) => {
   const id = req.params.id
   Users.findById(id, (err, post) => {
@@ -57,17 +60,24 @@ router.get("/:id", (req, res) => {
   });
 });
 
-// create a post
+// create a user (ame: @potcheeks, I changed from post to user)
+// generates hash for user's password
+//localhost:4000/v1/users/
 router.post("/", (req, res) => {
+    req.body.password = bcrypt.hashSync( //hashSync: return after hashing
+    req.body.password,
+    bcrypt.genSaltSync(10) //genSaltSync: generate such that it differs for each user. Number can be changed. Prevents other servers from seeing the same hash/
+    )
   Users.create(req.body, (error, createdUser) => {
     if (error) {
       res.status(400).json({ error: error.message })
     } 
     res.status(200).send(createdUser)
+    res.redirect("/v1/users")
   })
 })
 
-// delete a post
+// delete a user(ame: @potcheeks, I changed from post to user)
 router.delete("/:id", (req, res) => {
   Users.findByIdAndRemove(req.params.id, (err, deletedUser) => {
     if (err) {
