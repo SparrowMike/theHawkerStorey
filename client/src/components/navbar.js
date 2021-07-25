@@ -88,16 +88,14 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 0,
   },
   modal: {
+    overflow: "scroll",
+    display: "block",
+    padding: theme.spacing(3),
+  },
+  modalContainer: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    width: "75vw",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
 }));
 
@@ -156,28 +154,28 @@ export default function Navbar() {
           </Toolbar>
         </AppBar>
       ) : (
-          <AppBar
-            position="fixed"
-            className={clsx(classes.appBar, {
-              [classes.appBarShift]: open,
-            })}
-          >
-            <Toolbar>
-              <Typography variant="h6" noWrap className={classes.title}>
-                <FastfoodIcon />
-              </Typography>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="end"
-                onClick={handleDrawerOpen}
-                className={clsx(open && classes.hide)}
-              >
-                <MenuIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-        )}
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            <Typography variant="h6" noWrap className={classes.title}>
+              <FastfoodIcon />
+            </Typography>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={handleDrawerOpen}
+              className={clsx(open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      )}
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -194,8 +192,8 @@ export default function Navbar() {
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
-                <ChevronRightIcon />
-              )}
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
@@ -262,9 +260,11 @@ export default function Navbar() {
           timeout: 500,
         }}
       >
-        <Fade in={openPost}>
-          <Post />
-        </Fade>
+        <div className={classes.modalContainer}>
+          <Fade in={openPost}>
+            <Post />
+          </Fade>
+        </div>
       </Modal>
     </div>
   );
