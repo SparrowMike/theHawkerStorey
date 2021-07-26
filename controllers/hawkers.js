@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const {StatusCodes} = require("http-status-codes")
+const {StatusCodes} = require("http-status-codes");
 const HawkerStalls = require("../models/hawkerStalls");
-const HawkerCentre = require("../models/hawkerCentre")
-
+const HawkerCentre = require("../models/hawkerCentre");
+const mongoose = require("mongoose");
+const toId = mongoose.Schema.Types.ObjectId;
 
 //? Gets all hawker centres
 //localhost:4000/v1/hawkers
@@ -18,17 +19,31 @@ router.get("/", (req, res) => {
 
 //? Gets all hawkerstalls in hawker centre
 //localhost:4000/v1/maxwell-food-centre/stalls
-router.get("/:centreName/stalls", (req, res)=> { 
-  const centreName = req.params.centreName;
-  HawkerCentre.find({name: centreName}, (err, centreName)=>{
-    HawkerStalls.find({hawker_centre: centreName}, (err, stalls)=>{
-      if(err){
-        res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-      }
-      res.status(StatusCodes.OK).json(stalls);
-    })
-  })
-})
+
+// router.get("/:centreName/stalls", (req, res)=> { 
+//   const centreName = req.params.centreName;
+//   HawkerCentre.find({name: centreName}, (err, centreName)=>{
+//     if(err){
+//         res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+//       }
+//       const stallId = centreName[0].hawker_stalls;
+      
+//       // res.status(StatusCodes.OK).json(centreName[0].hawker_stalls);}
+//     })
+//   })
+
+
+// router.get("/:centreName/stalls", (req, res)=> { 
+//   const centreName = req.params.centreName;
+//   HawkerCentre.find({name: centreName}, (err, centreName)=>{
+//     HawkerStalls.find({}, (err, stalls)=>{
+//       if(err){
+//         res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+//       }
+//       res.status(StatusCodes.OK).json(stalls);
+//     })
+//   })
+// })
 
 //? Gets all hawkerstalls from all hawker centres
 router.get("/stalls", (req, res)=> { 
@@ -55,6 +70,7 @@ router.get("/seed", (req,res)=> {
           postal_code: "069184",
           description: "We wouldn’t believe anyone who say they haven’t been here, but if you really haven’t, here are the highlights from Singapore’s favourite tourist-approved hawker centre. Starting with Tian Tian Chicken Rice (Anthony Bourdain-approved, mind you), you should take note of other favourites like Zhen Zhen Porridge, and Maxwell Fuzhou Oyster Cake."
         },
+        hawker_stalls: ["60fe60779da27d6bb3d1c2d3", "60fe60779da27d6bb3d1c2d4", "60fe60779da27d6bb3d1c2d5" ]
     },
     {
       name: "Adam Road Food Centre",
@@ -63,6 +79,7 @@ router.get("/seed", (req,res)=> {
         postal_code: "289877",
         description: "Small but mighty, Adam Road FC counts famous stalls such as Selera Nasi Lemak as tenants."
       },
+      hawker_stalls:["60fe60779da27d6bb3d1c2d6"]
   }
     ],
     (err, data)=>{
@@ -84,7 +101,6 @@ router.get("/stalls/seed", (req, res) => {
         score: 5,
         image_url: "https://cache-wak-wak-hawker-com.s3-ap-southeast-1.amazonaws.com/data/images/stall/64/864/block/LQO1R82f328jzczp.jpg?v=1612194949",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        hawker_centre: "60fe1929f78f8946ba1fb3dd",
       },
       {
         name: "Traditional Chinese Claypot",
@@ -94,7 +110,6 @@ router.get("/stalls/seed", (req, res) => {
         score: 10,
         image_url: "https://hawkerpedia.s3.ap-southeast-1.amazonaws.com/highlight-item/20201123/h1EP4JHfZvdp_RTmMYVaOsywA_traditionalchineseclaypot_sf.jpg",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        hawker_centre: "60fe1929f78f8946ba1fb3dd",
       },
       {
         name: "Ah Tai Hainanese Chicken Rice",
@@ -104,7 +119,6 @@ router.get("/stalls/seed", (req, res) => {
         score: 10,
         image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        hawker_centre: "60fe1929f78f8946ba1fb3dd",
       },
       {
         name: "Adam Chicken Rice",
@@ -114,7 +128,6 @@ router.get("/stalls/seed", (req, res) => {
         score: 10,
         image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        hawker_centre: "60fe1929f78f8946ba1fb3de",
       },
     ],
     (err, data)=>{
