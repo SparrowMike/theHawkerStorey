@@ -1,9 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { Image } from "cloudinary-react";
+import {
+  makeStyles,
+  Grid,
+  Card,
+  Typography,
+  Button,
+  CardActions,
+  CardContent,
+  // CardMedia,
+  Container,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: "auto",
+    display: "flex",
+    flexDirection: "column",
+  },
+  cardMedia: {
+    // paddingTop: "56.25%", // 16:9
+    width: "100%",
+    heigth: "100%",
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+}));
+
 require("dotenv").config();
 
 const FetchImages = () => {
+  const classes = useStyles();
+
   const [imageIds, setImageIds] = useState();
+
   const loadImages = async () => {
     try {
       const res = await fetch("/images");
@@ -21,21 +59,49 @@ const FetchImages = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="title">Cloudinary Gallery</h1>
-      <div className="gallery">
-        {imageIds &&
-          imageIds.map((imageId, index) => (
-            <Image
-              key={index}
-              cloudName={"hawkerstorey"}
-              publicId={imageId}
-              width="300"
-              crop="scale"
-            />
-          ))}
-      </div>
-    </div>
+    <>
+      <Container className={classes.cardGrid} maxWidth="lg">
+        <Grid container spacing={4}>
+          {imageIds &&
+            imageIds.map((imageId, index) => (
+              <Grid item key={index} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <Image
+                    className={classes.cardMedia}
+                    key={index}
+                    cloudName={"hawkerstorey"}
+                    publicId={imageId}
+                    // width="300"
+                    crop="scale"
+                  />
+                  {/* <CardMedia
+                    className={classes.cardMedia}
+                    image="https://source.unsplash.com/random"
+                    title="Image title"
+                  /> */}
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Heading
+                    </Typography>
+                    <Typography>
+                      This is a media card. You can use this section to describe
+                      the content.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                    <Button size="small" color="primary">
+                      Edit
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+      </Container>
+    </>
   );
 };
 
