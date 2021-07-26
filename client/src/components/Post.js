@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { useQuery } from "react-query";
+import axios from "axios";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
@@ -36,6 +39,29 @@ export default function Post({ handleClosePost }) {
   const [dishName, setDishName] = useState("");
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(4);
+  
+
+
+  // Fetching of hawker centres
+  const {data} = useQuery("hawkercentres", () =>
+    axios("/v1/hawkers")
+  );
+
+  const centreNames = data?.data
+  const hcList = centreNames?.map((item) => {
+  return item.name
+  })
+
+  // Fetching of hawker stalls
+//   const {data} = useQuery("hawkercentres", () =>
+//   axios("v1/hawkers/maxwell-food-centre/")
+//       );
+
+//   const centreNames = data?.data
+//   const hcList = centreNames?.map((item) => {
+// return item.name
+//   })
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +79,6 @@ export default function Post({ handleClosePost }) {
     handleClosePost();
   };
 
-  console.log("hey there from post");
   //* convert image binary into string (base64EndcodedImage) and calls fetch route
   //! to change fetch route to post controller route when we move code from server.js to posts
   const uploadImage = async (base64EncodedImage) => {
@@ -80,7 +105,7 @@ export default function Post({ handleClosePost }) {
           <Grid item xs={12} md={6}>
             <Autocomplete
               id="Hawker Centre"
-              options={HawkerCentre}
+              options={hcList}
               getOptionLabel={(option) => option}
               onChange={(event, newValue) => {
                 setHawkerCentre(newValue);
