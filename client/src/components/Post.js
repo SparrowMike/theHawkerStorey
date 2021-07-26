@@ -56,7 +56,6 @@ export default function Post({ handleClosePost }) {
   //* convert image binary into string (base64EndcodedImage) and calls fetch route
   //! to change fetch route to post controller route when we move code from server.js to posts
   const uploadImage = async (base64EncodedImage) => {
-    console.log("Attempting upload - ", base64EncodedImage);
     try {
       await fetch("/upload", {
         method: "POST",
@@ -78,7 +77,6 @@ export default function Post({ handleClosePost }) {
         <Grid container spacing={3}>
           {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
           <Grid item xs={12} md={6}>
-            Auto
             <Autocomplete
               id="Hawker Centre"
               options={hawkerCentreDATA}
