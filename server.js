@@ -57,7 +57,6 @@ mongoose.connection.once("open", () => {
 // =======================================
 //         CONTROLLERS/ROUTES
 // =======================================
-//! available on > http://localhost:4000/v1/posts
 const postsController = require("./controllers/posts.js");
 app.use("/v1/posts", postsController);
 
@@ -69,6 +68,9 @@ app.use("/v1/dishes", dishesController);
 
 const usersController = require("./controllers/users.js");
 app.use("/v1/users", usersController);
+
+//!
+app.use("/upload", require("./routes/posts.js"));
 
 // =======================================
 //              LISTENER
