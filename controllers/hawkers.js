@@ -19,20 +19,16 @@ router.get("/", (req, res) => {
 
 //? Gets all hawkerstalls in hawker centre
 //localhost:4000/v1/maxwell-food-centre/stalls
-router.get("/:centreName/stalls", (req, res)=> { 
+router.get("/:centreName/", (req, res)=> { 
   const centreName = req.params.centreName;
-  HawkerCentre.find({name: centreName}).populate("hawker_stalls").
+  HawkerCentre.findOne({name: centreName}).populate("hawker_stalls").
   exec(function (err, HawkerCentre){
-    console.log(HawkerCentre.hawker_stalls.name)
+    console.log(HawkerCentre)
+    if(err){
+      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+    } 
+    res.status(StatusCodes.OK).json(HawkerCentre)}) ;
   })
-  // HawkerCentre.find({name: centreName}, (err, centreName)=>{
-  //     if(err){
-  //       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-  //     } 
-  //     // res.status(StatusCodes.OK).json(stalls);
-  //   })
-  // })
-})
 
 
 // router.get("/:centreName/stalls", (req, res)=> { 
@@ -86,7 +82,7 @@ router.get("/seed", (req,res)=> {
           postal_code: "069184",
           description: "We wouldn’t believe anyone who say they haven’t been here, but if you really haven’t, here are the highlights from Singapore’s favourite tourist-approved hawker centre. Starting with Tian Tian Chicken Rice (Anthony Bourdain-approved, mind you), you should take note of other favourites like Zhen Zhen Porridge, and Maxwell Fuzhou Oyster Cake."
         },
-        hawker_stalls: ["60fe60779da27d6bb3d1c2d3", "60fe60779da27d6bb3d1c2d4", "60fe60779da27d6bb3d1c2d5" ]
+        hawker_stalls: ["60fe61511b52676d31e5ea6c", "60fe61511b52676d31e5ea6d", "60fe61511b52676d31e5ea6e" ]
     },
     {
       name: "Adam Road Food Centre",
