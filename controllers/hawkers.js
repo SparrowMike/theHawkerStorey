@@ -17,39 +17,7 @@ router.get("/", (req, res) => {
 });
 
 //? Gets all hawkerstalls in hawker centre
-//localhost:4000/v1/maxwell%20food%20centre/stalls
-// router.get("/:hawker_centre/stalls", (req, res)=> { //!not too sure due to the spacing between HC name
-//   const hawkerCentre = req.params.hawker_centre
-//   HawkerStalls.find({hawker_centre: hawkerCentre}, (err, hawkerCentre)=>{ //!not too sure, need to research more on REF
-//     if(err){
-//       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-//     }
-//     res.status(StatusCodes.OK).json(hawkerCentre);
-//   })
-// })
-
-//? Gets all hawkerstalls from all hawker centres
-router.get("/stalls", (req, res)=> { 
-  HawkerStalls.find({}, (err, hawkerStalls)=>{
-    if(err){
-      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-    }
-    res.status(StatusCodes.OK).json(hawkerStalls);
-  })
-})
-
-// router.get("/:id/stalls", (req, res)=> { 
-//   const id = req.params.id
-//   HawkerStalls.find({hawker_centre: id}, (err, hawkerStalls)=>{
-//     if(err){
-//       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-//     }
-//     res.status(StatusCodes.OK).json(hawkerStalls);
-//   })
-// })
-
-//localhost:4000/v1/68594326456/stalls
-//localhost:4000/v1/maxwell%20food%20centre/stalls
+//localhost:4000/v1/maxwell-food-centre/stalls
 router.get("/:centreName/stalls", (req, res)=> { 
   const centreName = req.params.centreName;
   HawkerCentre.find({name: centreName}, (err, centreName)=>{
@@ -61,6 +29,17 @@ router.get("/:centreName/stalls", (req, res)=> {
     })
   })
 })
+
+//? Gets all hawkerstalls from all hawker centres
+router.get("/stalls", (req, res)=> { 
+  HawkerStalls.find({}, (err, hawkerStalls)=>{
+    if(err){
+      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+    }
+    res.status(StatusCodes.OK).json(hawkerStalls);
+  })
+})
+
 
 
 
@@ -126,6 +105,16 @@ router.get("/stalls/seed", (req, res) => {
         image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
         hawker_centre: "60fe1929f78f8946ba1fb3dd",
+      },
+      {
+        name: "Adam Chicken Rice",
+        operating_hours: "1100 - 1930",
+        closed_days: "Tuesday",
+        unit_number: "01-07",
+        score: 10,
+        image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
+        // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
+        hawker_centre: "60fe1929f78f8946ba1fb3de",
       },
     ],
     (err, data)=>{
