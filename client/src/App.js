@@ -11,7 +11,6 @@ import HawkerCentre from "./data/hawkerCentre";
 function App() {
   const queryClient = new QueryClient();
 
-
   return (
     <Router>
       <QueryClientProvider client={queryClient}>

@@ -53,7 +53,7 @@ export default function Post({ handleClosePost }) {
     handleClosePost();
   };
 
-  console.log("hey there from post")
+  console.log("hey there from post");
   //* convert image binary into string (base64EndcodedImage) and calls fetch route
   //! to change fetch route to post controller route when we move code from server.js to posts
   const uploadImage = async (base64EncodedImage) => {
