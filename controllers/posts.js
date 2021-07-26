@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 // shows post by ID
 //localhost:4000/v1/posts/:postsid
 router.get("/:id", (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   Posts.findById(id, (err, post) => {
     if (err) {
       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
@@ -34,7 +34,8 @@ router.get("/seed", (req, res) => {
   Posts.create(
     [
       {
-        image_url: "https://asianfoodnetwork.com/content/dam/afn/global/en/articles/5-must-try-food-in-one-of-singapore%27s-most-awarded-hawker-centers/curry%20mee.png",
+        image_url:
+          "https://asianfoodnetwork.com/content/dam/afn/global/en/articles/5-must-try-food-in-one-of-singapore%27s-most-awarded-hawker-centers/curry%20mee.png",
         review: "awesome chicken curry",
         rating: "3",
         timestamp: new Date(),
@@ -42,11 +43,12 @@ router.get("/seed", (req, res) => {
         liked_by: "1123",
         hc_id: "maxwell-123",
         hs_id: "tiantian-125125",
-        dishes_id: "dish-chickenrice"
+        dishes_id: "dish-chickenrice",
       },
 
       {
-        image_url: "http://www.ricebowlasia.com/wp-content/uploads/2019/11/is-nasi-lemak-malaysian.jpg",
+        image_url:
+          "http://www.ricebowlasia.com/wp-content/uploads/2019/11/is-nasi-lemak-malaysian.jpg",
         review: "rice was a tad too dry and not lemak enoguh",
         rating: "1",
         timestamp: new Date(),
@@ -54,11 +56,12 @@ router.get("/seed", (req, res) => {
         liked_by: "1293",
         hc_id: "maxwell-123",
         hs_id: "ahsengnasilemak-190125",
-        dishes_id: "dish-nasilemak"
+        dishes_id: "dish-nasilemak",
       },
 
       {
-        image_url: "https://1.bp.blogspot.com/-js5g5f7grTE/XUA-mdQPiJI/AAAAAAAAPxU/BjGAIxYIfB4T8hsAenv_kYaGmBRPNKf8gCLcBGAs/s1600/Hor%2BFun%2BPremium%2B%2528Alexandra%2BVillage%2BFood%2BCentre%2529%2B-%2BMixed%2BSeafood%2BHor%2BFun.jpg",
+        image_url:
+          "https://1.bp.blogspot.com/-js5g5f7grTE/XUA-mdQPiJI/AAAAAAAAPxU/BjGAIxYIfB4T8hsAenv_kYaGmBRPNKf8gCLcBGAs/s1600/Hor%2BFun%2BPremium%2B%2528Alexandra%2BVillage%2BFood%2BCentre%2529%2B-%2BMixed%2BSeafood%2BHor%2BFun.jpg",
         review: "tasty gravy so awesome",
         rating: "3",
         timestamp: new Date(),
@@ -66,15 +69,14 @@ router.get("/seed", (req, res) => {
         liked_by: "1923",
         hc_id: "maxwell-123",
         hs_id: "yumhorfun-100125",
-        dishes_id: "dish-beefhorfun"
+        dishes_id: "dish-beefhorfun",
       },
-
     ],
     (err, data) => {
       res.redirect("/v1/posts");
-    })
-}
-)
+    }
+  );
+});
 
 const isAuthenticated = (req, res, next) => {
   if (req.session.currentUser) {
@@ -89,11 +91,11 @@ const isAuthenticated = (req, res, next) => {
 router.post("/new", isAuthenticated, (req, res) => {
   Posts.create(req.body, (error, createdPost) => {
     if (error) {
-      res.status(400).json({ error: error.message })
+      res.status(400).json({ error: error.message });
     }
-    res.status(200).send(createdPost)
-  })
-})
+    res.status(200).send(createdPost);
+  });
+});
 
 // delete a post
 router.delete("/:id", (req, res) => {
