@@ -73,6 +73,15 @@ app.use("/v1/users", usersController);
 // =======================================
 //              LISTENER
 // =======================================
+//! temporary area for testing cloudinary fetch
+//! to change fetch route to controller
+app.get("/images", async (req, res) => {
+  const { resources } = await cloudinary.search.expression("test*").execute();
+  console.log("fetching", resources);
+  const publicIds = resources.map((file) => file.public_id);
+  res.send(publicIds);
+});
+
 //! temporary area for testing cloudinary upload.
 //! to change fetch route in ImageUpload.js when we move the code from server.js to posts controller
 app.post("/upload", async (req, res) => {
@@ -82,7 +91,7 @@ app.post("/upload", async (req, res) => {
       upload_preset: "hawkerstorey-preset",
     });
     res.json({ msg: uploadedResponse });
-    console.log("WE SENT IT TO THE CLOUD!!", uploadedResponse);
+    console.log("WE SENT IT TO THE CLOUD!!", uploadedResponse.url);
   } catch (error) {
     console.log(error);
     res.status(500).json({ err: "Uh oh. Something went wrong" });
