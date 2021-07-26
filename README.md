@@ -19,6 +19,7 @@
 - npm install --save material-ui-dropzone
 - npm i react-query
 - npm i axios
+- npm i cloudinary-react
 - npm run start
 
 ### 3. GIT commands
