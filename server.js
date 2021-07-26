@@ -68,6 +68,7 @@ const dishesController = require("./controllers/dishes.js");
 app.use("/v1/dishes", dishesController);
 
 const usersController = require("./controllers/users.js");
+
 app.use("/v1/users", usersController);
 
 // =======================================
@@ -75,14 +76,28 @@ app.use("/v1/users", usersController);
 // =======================================
 //! temporary area for testing cloudinary upload.
 //! to change fetch route in ImageUpload.js when we move the code from server.js to posts controller
+app.get("/");
+
 app.post("/upload", async (req, res) => {
   try {
     const fileStr = req.body.data;
+    fileStr = cloudinary.api.add_metadata_field({
+      external_id: "<INSERT post-id>",
+      label: "cuisine?",
+      datasource: {
+        values: {
+          hawkerCentre: "hawkerCentre",
+          username: "username",
+        },
+      },
+    });
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "hawkerstorey-preset",
     });
     res.json({ msg: uploadedResponse });
-    console.log("WE SENT IT TO THE CLOUD!!", uploadedResponse);
+    console.log("WE SENT IT TO THE CLOUD!!");
+    //! to pass this url into mongo
+    console.log(uploadedResponse.url);
   } catch (error) {
     console.log(error);
     res.status(500).json({ err: "Uh oh. Something went wrong" });
