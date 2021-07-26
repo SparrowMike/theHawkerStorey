@@ -1,10 +1,11 @@
 # Dependencies and Installation Guide
+
 ### 1. Back-End
 
 - cd theHawkerStorey
 - touch .env (copy everything from .env.example)
 - npm i express dotenv nodemon mongoose bcrypt express-session cors
-- npm i cloudinary multer path cors
+- npm i cloudinary multer path cors body-parser
 - npm i http-status-codes
 - run app with "nodemon" then go => http://localhost:4000/v1/posts
 
@@ -54,9 +55,12 @@
 - https://git-scm.com/book/en/v2/Git-Branching-Rebasing
 - https://www.youtube.com/watch?v=aJnFGMclhU8
 
-***
+---
+
 # Project Features
+
 ### Cloudinary Image Uploader
+
 ```
 npm i cloudinary multer path
 update .env file with your API keys:
@@ -65,4 +69,3 @@ CLOUDINARY_API_KEY
 CLOUDINARY_API_SECRET
 CLOUDINARY_UPLOAD_PRESET (optional - preset for unsigned uploading)
 ```
-
