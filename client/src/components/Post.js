@@ -21,6 +21,7 @@ import Rating from "@material-ui/lab/Rating";
 import { Box, Button } from "@material-ui/core";
 
 import AutocompleteHS from "./AutocompleteHS";
+import AutocompleteDishes from "./AutocompleteDishes";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -135,17 +136,9 @@ export default function Post({ handleClosePost }) {
             />
           </Grid>
           <Grid item xs={12}>
-            <Autocomplete
-              id="Dish Name"
-              options={dishNameDATA}
-              getOptionLabel={(option) => option}
-              onChange={(event, newValue) => {
-                setDishName(newValue);
-              }}
-              // style={{ width: "50vw" }}
-              renderInput={(params) => (
-                <TextField {...params} label="Dish Name" variant="outlined" />
-              )}
+          <AutocompleteDishes
+              hawkerStall={hawkerStall}
+              setDishName={setDishName}
             />
           </Grid>
           {/* ====================MATERIAL UI Textfield for user to write reviews=================== */}
