@@ -52,6 +52,7 @@ export default function Post({ handleClosePost }) {
 
     //* code for image upload
     const reader = new FileReader();
+    if (!image) return;
     reader.readAsDataURL(image);
     reader.onloadend = () => {
       uploadImage(reader.result);
@@ -126,6 +127,7 @@ export default function Post({ handleClosePost }) {
               acceptedFiles={["image/*"]}
               dropzoneText={"Drag and drop an image here or click"}
               filesLimit={1}
+              maxFileSize={10000000}
               onChange={(files) => {
                 setImage(files[0]);
               }}
