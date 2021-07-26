@@ -20,6 +20,8 @@ import { DropzoneArea } from "material-ui-dropzone";
 import Rating from "@material-ui/lab/Rating";
 import { Box, Button } from "@material-ui/core";
 
+import AutocompleteHS from "./AutocompleteHS";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -39,29 +41,24 @@ export default function Post({ handleClosePost }) {
   const [dishName, setDishName] = useState("");
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(4);
-  
-
 
   // Fetching of hawker centres
-  const {data} = useQuery("hawkercentres", () =>
-    axios("/v1/hawkers")
-  );
+  const { data } = useQuery("hawkercentres", () => axios("/v1/hawkers"));
 
-  const centreNames = data?.data
+  const centreNames = data?.data;
   const hcList = centreNames?.map((item) => {
-  return item.name
-  })
+    return item.name;
+  });
 
   // Fetching of hawker stalls
-//   const {data} = useQuery("hawkercentres", () =>
-//   axios("v1/hawkers/maxwell-food-centre/")
-//       );
+  //   const {data} = useQuery("hawkercentres", () =>
+  //   axios("v1/hawkers/maxwell-food-centre/")
+  //       );
 
-//   const centreNames = data?.data
-//   const hcList = centreNames?.map((item) => {
-// return item.name
-//   })
-
+  //   const centreNames = data?.data
+  //   const hcList = centreNames?.map((item) => {
+  // return item.name
+  //   })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -121,20 +118,9 @@ export default function Post({ handleClosePost }) {
           </Grid>
           {/* ====================MATERIAL UI Autocomplete for hawkerStall option selection: pairs to hawkerStallsDATA==================== */}
           <Grid item xs={12} md={6}>
-            <Autocomplete
-              id="Hawker Stall"
-              options={hawkerStallsDATA}
-              getOptionLabel={(option) => option}
-              onChange={(event, newValue) => {
-                setHawkerStall(newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Hawker Stall"
-                  variant="outlined"
-                />
-              )}
+            <AutocompleteHS
+              hawkerCentre={hawkerCentre}
+              setHawkerStall={setHawkerStall}
             />
           </Grid>
           {/* ====================MATERIAL UI DROPZONE for image uploading: pairs to Cloudinary==================== */}
