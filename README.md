@@ -18,7 +18,7 @@
 - npm install @material-ui/lab
 - npm install --save material-ui-dropzone
 - npm i react-query
-- npm i axios 
+- npm i axios
 - npm run start
 
 ### 3. GIT commands
@@ -71,3 +71,5 @@ CLOUDINARY_API_KEY
 CLOUDINARY_API_SECRET
 CLOUDINARY_UPLOAD_PRESET (optional - preset for unsigned uploading)
 ```
+
+TESTING FOR GIT
