@@ -20,16 +20,18 @@ router.get("/", (req, res) => {
 //localhost:4000/v1/maxwell-food-centre/stalls
 router.get("/:centreName/stalls", (req, res)=> { 
   const centreName = req.params.centreName;
-  HawkerCentre.find({name: centreName}, (err, centreName)=>{
-    HawkerStalls.find({hawker_centre: centreName}, (err, stalls)=>{
-      if(err){
-        res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-      }
-      res.status(StatusCodes.OK).json(stalls);
-    })
+  HawkerCentre.find({name: centreName}).populate("hawker_stalls").
+  exec(function (err, HawkerCentre){
+    console.log(HawkerCentre.hawker_stalls.name)
   })
+  // HawkerCentre.find({name: centreName}, (err, centreName)=>{
+  //     if(err){
+  //       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+  //     } 
+  //     // res.status(StatusCodes.OK).json(stalls);
+  //   })
+  // })
 })
-
 //? Gets all hawkerstalls from all hawker centres
 router.get("/stalls", (req, res)=> { 
   HawkerStalls.find({}, (err, hawkerStalls)=>{
