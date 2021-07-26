@@ -4,24 +4,31 @@ import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "prop-types";
+import HawkerCentre from "./data/hawkerCentre";
 
 function App() {
+  const queryClient = new QueryClient();
+
+
   return (
     <Router>
-      <Switch>
-        <Route path="/" exact>
-          <Navbar />
-          <Main />
-        </Route>
-        <Route path="/signup">
-          <Navbar />
-          <SignUp />
-        </Route>
-        <Route path="/login">
-          <Navbar />
-          <SignIn />
-        </Route>
-      </Switch>
+      <QueryClientProvider client={queryClient}>
+        <Navbar />
+        <HawkerCentre />
+        <Switch>
+          <Route path="/" exact>
+            <Main />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="/login">
+            <SignIn />
+          </Route>
+        </Switch>
+      </QueryClientProvider>
     </Router>
   );
 }
