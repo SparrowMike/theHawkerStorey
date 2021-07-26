@@ -77,7 +77,6 @@ export default function Post({ handleClosePost }) {
         <Grid container spacing={3}>
           {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
           <Grid item xs={12} md={6}>
-            Auto
             <Autocomplete
               id="Hawker Centre"
               options={hawkerCentreDATA}
