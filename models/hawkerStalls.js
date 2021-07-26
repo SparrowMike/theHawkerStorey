@@ -9,7 +9,6 @@ const hawkerStallsSchema = new Schema({
   score: { type: Number, default: 0 },
   image_url: { type: String },
   dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-  hawker_centre: {type: Schema.Types.ObjectId, ref: "HawkerCentre"}, //! Reference (HAWKER CENTRE id)
 
   //! + all user posts that reviewed stall (query from post_id)
 });
