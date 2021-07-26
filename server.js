@@ -1,7 +1,6 @@
 // =======================================
 //              DEPENDENCIES
 // =======================================
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -9,7 +8,6 @@ const session = require("express-session");
 const cors = require("cors");
 const { cloudinary } = require("./utils/cloudinary");
 const path = require("path");
-const bodyParser = require("body-parser");
 
 // =======================================
 //              CONFIGURATIONS
@@ -30,9 +28,8 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(bodyParser.json({ limit: "10mb" }));
-app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.static("public"));
 app.use(express.static("./client/build"));
 const methodOverride = require("method-override");

@@ -5,7 +5,7 @@
 - cd theHawkerStorey
 - touch .env (copy everything from .env.example)
 - npm i express dotenv nodemon mongoose bcrypt express-session cors
-- npm i cloudinary multer path cors body-parser
+- npm i cloudinary multer path cors
 - npm i http-status-codes
 - run app with "nodemon" then go => http://localhost:4000/v1/posts
 
