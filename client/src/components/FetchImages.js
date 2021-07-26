@@ -8,7 +8,6 @@ import {
   Button,
   CardActions,
   CardContent,
-  // CardMedia,
   Container,
 } from "@material-ui/core";
 
@@ -74,11 +73,6 @@ const FetchImages = () => {
                     // width="300"
                     crop="scale"
                   />
-                  {/* <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  /> */}
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       Heading
