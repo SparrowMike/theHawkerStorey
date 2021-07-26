@@ -9,6 +9,7 @@ const session = require("express-session");
 const cors = require("cors");
 const { cloudinary } = require("./utils/cloudinary");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 // =======================================
 //              CONFIGURATIONS
@@ -29,6 +30,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.static("./client/build"));
@@ -66,7 +69,6 @@ app.use("/v1/hawkers", hawkersController);
 
 const dishesController = require("./controllers/dishes.js");
 app.use("/v1/dishes", dishesController);
-
 
 const usersController = require("./controllers/users.js");
 app.use("/v1/users", usersController);
