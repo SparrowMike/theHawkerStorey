@@ -17,9 +17,6 @@ import { DropzoneArea } from "material-ui-dropzone";
 import Rating from "@material-ui/lab/Rating";
 import { Box, Button } from "@material-ui/core";
 
-//! dave imageupload test
-// import ImageUpload from "./imageUpload/ImageUpload";
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -42,13 +39,6 @@ export default function Post({ handleClosePost }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log("hawkerCentre", hawkerCentre);
-    console.log("hawkerStall", hawkerStall);
-    console.log("image", image);
-    console.log("dishName", dishName);
-    console.log("review", review);
-    console.log("rating", rating);
 
     //* code for image upload
     const reader = new FileReader();
@@ -86,7 +76,9 @@ export default function Post({ handleClosePost }) {
           Add New Post
         </Typography>
         <Grid container spacing={3}>
+          {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
           <Grid item xs={12} md={6}>
+            Auto
             <Autocomplete
               id="Hawker Centre"
               options={hawkerCentreDATA}
@@ -103,6 +95,7 @@ export default function Post({ handleClosePost }) {
               )}
             />
           </Grid>
+          {/* ====================MATERIAL UI Autocomplete for hawkerStall option selection: pairs to hawkerStallsDATA==================== */}
           <Grid item xs={12} md={6}>
             <Autocomplete
               id="Hawker Stall"
@@ -120,7 +113,7 @@ export default function Post({ handleClosePost }) {
               )}
             />
           </Grid>
-          {/* ====================MATERIAL UI DROPZONE==================== */}
+          {/* ====================MATERIAL UI DROPZONE for image uploading: pairs to Cloudinary==================== */}
           <Grid item xs={12}>
             <DropzoneArea
               acceptedFiles={["image/*"]}
@@ -130,7 +123,6 @@ export default function Post({ handleClosePost }) {
                 setImage(files[0]);
               }}
             />
-            {/* <ImageUpload /> */}
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
@@ -146,6 +138,7 @@ export default function Post({ handleClosePost }) {
               )}
             />
           </Grid>
+          {/* ====================MATERIAL UI Textfield for user to write reviews=================== */}
           <Grid item xs={12}>
             <TextField
               id="outlined-multiline-static"
@@ -159,6 +152,7 @@ export default function Post({ handleClosePost }) {
               }}
             />
           </Grid>
+          {/* ====================MATERIAL UI Rating for users to select review=================== */}
           <Grid item xs={12}>
             <Rating
               size="large"
