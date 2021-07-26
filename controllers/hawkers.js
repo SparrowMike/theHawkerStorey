@@ -3,8 +3,7 @@ const router = express.Router();
 const {StatusCodes} = require("http-status-codes")
 const HawkerStalls = require("../models/hawkerStalls");
 const HawkerCentre = require("../models/hawkerCentre")
-const mongoose = require("mongoose");
-const toId = mongoose.Types.ObjectId
+
 
 //? Gets all hawker centres
 //localhost:4000/v1/hawkers
@@ -39,21 +38,30 @@ router.get("/stalls", (req, res)=> {
   })
 })
 
-router.get("/:id/stalls", (req, res)=> { 
-  const id = req.params.id
-  HawkerStalls.find({hawker_centre: id}, (err, hawkerStalls)=>{
-    if(err){
-      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-    }
-    res.status(StatusCodes.OK).json(hawkerStalls);
+// router.get("/:id/stalls", (req, res)=> { 
+//   const id = req.params.id
+//   HawkerStalls.find({hawker_centre: id}, (err, hawkerStalls)=>{
+//     if(err){
+//       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+//     }
+//     res.status(StatusCodes.OK).json(hawkerStalls);
+//   })
+// })
+
+//localhost:4000/v1/68594326456/stalls
+//localhost:4000/v1/maxwell%20food%20centre/stalls
+router.get("/:centreName/stalls", (req, res)=> { 
+  const centreName = req.params.centreName;
+  HawkerCentre.find({name: centreName}, (err, centreName)=>{
+    HawkerStalls.find({hawker_centre: centreName}, (err, stalls)=>{
+      if(err){
+        res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+      }
+      res.status(StatusCodes.OK).json(stalls);
+    })
   })
 })
 
-// router.get("/:hawker_centre/see", (req, res)=> { 
-//   req.params.hawker_centre = toId(req.params.hawker_centre)
-//   const hawkerCentre = HawkerStalls.find({}).populate();
-//   res.send(hawkerCentre)
-// })
 
 
 //? seed hawker centres
@@ -62,7 +70,7 @@ router.get("/seed", (req,res)=> {
   HawkerCentre.remove({}, (err, hawkerCentres)=>{
     HawkerCentre.create([
       {
-        name: "Maxwell Food Centre",
+        name: "maxwell-food-centre",
         address: {
           street_address: "1, Kadayanallur Street",
           postal_code: "069184",
@@ -97,7 +105,7 @@ router.get("/stalls/seed", (req, res) => {
         score: 5,
         image_url: "https://cache-wak-wak-hawker-com.s3-ap-southeast-1.amazonaws.com/data/images/stall/64/864/block/LQO1R82f328jzczp.jpg?v=1612194949",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        hawker_centre: "60fbdc1cef552a1790866fd9",
+        hawker_centre: "60fe1929f78f8946ba1fb3dd",
       },
       {
         name: "Traditional Chinese Claypot",
@@ -107,7 +115,7 @@ router.get("/stalls/seed", (req, res) => {
         score: 10,
         image_url: "https://hawkerpedia.s3.ap-southeast-1.amazonaws.com/highlight-item/20201123/h1EP4JHfZvdp_RTmMYVaOsywA_traditionalchineseclaypot_sf.jpg",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        hawker_centre: "60fbdc1cef552a1790866fd9",
+        hawker_centre: "60fe1929f78f8946ba1fb3dd",
       },
       {
         name: "Ah Tai Hainanese Chicken Rice",
@@ -117,7 +125,7 @@ router.get("/stalls/seed", (req, res) => {
         score: 10,
         image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
-        hawker_centre: "60fbdc1cef552a1790866fd9",
+        hawker_centre: "60fe1929f78f8946ba1fb3dd",
       },
     ],
     (err, data)=>{
