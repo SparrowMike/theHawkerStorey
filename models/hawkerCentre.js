@@ -8,6 +8,7 @@ const hawkerCentreSchema = new Schema({
     postal_code: {type: String, required: true} //! Numbers leading with 0 can't be used as a number field
    }, 
   description: { type: String },
+
   hawker_stalls: [{type: Schema.Types.ObjectId, ref: "HawkerStalls"}], //! Reference (HAWKER CENTRE id)
   //! + show all hawker stalls relating to  (query from post_id)
 });
