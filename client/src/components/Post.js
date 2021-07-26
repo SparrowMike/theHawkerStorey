@@ -56,7 +56,6 @@ export default function Post({ handleClosePost }) {
   //* convert image binary into string (base64EndcodedImage) and calls fetch route
   //! to change fetch route to post controller route when we move code from server.js to posts
   const uploadImage = async (base64EncodedImage) => {
-    console.log("Attempting upload - ", base64EncodedImage);
     try {
       await fetch("/upload", {
         method: "POST",
