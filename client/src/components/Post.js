@@ -12,8 +12,8 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import dishNameDATA from "../data/dishName";
-import hawkerStallsDATA from "../data/hawkerStalls";
-import HawkerCentre from "../data/hawkerCentre";
+import FetchHawkerStalls from "../data/FetchHawkerStalls";
+import FetchHawkerCentre from "../data/hawkerCentre";
 
 import { DropzoneArea } from "material-ui-dropzone";
 
@@ -43,14 +43,15 @@ export default function Post({ handleClosePost }) {
 
 
   // Fetching of hawker centres
-  const {data} = useQuery("hawkercentres", () =>
-    axios("/v1/hawkers")
-  );
 
-  const centreNames = data?.data
-  const hcList = centreNames?.map((item) => {
-  return item.name
-  })
+  // const {data} = useQuery("hawkercentres", () =>
+  //   axios("/v1/hawkers")
+  // );
+
+  // const centreNames = data?.data
+  // const hcList = centreNames?.map((item) => {
+  // return item.name
+  // })
 
   // Fetching of hawker stalls
 //   const {data} = useQuery("hawkercentres", () =>
@@ -103,27 +104,13 @@ export default function Post({ handleClosePost }) {
         <Grid container spacing={3}>
           {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
           <Grid item xs={12} md={6}>
-            <Autocomplete
-              id="Hawker Centre"
-              options={hcList}
-              getOptionLabel={(option) => option}
-              onChange={(event, newValue) => {
-                setHawkerCentre(newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Hawker Centre"
-                  variant="outlined"
-                />
-              )}
-            />
+            <FetchHawkerCentre hawkerCentre={hawkerCentre} />
           </Grid>
           {/* ====================MATERIAL UI Autocomplete for hawkerStall option selection: pairs to hawkerStallsDATA==================== */}
           <Grid item xs={12} md={6}>
             <Autocomplete
               id="Hawker Stall"
-              options={hawkerStallsDATA}
+              options={FetchHawkerStalls}
               getOptionLabel={(option) => option}
               onChange={(event, newValue) => {
                 setHawkerStall(newValue);
