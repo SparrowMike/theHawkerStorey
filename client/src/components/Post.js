@@ -10,7 +10,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import dishNameDATA from "../data/dishName";
 import hawkerStallsDATA from "../data/hawkerStalls";
-import hawkerCentreDATA from "../data/hawkerCentre";
+import HawkerCentre from "../data/hawkerCentre";
 
 import { DropzoneArea } from "material-ui-dropzone";
 
@@ -53,6 +53,7 @@ export default function Post({ handleClosePost }) {
     handleClosePost();
   };
 
+  console.log("hey there from post")
   //* convert image binary into string (base64EndcodedImage) and calls fetch route
   //! to change fetch route to post controller route when we move code from server.js to posts
   const uploadImage = async (base64EncodedImage) => {
@@ -79,7 +80,7 @@ export default function Post({ handleClosePost }) {
           <Grid item xs={12} md={6}>
             <Autocomplete
               id="Hawker Centre"
-              options={hawkerCentreDATA}
+              options={HawkerCentre}
               getOptionLabel={(option) => option}
               onChange={(event, newValue) => {
                 setHawkerCentre(newValue);

@@ -1,17 +1,19 @@
-// import axios from "axios";
-// import { useQuery } from "react-query";
+import axios from "axios";
+import { useQuery } from "react-query";
 
-// const hawkerCentre = () => {
-//   const { isLoading, error, data } = useQuery("hawkercentres", () =>
-//     axios("v1/hawkers")
-//   );
+const HawkerCentre = () => {
 
-//   if (error) return <h1>Error, {error.message}, try again </h1>;
-//   if (isLoading) return <h1>Loading....</h1>;
+const {data} = useQuery("hawkercentres", () =>
+    axios("http://localhost:4000/v1/hawkers")
+  );
 
-//   console.log(data);
+  // if (error) return <h1>Error, {error.message}, try again </h1>;
+  // if (isLoading) return <h1>Loading....</h1>;
 
-//   return;
-// };
+  console.log("this is the data", data);
 
-// export default hawkerCentre;
+  return <></>
+ 
+};
+
+export default HawkerCentre;
