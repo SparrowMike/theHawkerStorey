@@ -8,8 +8,8 @@ import SignIn from "./components/SignIn";
 function App() {
   return (
     <Router>
+      <Navbar />
       <Switch>
-        <Navbar />
         <Route path="/" exact>
           <Main />
         </Route>
