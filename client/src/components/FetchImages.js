@@ -1,36 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Image } from "cloudinary-react";
-import {
-  makeStyles,
-  Grid,
-  Card,
-  Typography,
-  Button,
-  CardActions,
-  CardContent,
-  Container,
-} from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
+
+import StackGrid, { transitions } from "react-stack-grid";
+
+const { scaleDown } = transitions;
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(1),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(2),
+  container: {
+    paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(8),
   },
-  card: {
-    height: "auto",
-    display: "flex",
-    flexDirection: "column",
-  },
   cardMedia: {
-    // paddingTop: "56.25%", // 16:9
+    padding: "10px",
     width: "100%",
     heigth: "100%",
   },
-  cardContent: {
-    flexGrow: 1,
+
+  stackGrid: {
+    padding: "40px",
   },
 }));
 
@@ -59,24 +47,20 @@ const FetchImages = () => {
 
   return (
     <>
-      <Container className={classes.cardGrid} maxWidth="lg">
-        <Grid container spacing={2}>
+      <Container className={classes.container}>
+        <StackGrid columnWidth={330} className={classes.stackGrid}>
           {imageIds &&
             imageIds.map((imageId, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <Image
-                    className={classes.cardMedia}
-                    key={index}
-                    cloudName={"hawkerstorey"}
-                    publicId={imageId}
-                    // width="300"
-                    crop="scale"
-                  />
-                </Card>
-              </Grid>
+              <Image
+                className={classes.cardMedia}
+                key={index}
+                cloudName={"hawkerstorey"}
+                publicId={imageId}
+                // width="300"
+                crop="scale"
+              />
             ))}
-        </Grid>
+        </StackGrid>
       </Container>
     </>
   );
