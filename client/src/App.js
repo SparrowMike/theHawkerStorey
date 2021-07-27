@@ -6,36 +6,30 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import HawkerStallDisplay from "./components/HawkerStallDisplay";
 import { QueryClient, QueryClientProvider } from "react-query";
-import HawkerCentreDisplay from "./components/HawkerCentreDisplay"
-import { ReactQueryDevtools } from 'react-query/devtools'
-
+import HawkerCentreDisplay from "./components/HawkerCentreDisplay";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
   const queryClient = new QueryClient();
 
-
-
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
 
         <Navbar />
-        {/* <HawkerCentreDisplay path="/hawkers"/> */}
-        <Route path="/:hawkercentre" component={HawkerCentreDisplay}/>
-
-
-      <ReactQueryDevtools initialIsOpen={false} />
-
-        <Navbar /> 
 
         <Switch>
-          <Route path="/:centreName/:stall">
-          <HawkerStallDisplay />
-          </Route>
-        
-        
           <Route path="/" exact>
             <Main />
+          </Route>
+
+          <Route path="/:centreName/:stall">
+            <HawkerStallDisplay />
+          </Route>
+
+          <Route path="/:centreName/">
+            <HawkerCentreDisplay />
           </Route>
 
           <Route path="/signup">
@@ -45,9 +39,7 @@ function App() {
           <Route path="/login">
             <SignIn />
           </Route>
-
         </Switch>
-
       </QueryClientProvider>
     </Router>
   );

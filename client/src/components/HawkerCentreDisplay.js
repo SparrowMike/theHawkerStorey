@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const HawkerCentreDisplay = () => {
   const classes = useStyles();
-  const {data, isLoading, error} = useQuery("hawkercentres", 
+  const {data, isLoading, error} = useQuery("hawkerCentres", 
   ()=> axios("/v1/hawkers/maxwell-food-centre"))
   const centres = data?.data;
   console.log("centres: ", centres)

@@ -5,9 +5,11 @@ import axios from "axios";
 
 
 const HawkerStallDisplay = () => {
+const {centreName, stall} = useParams()
+
 //fetches stall information
 const { data: stalldata } = useQuery("hawkerstalls", () =>
-axios("/v1/hawkers/maxwell-food-centre/")
+axios(`/v1/hawkers/${centreName}`)
 );
 console.log("data for list of hawkerstalls", stalldata?.data?.hawker_stalls);
 
@@ -18,14 +20,14 @@ axios("/v1/posts")
 console.log("this is postdata", postdata?.data);
 // const postData = postdata?.data;
     
- const {centreName, stall} = useParams()
+ 
 
 
 
 return (
     <div>
 
-      <h1>This shows all the hawker centres</h1>
+      <h1>This shows all the hawker stalls</h1>
       Title: {stalldata?.data?.name} <br /> <br />
       Description: {stalldata?.data?.description} <br />
       
