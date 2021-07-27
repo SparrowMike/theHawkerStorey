@@ -18,10 +18,10 @@ function App() {
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
+
       <ReactQueryDevtools initialIsOpen={false} />
 
         <Navbar /> 
-        
         <Switch>
         <HawkerStallDisplay path="/hawkers/:centreName/:stall" />
         

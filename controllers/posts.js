@@ -4,6 +4,8 @@ const router = express.Router();
 const { StatusCodes } = require("http-status-codes");
 const Posts = require("../models/posts");
 const session = require("express-session");
+const { cloudinary } = require("../utils/cloudinary");
+const upload = require("../utils/multer");
 
 const sessionsController = require("./sessions");
 app.use("/sessions", sessionsController);
@@ -85,6 +87,35 @@ const isAuthenticated = (req, res, next) => {
     res.redirect("/sessions/new");
   }
 };
+//!dave post test
+router.post("/upload", async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "hawkerstorey-preset",
+    });
+    // const result = await cloudinary.uploader.upload(req.file.data);
+    // console.log("results", results);
+    // res.json({ msg: uploadedResponse });
+    console.log("WE SENT IT TO THE CLOUD!!", uploadedResponse);
+    console.log(req.body)
+    //* Create new post
+    let post = new Posts({
+      image_url: uploadedResponse.secure_url,
+      cloudinary_id: uploadedResponse.public_id,
+      hawkerCentre: req.body.hawkerCentre,
+      hawkerStall: req.body.hawkerStall,
+      review: req.body.review,
+      rating: req.body.rating,
+      dishes_id: req.body.dishes_id,
+    });
+    await post.save();
+    res.json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ err: "Uh oh. Something went wrong" });
+  }
+});
 
 // create a post
 //localhost:4000/v1/posts/new (ame: @potcheeks, changed the url to /new for authentication)
@@ -96,6 +127,7 @@ router.post("/new", isAuthenticated, (req, res) => {
     res.status(200).send(createdPost);
   });
 });
+
 
 // delete a post
 router.delete("/:id", (req, res) => {
@@ -123,3 +155,4 @@ router.put("/:id", (req, res) => {
 });
 
 module.exports = router;
+
