@@ -6,6 +6,7 @@ import {
   Typography,
   CardContent,
 } from "@material-ui/core";
+
 import {Link} from "react-router-dom"
 
 {/* =========this is stalls displayed in /v1/hawkers/:hawkercentre============ */}
@@ -38,12 +39,14 @@ const StallArrays = ({stall, index, centreName}) => {
   const classes = useStyles()
   return(
     <>
+
     <Grid item xs={12} sm={6} md={4}>
     {/* <Image
         className={classes.cardMedia}
         src= {stall.image_url}
         crop="scale"
     /> */}
+
     <Link to ={`/${centreName}/${stall.name}`}>
     <Card className={classes.card}>
     {/* <CardMedia
@@ -60,7 +63,7 @@ const StallArrays = ({stall, index, centreName}) => {
     </Link>
     </Grid>
     </>
-  )
-}
+  );
+};
 
 export default StallArrays;
