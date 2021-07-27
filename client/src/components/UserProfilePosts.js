@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   makeStyles,
   Grid,
@@ -30,26 +30,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-const UserProfilePosts = ({post}) => {
-  const classes = useStyles()
+const UserProfilePosts = ({ post }) => {
+  const classes = useStyles();
   return (
     <>
-    <Grid item xs={12} sm={6} md={4}>
-    
-    <Card className={classes.card}> 
-    {/*=====   add link to posts modal/page =======*/}
-    <img src={post.image_url} alt="user post image" />
-    <CardContent className={classes.cardContent}>
-    <Typography gutterBottom variant="body">
-    {post.review}
-    </Typography>
-    </CardContent>
-    </Card>
-    </Grid>
+      <Grid item xs={12} sm={6} md={4}>
+        <Card className={classes.card}>
+          {/*=====   add link to posts modal/page =======*/}
+          <img src={post.image_url} alt="user post" />
+          <CardContent className={classes.cardContent}>
+            <Typography gutterBottom variant="body">
+              {post.review}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
     </>
-  )
-}
+  );
+};
 
-export default UserProfilePosts
+export default UserProfilePosts;
