@@ -67,7 +67,11 @@ const HawkerCentreDisplay = () => {
     </Container>
     <Container className={classes.cardGrid} maxWidth="lg">
     <Grid container spacing={4}>
-      {centres.hawker_stalls.map((stall, index)=> <StallArrays stall={stall} index={index}/>)}
+      {centres.hawker_stalls.map((stall, index)=> <StallArrays 
+      stall={stall} 
+      index={index} 
+      centreName = {centreName}
+      />)}
     </Grid>
     </Container>
     </> 
