@@ -14,11 +14,36 @@ const useStyles = makeStyles((theme) => ({
   heroContent: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
+    position: "relative",
+    zIndex: "1",
   },
+  image: {
+    // backgroundImage:
+    //   "url(https://www.visitsingapore.com/singapore-itineraries/singapore-food-paradise-a-three-day-guide/_jcr_content/par-carousel/carousel_detailpage/carousel/item0.thumbnail.carousel-img.740.416.jpg)",
+    backgroundImage:
+      "url(https://www.visitsingapore.com/editorials/did-you-know-foodies/_jcr_content.renderimage.carousel.rect.835.470.jpg) center center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    opacity: "0.4",
+    position: "absolute",
+    zIndex: "-1",
+    // top: "0",
+    // bottom: "0",
+    // left: "0",
+    // right: "0",
+    // background: url(test.jpg) center center;
+
+    width: "100%",
+    height: " 100%",
+  },
+
   heroButtons: {
     marginTop: theme.spacing(4),
   },
 
+  header: {
+    color: theme.palette.common.white,
+  },
 }));
 
 export default function Main() {
@@ -28,14 +53,14 @@ export default function Main() {
     <React.Fragment>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
+        <div className={classes.image} />
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
               component="h1"
               variant="h2"
               align="center"
-              color="textPrimary"
+              // className={classes.header}
               gutterBottom
             >
               Album layout
@@ -43,7 +68,7 @@ export default function Main() {
             <Typography
               variant="h5"
               align="center"
-              color="textSecondary"
+              // className={classes.header}
               paragraph
             >
               Something short and leading about the collection below—its

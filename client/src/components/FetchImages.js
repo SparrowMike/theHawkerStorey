@@ -13,7 +13,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   icon: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -60,7 +60,7 @@ const FetchImages = () => {
   return (
     <>
       <Container className={classes.cardGrid} maxWidth="lg">
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           {imageIds &&
             imageIds.map((imageId, index) => (
               <Grid item key={index} xs={12} sm={6} md={4}>
@@ -73,7 +73,7 @@ const FetchImages = () => {
                     // width="300"
                     crop="scale"
                   />
-                  <CardContent className={classes.cardContent}>
+                  {/* <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       Heading
                     </Typography>
@@ -89,7 +89,7 @@ const FetchImages = () => {
                     <Button size="small" color="primary">
                       Edit
                     </Button>
-                  </CardActions>
+                  </CardActions> */}
                 </Card>
               </Grid>
             ))}
