@@ -9,12 +9,14 @@ const toId = mongoose.Schema.Types.ObjectId;
 //? Gets all hawker centres
 //localhost:4000/v1/hawkers
 router.get("/", (req, res) => {
-  HawkerCentre.find({}, (err, foundHawkerCentres)=>{
+  HawkerCentre.find({}).populate("hawker_stalls").
+  exec(function (err, HawkerCentre){
+    console.log(HawkerCentre)
     if(err){
-      res.status(400).json({ error: err.message });
-    };
-    res.status(200).json(foundHawkerCentres);
-  })
+      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+    } 
+    res.status(StatusCodes.OK).json(HawkerCentre)
+  });
 });
 
 //? Gets all hawkerstalls in hawker centre
@@ -27,34 +29,10 @@ router.get("/:centreName/", (req, res)=> {
     if(err){
       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
     } 
-    res.status(StatusCodes.OK).json(HawkerCentre)}) ;
+    res.status(StatusCodes.OK).json(HawkerCentre)
+  });
   })
 
-
-// router.get("/:centreName/stalls", (req, res)=> { 
-//   const centreName = req.params.centreName;
-//   HawkerCentre.find({name: centreName}, (err, centreName)=>{
-//     if(err){
-//         res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-//       }
-//       const stallId = centreName[0].hawker_stalls;
-      
-//       // res.status(StatusCodes.OK).json(centreName[0].hawker_stalls);}
-//     })
-//   })
-
-
-// router.get("/:centreName/stalls", (req, res)=> { 
-//   const centreName = req.params.centreName;
-//   HawkerCentre.find({name: centreName}, (err, centreName)=>{
-//     HawkerStalls.find({}, (err, stalls)=>{
-//       if(err){
-//         res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-//       }
-//       res.status(StatusCodes.OK).json(stalls);
-//     })
-//   })
-// })
 
 
 //? Gets all hawkerstalls from all hawker centres
