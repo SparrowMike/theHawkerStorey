@@ -1,6 +1,6 @@
-// =======================================
-//              DEPENDENCIES
-// =======================================
+//* =======================================
+//*              DEPENDENCIES
+//* =======================================
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -9,16 +9,16 @@ const cors = require("cors");
 const { cloudinary } = require("./utils/cloudinary");
 const path = require("path");
 
-// =======================================
-//              CONFIGURATIONS
-// =======================================
+//* =======================================
+//*              CONFIGURATIONS
+//* =======================================
 require("dotenv").config();
 const PORT = process.env.PORT;
 const mongodbURI = process.env.MONGODB_URI;
 
-// =======================================
-//        BODY PARSER, MIDDLEWARE
-// =======================================
+//* =======================================
+//*        BODY PARSER, MIDDLEWARE
+//* =======================================
 app.use(cors());
 
 app.use(
@@ -34,9 +34,9 @@ app.use(express.static("public"));
 app.use(express.static("./client/build"));
 const methodOverride = require("method-override");
 
-// =======================================
-//            MONGOOSE CONNECTION
-// =======================================
+//* =======================================
+//*            MONGOOSE CONNECTION
+//* =======================================
 mongoose.connect(mongodbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -54,9 +54,9 @@ mongoose.connection.once("open", () => {
   console.log("connected to mongo");
 });
 
-// =======================================
-//         CONTROLLERS/ROUTES
-// =======================================
+//* =======================================
+//*         CONTROLLERS/ROUTES
+//* =======================================
 const postsController = require("./controllers/posts.js");
 app.use("/v1/posts", postsController);
 
@@ -72,16 +72,20 @@ app.use("/v1/users", usersController);
 //!
 app.use("/upload", require("./routes/posts.js"));
 
-// =======================================
-//              LISTENER
-// =======================================
-// //! temporary area for testing cloudinary
-// app.get("/api/images", async (req, res) => {
+
+
+//* =======================================
+//*              LISTENER
+//* =======================================
+//! temporary area for testing cloudinary fetch
+//! to change fetch route to controller
+// app.get("/images", async (req, res) => {
 //   const { resources } = await cloudinary.search.expression("test*").execute();
 //   console.log("fetching", resources);
 //   const publicIds = resources.map((file) => file.public_id);
 //   res.send(publicIds);
 // });
+
 
 // app.post("/api/upload", async (req, res) => {
 //   try {
