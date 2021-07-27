@@ -77,7 +77,7 @@ app.use("/upload", require("./routes/posts.js"));
 // =======================================
 //! temporary area for testing cloudinary fetch
 //! to change fetch route to controller
-app.get("/images", async (req, res) => {
+app.get("/api/images", async (req, res) => {
   const { resources } = await cloudinary.search.expression("test*").execute();
   console.log("fetching", resources);
   const publicIds = resources.map((file) => file.public_id);
@@ -86,7 +86,7 @@ app.get("/images", async (req, res) => {
 
 //! temporary area for testing cloudinary upload.
 //! to change fetch route in ImageUpload.js when we move the code from server.js to posts controller
-app.post("/upload", async (req, res) => {
+app.post("/api/upload", async (req, res) => {
   try {
     const fileStr = req.body.data;
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {

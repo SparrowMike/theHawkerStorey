@@ -43,7 +43,7 @@ const FetchImages = () => {
 
   const loadImages = async () => {
     try {
-      const res = await fetch("/images");
+      const res = await fetch("/api/images");
       const data = await res.json();
       console.log(data);
       setImageIds(data);
