@@ -3,8 +3,7 @@ const router = express.Router();
 const {StatusCodes} = require("http-status-codes");
 const HawkerStalls = require("../models/hawkerStalls");
 const HawkerCentre = require("../models/hawkerCentre");
-const mongoose = require("mongoose");
-const toId = mongoose.Schema.Types.ObjectId;
+
 
 //? Gets all hawker centres
 //localhost:4000/v1/hawkers
@@ -18,6 +17,18 @@ router.get("/", (req, res) => {
     res.status(StatusCodes.OK).json(HawkerCentre)
   });
 });
+
+//? Gets all hawkerstalls from all hawker centres
+//localhost:4000/v1/hawkers/stalls
+router.get("/stalls", (req, res)=> { 
+  HawkerStalls.find({}, (err, hawkerStalls)=>{
+    if(err){
+      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
+    }
+    console.log("HS: ", hawkerStalls)
+    res.status(StatusCodes.OK).json(hawkerStalls);
+  })
+})
 
 //? Gets all hawkerstalls in hawker centre
 //localhost:4000/v1/maxwell-food-centre/stalls
@@ -35,15 +46,6 @@ router.get("/:centreName/", (req, res)=> {
 
 
 
-//? Gets all hawkerstalls from all hawker centres
-router.get("/stalls", (req, res)=> { 
-  HawkerStalls.find({}, (err, hawkerStalls)=>{
-    if(err){
-      res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-    }
-    res.status(StatusCodes.OK).json(hawkerStalls);
-  })
-})
 
 
 
