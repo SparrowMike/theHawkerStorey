@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import axios from "axios";
 import { Image } from "cloudinary-react";
 import {
   Container,
@@ -44,13 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-require("dotenv").config();
-
 const FetchImages = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
-  const [imageIds, setImageIds] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -60,27 +58,18 @@ const FetchImages = () => {
     setOpen(false);
   };
 
-  const loadImages = async () => {
-    try {
-      const res = await fetch("/images");
-      const data = await res.json();
-      console.log(data);
-      setImageIds(data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    console.log("useeffect from fetchimages");
-    loadImages();
-  }, []);
+  //* pull posts from mongoose to display images by cloudinary ids
+  const { isLoading, data } = useQuery("get-posts", () => axios("v1/posts"));
+  const imageIds = data?.data.map((image) => image.cloudinary_id);
 
   return (
     <>
       <Container className={classes.container}>
         <StackGrid columnWidth={300} className={classes.stackGrid}>
-          {imageIds &&
+          {isLoading ? (
+            <h1>Hang on while we fetch some yummy photos!</h1>
+          ) : (
+            imageIds &&
             imageIds.map((imageId, index) => (
               <Image
                 className={classes.cardMedia}
@@ -90,7 +79,8 @@ const FetchImages = () => {
                 publicId={imageId}
                 crop="scale"
               />
-            ))}
+            ))
+          )}
         </StackGrid>
         <Modal
           className={classes.modal}
