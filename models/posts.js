@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const postsSchema = new Schema({
   image_url: { type: String, required: true },
-  // review: { type: String, required: true },
-  // rating: { type: Number, required: true },
+  review: { type: String, required: true },
+  rating: { type: Number, required: true },
 
   cloudinary_id: String,
 
