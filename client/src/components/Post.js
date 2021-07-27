@@ -6,7 +6,11 @@ import AutocompleteDishes from "./AutocompleteDishes";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Button, Grid, TextField, Typography } from "@material-ui/core/";
-import { Autocomplete, Rating } from "@material-ui/lab/";
+import {
+  Autocomplete,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@material-ui/lab/";
 import { DropzoneArea } from "material-ui-dropzone";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +30,12 @@ export default function Post({ handleClosePost }) {
   const [image, setImage] = useState("");
   const [dishName, setDishName] = useState("");
   const [review, setReview] = useState("");
-  const [rating, setRating] = useState(4);
+  const [rating, setRating] = useState("3");
+
+  const handleRating = (event, newRating) => {
+    setRating(newRating);
+    console.log(rating);
+  };
 
   //* Fetching of hawker centres data
   const { data } = useQuery("hawkercentres", () => axios("/v1/hawkers"));
@@ -141,19 +150,30 @@ export default function Post({ handleClosePost }) {
           </Grid>
           {/* ====================MATERIAL UI Rating for users to select review=================== */}
           <Grid item xs={12}>
-            {/* <Rating
-              size="large"
-              name="simple-controlled"
+            <ToggleButtonGroup
               value={rating}
-              onChange={(event, newValue) => {
-                setRating(newValue);
-              }}
-            /> */}
+              exclusive
+              onChange={handleRating}
+              aria-label="text alignment"
+            >
+              <ToggleButton value="3">
+                <Typography>MUST GO!</Typography>
+              </ToggleButton>
+
+              <ToggleButton value="2">
+                <Typography>CAN GO!</Typography>
+              </ToggleButton>
+
+              <ToggleButton value="1">
+                <Typography>NO GO!</Typography>
+              </ToggleButton>
+            </ToggleButtonGroup>
+
             <Box textAlign="right">
               <Button
                 onClick={handleSubmit}
                 variant="contained"
-                color="primary"
+                color="secondary"
               >
                 Submit
               </Button>
