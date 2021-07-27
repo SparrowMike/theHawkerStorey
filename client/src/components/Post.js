@@ -63,6 +63,7 @@ export default function Post({ handleClosePost }) {
 
     //* code for image upload
     const reader = new FileReader();
+
     reader.readAsDataURL(image);
     reader.onloadend = () => {
       uploadImage(reader.result);
