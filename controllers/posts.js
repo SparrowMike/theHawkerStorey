@@ -107,7 +107,7 @@ router.post("/upload", async (req, res) => {
       hawkerStall: req.body.hawkerStall,
       review: req.body.review,
       rating: req.body.rating,
-      dishes_id: "hardcoded"
+      dishes_id: req.body.dishes_id,
     });
     await post.save();
     res.json(post);
