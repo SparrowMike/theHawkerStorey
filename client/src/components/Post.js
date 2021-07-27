@@ -91,6 +91,10 @@ export default function Post({ handleClosePost }) {
               onChange={(event, newValue) => {
                 setHawkerCentre(newValue);
               }}
+              onSelect={(event, newValue) => {
+                setHawkerCentre(newValue);
+              }}
+              defaultValue="maxwell-food-centre"
               renderInput={(params) => (
                 <TextField
                   {...params}
