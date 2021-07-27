@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
+    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(8),
   },
   card: {
@@ -73,23 +73,6 @@ const FetchImages = () => {
                     // width="300"
                     crop="scale"
                   />
-                  {/* <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                  </CardActions> */}
                 </Card>
               </Grid>
             ))}
