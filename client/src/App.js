@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 
+
 function App() {
   const queryClient = new QueryClient();
 
@@ -16,8 +17,10 @@ function App() {
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
+
       <ReactQueryDevtools initialIsOpen={false} />
         <Navbar /> 
+
         <Switch>
           <Route path="/" exact>
             <Main />
