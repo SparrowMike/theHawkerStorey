@@ -6,12 +6,11 @@ import TextField from "@material-ui/core/TextField";
 
 const AutocompleteDishes = ({ hawkerStall, setDishName }) => {
   // Fetching of dishes
-  const { data, isLoading, error } = useQuery("dishes", () =>
+  const { data } = useQuery("dishes", () =>
     axios("v1/dishes")
   );
 
   const dishNames = data ?.data;
-  console.log("dishnames", dishNames)
   const dishList = dishNames ?.map((dish) => {
     return dish.name;
   })

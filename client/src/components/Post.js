@@ -33,8 +33,8 @@ export default function Post({ handleClosePost }) {
   //* Fetching of hawker centres data
   const { data } = useQuery("hawkercentres", () => axios("/v1/hawkers"));
 
-  const centreNames = data?.data;
-  const hcList = centreNames?.map((item) => {
+  const centreNames = data ?.data;
+  const hcList = centreNames ?.map((item) => {
     return item.name;
   });
 
@@ -60,9 +60,15 @@ export default function Post({ handleClosePost }) {
     try {
       await fetch("/v1/posts/upload", {
         method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
+        body: JSON.stringify({
+          data: base64EncodedImage,
+          hawkerCentre: hawkerCentre,
+          hawkerStall: hawkerStall,
+          review: review,
+          rating: rating,
+        }),
         headers: { "Content-Type": "application/json" },
-      });
+      })
       setImage("");
     } catch (err) {
       console.error(err);
@@ -135,14 +141,14 @@ export default function Post({ handleClosePost }) {
           </Grid>
           {/* ====================MATERIAL UI Rating for users to select review=================== */}
           <Grid item xs={12}>
-            <Rating
+            {/* <Rating
               size="large"
               name="simple-controlled"
               value={rating}
               onChange={(event, newValue) => {
                 setRating(newValue);
               }}
-            />
+            /> */}
             <Box textAlign="right">
               <Button
                 onClick={handleSubmit}

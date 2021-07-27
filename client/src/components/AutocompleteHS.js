@@ -6,19 +6,15 @@ import TextField from "@material-ui/core/TextField";
 
 const AutocompleteHS = ({ hawkerCentre, setHawkerStall }) => {
   // Fetching of hawker stalls
-  const { data, isLoading, error } = useQuery("hawkerstalls", () =>
-    axios(`v1/hawkers/${hawkerCentre}/`)
-  );
-
-  // find out why it doesn't fetch
+  const { data } = useQuery("hawkerstalls", () =>
+    axios(`v1/hawkers/maxwell-food-centre`)
+  ); //! change to dynamic hawker centre
 
   const stallNames = data ?.data ?.hawker_stalls;
-  console.log("stallnames", stallNames);
   const hsList = stallNames ?.map((stall) => {
     return stall.name;
   });
   return (
-
     <Autocomplete
       id="Hawker Stall"
       options={hsList}
