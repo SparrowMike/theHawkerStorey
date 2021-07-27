@@ -49,16 +49,19 @@ router.get("/seed", (req,res)=> {
 })
 
 // shows user by ID
-//localhost:4000/v1/users/:userid
+//localhost:4000/v1/users/:id
 router.get("/:id", (req, res) => {
   const id = req.params.id
-  Users.findById(id, (err, post) => {
-    if (err) {
+  Users.findOne({_id: id}).populate("posts_history").
+  exec(function (err, Users){
+    console.log("users: ", Users)
+    if(err){
       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-    }
-    res.status(StatusCodes.OK).json(post);
-  });
+    } 
+    res.status(StatusCodes.OK).json(Users)
+  })
 });
+
 
 // create a user (ame: @potcheeks, I changed from post to user)
 // generates hash for user's password

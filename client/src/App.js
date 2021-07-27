@@ -5,8 +5,9 @@ import Main from "./components/Main";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import HawkerStallDisplay from "./components/HawkerStallDisplay";
-import { QueryClient, QueryClientProvider } from "react-query";
 import HawkerCentreDisplay from "./components/HawkerCentreDisplay";
+import UserProfile from "./components/UserProfile";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
             <Main />
           </Route>
 
+          <Route path="/users/:id">
+          <UserProfile />
+          </Route>
+          
           <Route path="/:centreName/:stall">
             <HawkerStallDisplay />
           </Route>
@@ -32,6 +37,7 @@ function App() {
           <Route path="/:centreName/">
             <HawkerCentreDisplay />
           </Route>
+          
 
           <Route path="/signup">
             <SignUp />
@@ -39,6 +45,8 @@ function App() {
 
           <Route path="/login">
             <SignIn />
+
+
           </Route>
         </Switch>
       </QueryClientProvider>
