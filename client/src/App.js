@@ -5,9 +5,8 @@ import Main from "./components/Main";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from 'react-query/devtools'
-
-
+import { ReactQueryDevtools } from "prop-types";
+import HawkerCentre from "./data/hawkerCentre";
 
 function App() {
   const queryClient = new QueryClient();
@@ -17,10 +16,8 @@ function App() {
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
-
-      <ReactQueryDevtools initialIsOpen={false} />
-        <Navbar /> 
-
+        <Navbar />
+        <HawkerCentre />
         <Switch>
           <Route path="/" exact>
             <Main />

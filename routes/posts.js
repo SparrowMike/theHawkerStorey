@@ -7,7 +7,6 @@ const Posts = require("../models/posts");
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.file.path);
-
     console.log("results", result);
     // Create new post
     let post = new Posts({
@@ -15,7 +14,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       review: req.body.review,
       rating: req.body.rating,
       cloudinary_id: result.public_id,
-      dishes_id: req.body.dishes_id,
+      // posted_by: result.public_id,
     });
     // Save post
     await post.save();
@@ -50,7 +49,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//*=====================UPDATE THE POST=========================
+//!=====================UPDATE THE POST====================== CURRENTLY IN PROGRESS! TIMESTAMP = ~24:00
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     let post = await Posts.findById(req.params.id);
@@ -64,11 +63,13 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 
     //! UNSURE ABOUT LINES BELOW
     const data = {
-      image_url: result?.secure_url || post.secure_url,
-      review: req.body.review || post.review,
-      rating: req.body.rating || post.rating,
-      cloudinary_id: result?.public_id || post.cloudinary_id,
-      dishes_id: req.body.dishes_id || post.dishes_id,
+      image_url: result?.secure_url,
+      review: req.body.review,
+      rating: req.body.rating,
+
+      // name: req.body.name || post.name,
+      // avatar: result?.secure_url || post.avatar,
+      // cloudinary_id: result?.public_id || post.cloudinary_id,
     };
 
     post = await Posts.findByIdAndUpdate(req.params.id, data, { new: true });

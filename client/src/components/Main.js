@@ -11,35 +11,14 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
-
   heroContent: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
-    backgroundImage:
-      " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://www.visitsingapore.com/editorials/did-you-know-foodies/_jcr_content.renderimage.carousel.rect.835.470.jpg)",
-    // " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80)",
-    // " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://www.visitsingapore.com/singapore-itineraries/singapore-food-paradise-a-three-day-guide/_jcr_content/par-carousel/carousel_detailpage/carousel/item0.thumbnail.carousel-img.740.416.jpg)",
-
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
   },
-
   heroButtons: {
     marginTop: theme.spacing(4),
-    color: theme.palette.common.white,
   },
 
-  header: {
-    color: theme.palette.common.black,
-    // fontSize: "25px",
-    fontWeight: "500",
-  },
-
-  button: {
-    // color: theme.palette.primary,
-    // background: theme.palette.secondary,
-  },
 }));
 
 export default function Main() {
@@ -49,13 +28,14 @@ export default function Main() {
     <React.Fragment>
       <CssBaseline />
       <main>
+        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
               component="h1"
               variant="h2"
               align="center"
-              className={classes.header}
+              color="textPrimary"
               gutterBottom
             >
               Album layout
@@ -63,7 +43,7 @@ export default function Main() {
             <Typography
               variant="h5"
               align="center"
-              className={classes.header}
+              color="textSecondary"
               paragraph
             >
               Something short and leading about the collection below—its
@@ -73,12 +53,12 @@ export default function Main() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
-                  <Button variant="contained" className={classes.button}>
+                  <Button variant="contained" color="primary">
                     Main call to action
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" className={classes.button}>
+                  <Button variant="outlined" color="primary">
                     Secondary action
                   </Button>
                 </Grid>

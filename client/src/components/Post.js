@@ -1,24 +1,14 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-import Typography from "@material-ui/core/Typography";
-
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-
-
-import { DropzoneArea } from "material-ui-dropzone";
-
-import Rating from "@material-ui/lab/Rating";
-import { Box, Button } from "@material-ui/core";
-
 import AutocompleteHS from "./AutocompleteHS";
 import AutocompleteDishes from "./AutocompleteDishes";
+
+import { makeStyles } from "@material-ui/core/styles";
+import { Box, Button, Grid, TextField, Typography } from "@material-ui/core/";
+import { Autocomplete, Rating } from "@material-ui/lab/";
+import { DropzoneArea } from "material-ui-dropzone";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,23 +30,13 @@ export default function Post({ handleClosePost }) {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(4);
 
-  // Fetching of hawker centres
+  //* Fetching of hawker centres data
   const { data } = useQuery("hawkercentres", () => axios("/v1/hawkers"));
 
-  const centreNames = data?.data;
-  const hcList = centreNames?.map((item) => {
+  const centreNames = data ?.data;
+  const hcList = centreNames ?.map((item) => {
     return item.name;
   });
-
-  // Fetching of hawker stalls
-  //   const {data} = useQuery("hawkercentres", () =>
-  //   axios("v1/hawkers/maxwell-food-centre/")
-  //       );
-
-  //   const centreNames = data?.data
-  //   const hcList = centreNames?.map((item) => {
-  // return item.name
-  //   })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,11 +59,17 @@ export default function Post({ handleClosePost }) {
   //! to change fetch route to post controller route when we move code from server.js to posts
   const uploadImage = async (base64EncodedImage) => {
     try {
-      await fetch("/upload", {
+      await fetch("/v1/posts/upload", {
         method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
+        body: JSON.stringify({
+          data: base64EncodedImage,
+          hawkerCentre: hawkerCentre,
+          hawkerStall: hawkerStall,
+          review: review,
+          rating: rating,
+        }),
         headers: { "Content-Type": "application/json" },
-      });
+      })
       setImage("");
     } catch (err) {
       console.error(err);
@@ -134,7 +120,8 @@ export default function Post({ handleClosePost }) {
             />
           </Grid>
           <Grid item xs={12}>
-          <AutocompleteDishes
+            {/* ====================MATERIAL UI Autocomplete for dishes=================== */}
+            <AutocompleteDishes
               hawkerStall={hawkerStall}
               setDishName={setDishName}
             />
@@ -155,14 +142,14 @@ export default function Post({ handleClosePost }) {
           </Grid>
           {/* ====================MATERIAL UI Rating for users to select review=================== */}
           <Grid item xs={12}>
-            <Rating
+            {/* <Rating
               size="large"
               name="simple-controlled"
               value={rating}
               onChange={(event, newValue) => {
                 setRating(newValue);
               }}
-            />
+            /> */}
             <Box textAlign="right">
               <Button
                 onClick={handleSubmit}
