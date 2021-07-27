@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     overflow: "scroll",
     display: "block",
-    padding: theme.spacing(3),
+    padding: theme.spacing(11),
   },
   modalContainer: {
     display: "flex",
