@@ -11,7 +11,7 @@ const AutocompleteHS = ({ hawkerCentre, setHawkerStall }) => {
 
   // Fetching of hawker stalls
   const { data, isLoading, error } = useQuery("hawkerstalls", () =>
-    axios(`v1/hawkers/maxwell-food-centre/`)
+    axios("/v1/hawkers/maxwell-food-centre/")
     );
  
   // find out why it doesn't fetch
