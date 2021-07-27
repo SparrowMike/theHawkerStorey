@@ -13,12 +13,16 @@ axios(`/v1/hawkers/${centreName}`)
 );
 console.log("data for list of hawkerstalls", stalldata?.data?.hawker_stalls);
 
+const stallList = stalldata?.data?.hawker_stalls
+
+
 // fetches post information
 const { data: postdata } = useQuery("posts", () =>
 axios("/v1/posts")
 );
 console.log("this is postdata", postdata?.data);
-// const postData = postdata?.data;
+
+// const postdata = postdata?.data.filter(post => ) ;
     
  
 

@@ -20,6 +20,7 @@
 - npm i react-query
 - npm i axios
 - npm i cloudinary-react
+- npm install react-stack-grid
 - npm run start
 
 ### 3. GIT commands
