@@ -34,6 +34,7 @@ router.get("/stalls", (req, res)=> {
 //localhost:4000/v1/maxwell-food-centre/stalls
 router.get("/:centreName/", (req, res)=> { 
   const centreName = req.params.centreName;
+  console.log(centreName)
   HawkerCentre.findOne({name: centreName}).populate("hawker_stalls").
   exec(function (err, HawkerCentre){
     console.log(HawkerCentre)
@@ -43,8 +44,6 @@ router.get("/:centreName/", (req, res)=> {
     res.status(StatusCodes.OK).json(HawkerCentre)
   });
   })
-
-
 
 
 
