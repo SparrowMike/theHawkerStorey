@@ -7,7 +7,7 @@ import AutocompleteDishes from "./Post/AutocompleteDishes";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Button, Grid, TextField, Typography } from "@material-ui/core/";
-import { Autocomplete, Rating } from "@material-ui/lab/";
+// import { Autocomplete, Rating } from "@material-ui/lab/";
 import { DropzoneArea } from "material-ui-dropzone";
 
 const useStyles = makeStyles((theme) => ({
@@ -91,6 +91,7 @@ export default function Post({ handleClosePost }) {
           <Grid item xs={12}>
             {hawkerStall && (
               <AutocompleteDishes
+                hawkerCentre={hawkerCentre}
                 hawkerStall={hawkerStall}
                 setDishName={setDishName}
               />
