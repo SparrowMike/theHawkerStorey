@@ -45,20 +45,6 @@ router.get("/:centreName/", (req, res)=> {
   });
   })
 
-  // router.get("/:centreName/:stall", (req, res)=> { 
-  //   const centreName = req.params.centreName;
-  //   const stall = req.params.name;
-  //   console.log(stall)
-  //   HawkerCentre.findOne({name: centreName}).populate("hawker_stalls").
-  //   exec(function (err, HawkerCentre){
-  //     console.log(HawkerCentre)
-  //     if(err){
-  //       res.status(StatusCodes.BAD_REQUEST).json({ error: err.message });
-  //     } 
-  //     res.status(StatusCodes.OK).json(HawkerCentre)
-  //   });
-  //   })
-
 
 
 
