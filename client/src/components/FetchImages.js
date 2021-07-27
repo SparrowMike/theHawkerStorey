@@ -5,10 +5,6 @@ import { Container, makeStyles } from "@material-ui/core";
 import StackGrid, { transitions } from "react-stack-grid";
 
 const { scaleDown } = transitions;
-import {
-  makeStyles,
-  Container,
-} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
