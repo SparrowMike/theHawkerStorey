@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const postsSchema = new Schema({
   image_url: { type: String, required: true },
   cloudinary_id: String,
-  hawkerCentre: { type: Number, required: true },
-  hawkerStall: { type: Number, required: true },
+  hawkerCentre: { type: String, required: true },
+  hawkerStall: { type: String, required: true },
   dishes_id: { type: String, required: true },
   review: { type: String, required: true },
   rating: { type: Number, required: true },
