@@ -82,7 +82,7 @@ router.get("/seed", (req,res)=> {
           postal_code: "069184",
           description: "We wouldn’t believe anyone who say they haven’t been here, but if you really haven’t, here are the highlights from Singapore’s favourite tourist-approved hawker centre. Starting with Tian Tian Chicken Rice (Anthony Bourdain-approved, mind you), you should take note of other favourites like Zhen Zhen Porridge, and Maxwell Fuzhou Oyster Cake."
         },
-        hawker_stalls: ["60fe61511b52676d31e5ea6c", "60fe61511b52676d31e5ea6d", "60fe61511b52676d31e5ea6e" ]
+        hawker_stalls: ["60fe61511b52676d31e5ea6c", "60fe61511b52676d31e5ea6d", "60fe61511b52676d31e5ea6e" ],
     },
     {
       name: "Adam Road Food Centre",
@@ -112,6 +112,8 @@ router.get("/stalls/seed", (req, res) => {
         unit_number: "01-01",
         score: 5,
         image_url: "https://cache-wak-wak-hawker-com.s3-ap-southeast-1.amazonaws.com/data/images/stall/64/864/block/LQO1R82f328jzczp.jpg?v=1612194949",
+        dishes: ["60fc155e5dd1ad70705c6f37", "60fc155e5dd1ad70705c6f39"]
+
         // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
       },
       {
@@ -121,7 +123,7 @@ router.get("/stalls/seed", (req, res) => {
         unit_number: "01-02",
         score: 10,
         image_url: "https://hawkerpedia.s3.ap-southeast-1.amazonaws.com/highlight-item/20201123/h1EP4JHfZvdp_RTmMYVaOsywA_traditionalchineseclaypot_sf.jpg",
-        // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
+        dishes: ["60fc155e5dd1ad70705c6f37"]
       },
       {
         name: "Ah Tai Hainanese Chicken Rice",
@@ -130,7 +132,7 @@ router.get("/stalls/seed", (req, res) => {
         unit_number: "01-07",
         score: 10,
         image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
-        // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
+        dishes: ["60fc155e5dd1ad70705c6f37"]
       },
       {
         name: "Adam Chicken Rice",
@@ -139,7 +141,7 @@ router.get("/stalls/seed", (req, res) => {
         unit_number: "01-07",
         score: 10,
         image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
-        // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
+        dishes: ["60fc155e5dd1ad70705c6f37"]
       },
     ],
     (err, data)=>{
