@@ -6,8 +6,8 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import HawkerStallDisplay from "./components/HawkerStallDisplay";
 import { QueryClient, QueryClientProvider } from "react-query";
+import HawkerCentreDisplay from "./components/HawkerCentreDisplay"
 import { ReactQueryDevtools } from 'react-query/devtools'
-
 
 
 function App() {
@@ -19,9 +19,15 @@ function App() {
     <Router>
       <QueryClientProvider client={queryClient}>
 
+        <Navbar />
+        {/* <HawkerCentreDisplay path="/hawkers"/> */}
+        <Route path="/:hawkercentre" component={HawkerCentreDisplay}/>
+
+
       <ReactQueryDevtools initialIsOpen={false} />
 
         <Navbar /> 
+
         <Switch>
         <HawkerStallDisplay path="/hawkers/:centreName/:stall" />
         
