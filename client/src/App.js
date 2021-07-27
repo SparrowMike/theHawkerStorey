@@ -21,7 +21,7 @@ function App() {
 
         <Navbar />
         {/* <HawkerCentreDisplay path="/hawkers"/> */}
-        <Route path="/:hawkercentre" component={HawkerCentreDisplay}/>
+        <Route path="/:centreName" component={HawkerCentreDisplay}/>
 
 
       <ReactQueryDevtools initialIsOpen={false} />

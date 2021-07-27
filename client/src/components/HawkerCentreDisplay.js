@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
+import {useParams} from "react-router-dom";
 import axios from "axios"
 import StallArrays from "./StallArrays";
 
@@ -32,9 +33,11 @@ const useStyles = makeStyles((theme) => ({
 
 const HawkerCentreDisplay = () => {
   const classes = useStyles();
-  const {data, isLoading, error} = useQuery("hawkercentres", 
-  ()=> axios("/v1/hawkers/maxwell-food-centre"))
+  const {centreName} = useParams();
+  const {data, isLoading, error} = useQuery("hawkerCentres", 
+  ()=> axios(`/v1/hawkers/${centreName}`))
   const centres = data?.data;
+  console.log("centreName: ", centreName)
   console.log("centres: ", centres)
   
   if (error){
