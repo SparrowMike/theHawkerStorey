@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Image } from "cloudinary-react";
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     // width: "300px",
   },
   cardMedia: {
+    postition: "fixed",
     padding: "10px",
     width: "100%",
     heigth: "100%",
@@ -51,13 +52,11 @@ const useStyles = makeStyles((theme) => ({
 const FetchImages = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [imageIds, setImageIds] = useState();
   const [modal, setModal] = useState("");
 
   //*===============OPEN MODAL==============
   const handleOpen = (e) => {
     setOpen(true);
-    console.log(e);
     setModal(e);
   };
   const handleClose = () => {
@@ -68,14 +67,22 @@ const FetchImages = () => {
   const { isLoading, data } = useQuery("get-posts", () => axios("v1/posts"));
   const imageIds = data?.data.map((image) => image.cloudinary_id);
 
+  console.log(data);
+
   return (
     <>
       <Container className={classes.container}>
-        <StackGrid columnWidth={300} className={classes.stackGrid}>
+        <StackGrid
+          columnWidth={300}
+          className={classes.stackGrid}
+          duration={1000}
+          monitorImagesLoaded={true}
+        >
           {isLoading ? (
-            <h1>Hang on while we fetch some yummy photos!</h1>
+            <Typography component="h1" variant="h2" align="center" gutterBottom>
+              Hang on while we fetch some yummy photos!
+            </Typography>
           ) : (
-            imageIds &&
             imageIds.map((imageId, index) => (
               <Image
                 className={classes.cardMedia}
@@ -86,6 +93,8 @@ const FetchImages = () => {
                 crop="scale"
               />
             ))
+
+            
           )}
         </StackGrid>
         <Modal
@@ -101,8 +110,6 @@ const FetchImages = () => {
           <Fade in={open}>
             <div className={classes.paper}>
               <Image
-                // key={index}
-                // onClick={() => handleOpen(imageId)}
                 cloudName={"hawkerstorey"}
                 publicId={modal}
                 crop="scale"
