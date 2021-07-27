@@ -9,6 +9,7 @@ import {
   CardActions,
   CardContent,
   Container,
+  CardMedia,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -73,6 +74,7 @@ const FetchImages = () => {
                     // width="300"
                     crop="scale"
                   />
+
                   {/* <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       Heading
