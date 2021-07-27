@@ -29,7 +29,10 @@ function App() {
         <Navbar /> 
 
         <Switch>
-        <HawkerStallDisplay path="/hawkers/:centreName/:stall" />
+          <Route path="/:centreName/:stall">
+          <HawkerStallDisplay />
+          </Route>
+        
         
           <Route path="/" exact>
             <Main />
