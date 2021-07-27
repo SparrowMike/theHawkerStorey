@@ -4,11 +4,7 @@ import { Container, makeStyles } from "@material-ui/core";
 
 import StackGrid, { transitions } from "react-stack-grid";
 
-const { scaleDown } = transitions;
-import {
-  makeStyles,
-  Container,
-} from "@material-ui/core";
+// const { scaleDown } = transitions;
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,7 +59,6 @@ const FetchImages = () => {
                 // width="300"
                 crop="scale"
               />
-
             ))}
         </StackGrid>
       </Container>
