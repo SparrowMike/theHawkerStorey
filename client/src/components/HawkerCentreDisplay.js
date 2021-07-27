@@ -33,9 +33,11 @@ const useStyles = makeStyles((theme) => ({
 
 const HawkerCentreDisplay = () => {
   const classes = useStyles();
+
   const {centreName} = useParams();
   const {data, isLoading, error} = useQuery("hawkerCentres", 
   ()=> axios(`/v1/hawkers/${centreName}`))
+
   const centres = data?.data;
   console.log("centreName: ", centreName)
   console.log("centres: ", centres)

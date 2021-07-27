@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
-    width: "70vw",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -32,8 +31,8 @@ export default function Post({ handleClosePost }) {
   //* Fetching of hawker centres data
   const { data } = useQuery("hawkercentres", () => axios("/v1/hawkers"));
 
-  const centreNames = data ?.data;
-  const hcList = centreNames ?.map((item) => {
+  const centreNames = data?.data;
+  const hcList = centreNames?.map((item) => {
     return item.name;
   });
 
@@ -69,7 +68,7 @@ export default function Post({ handleClosePost }) {
           dishes_id: dishName,
         }),
         headers: { "Content-Type": "application/json" },
-      })
+      });
       setImage("");
     } catch (err) {
       console.error(err);
@@ -165,4 +164,3 @@ export default function Post({ handleClosePost }) {
     </div>
   );
 }
-
