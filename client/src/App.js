@@ -19,6 +19,7 @@ function App() {
 
         <Navbar />
 
+
         <Switch>
           <Route path="/" exact>
             <Main />
