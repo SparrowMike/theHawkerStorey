@@ -11,10 +11,6 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-import dishNameDATA from "../data/dishName";
-import hawkerStallsDATA from "../data/hawkerStalls";
-import HawkerCentre from "../data/hawkerCentre";
-
 import { DropzoneArea } from "material-ui-dropzone";
 
 import Rating from "@material-ui/lab/Rating";
