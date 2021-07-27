@@ -4,10 +4,8 @@ import {useParams} from "react-router-dom";
 import axios from "axios"
 import StallArrays from "./StallArrays";
 
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
+
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
@@ -69,7 +67,7 @@ const HawkerCentreDisplay = () => {
     <Grid container spacing={4}>
       {centres.hawker_stalls.map((stall, index)=> <StallArrays 
       stall={stall} 
-      index={index} 
+      key={index}
       centreName = {centreName}
       />)}
     </Grid>
