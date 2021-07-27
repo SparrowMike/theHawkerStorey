@@ -16,27 +16,20 @@ function App() {
     <Router>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-
         <Navbar />
-
-
         <Switch>
           <Route path="/" exact>
             <Main />
           </Route>
-
           <Route path="/:centreName/:stall">
             <HawkerStallDisplay />
           </Route>
-
           <Route path="/:centreName/">
             <HawkerCentreDisplay />
           </Route>
-
           <Route path="/signup">
             <SignUp />
           </Route>
-
           <Route path="/login">
             <SignIn />
           </Route>

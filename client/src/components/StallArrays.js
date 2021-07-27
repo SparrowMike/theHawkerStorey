@@ -4,12 +4,15 @@ import {
   Grid,
   Card,
   Typography,
-  Button,
-  CardActions,
+  // Button,
+  // CardActions,
+  // CardMedia,
+  // Container,
   CardContent,
-  CardMedia,
-  Container,
 } from "@material-ui/core";
+
+import {Link} from "react-router-dom"
+
 {/* =========this is stalls displayed in /v1/hawkers/:hawkercentre============ */}
 
 const useStyles = makeStyles((theme) => ({
@@ -36,16 +39,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const StallArrays = ({stall, index}) => {
+const StallArrays = ({stall, index, centreName}) => {
   const classes = useStyles()
   return(
     <>
-    <Grid item key={index} xs={12} sm={6} md={4}>
-    {/* <Image
+      <Grid item key={index} xs={12} sm={6} md={4}>
+        {/* <Image
         className={classes.cardMedia}
         src= {stall.image_url}
         crop="scale"
     /> */}
+
+    <Link to ={`/${centreName}/${stall.name}`}>
     <Card className={classes.card}>
     {/* <CardMedia
     className={classes.cardMedia}
@@ -57,10 +62,11 @@ const StallArrays = ({stall, index}) => {
     {stall.name}
     </Typography>
     </CardContent>
-   </Card>
+    </Card>
+    </Link>
     </Grid>
     </>
-  )
-}
+  );
+};
 
 export default StallArrays;
