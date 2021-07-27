@@ -58,7 +58,7 @@ export default function Post({ handleClosePost }) {
   //! to change fetch route to post controller route when we move code from server.js to posts
   const uploadImage = async (base64EncodedImage) => {
     try {
-      await fetch("/api/upload", {
+      await fetch("/v1/posts/upload", {
         method: "POST",
         body: JSON.stringify({ data: base64EncodedImage }),
         headers: { "Content-Type": "application/json" },
