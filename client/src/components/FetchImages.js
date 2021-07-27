@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Image } from "cloudinary-react";
 import { Container, makeStyles } from "@material-ui/core";
 
-import StackGrid, { transitions } from "react-stack-grid";
-
-// const { scaleDown } = transitions;
+import StackGrid from "react-stack-grid";
+// import StackGrid, { transitions } from "react-stack-grid";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -57,7 +56,7 @@ const FetchImages = () => {
   return (
     <>
       <Container className={classes.container}>
-        <StackGrid columnWidth={400} className={classes.stackGrid}>
+        <StackGrid columnWidth={300} className={classes.stackGrid}>
           {imageIds &&
             imageIds.map((imageId, index) => (
               <Image
