@@ -15,6 +15,15 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     width: "100%",
     heigth: "100%",
+    "&:hover": {
+      // boxShadow: "0 0 1px 1px #9d0208 inset",
+      // transform: "scale(1.09)",
+      boxShadow: "11 11 11px blacknpm",
+
+      // boxShadow: "0 0.6em 0.5em -0.4em salmon",
+      // transform: "translateY(-0.15em)",
+      cursor: "pointer",
+    },
   },
 
   stackGrid: {
@@ -48,7 +57,7 @@ const FetchImages = () => {
   return (
     <>
       <Container className={classes.container}>
-        <StackGrid columnWidth={330} className={classes.stackGrid}>
+        <StackGrid columnWidth={400} className={classes.stackGrid}>
           {imageIds &&
             imageIds.map((imageId, index) => (
               <Image
