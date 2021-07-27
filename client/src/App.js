@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import HawkerStallDisplay from "./components/HawkerStallDisplay";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 
@@ -19,19 +20,25 @@ function App() {
       <QueryClientProvider client={queryClient}>
 
       <ReactQueryDevtools initialIsOpen={false} />
-        <Navbar /> 
 
+        <Navbar /> 
         <Switch>
+        <HawkerStallDisplay path="/hawkers/:centreName/:stall" />
+        
           <Route path="/" exact>
             <Main />
           </Route>
+
           <Route path="/signup">
             <SignUp />
           </Route>
+
           <Route path="/login">
             <SignIn />
           </Route>
+
         </Switch>
+
       </QueryClientProvider>
     </Router>
   );

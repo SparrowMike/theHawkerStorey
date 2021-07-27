@@ -11,7 +11,7 @@ const AutocompleteDishes = ({ hawkerStall, setDishName }) => {
 
   // Fetching of dishes
   const { data, isLoading, error } = useQuery("dishes", () => 
-  axios("v1/dishes")
+  axios("/v1/dishes")
   );
 
 
