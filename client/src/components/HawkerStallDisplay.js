@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
 
@@ -17,7 +18,8 @@ axios("/v1/posts")
 console.log("this is postdata", postdata?.data);
 // const postData = postdata?.data;
     
-  
+ const {centreName, stall} = useParams()
+
 
 
 return (
@@ -26,6 +28,8 @@ return (
       <h1>This shows all the hawker centres</h1>
       Title: {stalldata?.data?.name} <br /> <br />
       Description: {stalldata?.data?.description} <br />
+      
+      Now showing {centreName} {stall}
       
 
 
