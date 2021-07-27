@@ -67,6 +67,7 @@ export default function Post({ handleClosePost }) {
           hawkerStall: hawkerStall,
           review: review,
           rating: rating,
+          dishes_id: dishName,
         }),
         headers: { "Content-Type": "application/json" },
       })
