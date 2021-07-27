@@ -8,6 +8,7 @@ import {
   Modal,
   Backdrop,
   Fade,
+  Typography,
 } from "@material-ui/core";
 
 import StackGrid from "react-stack-grid";
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "40px",
   },
   modal: {
+    // overflow: "scroll",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -49,11 +51,15 @@ const useStyles = makeStyles((theme) => ({
 const FetchImages = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [imageIds, setImageIds] = useState();
+  const [modal, setModal] = useState("");
 
-  const handleOpen = () => {
+  //*===============OPEN MODAL==============
+  const handleOpen = (e) => {
     setOpen(true);
+    console.log(e);
+    setModal(e);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -74,7 +80,7 @@ const FetchImages = () => {
               <Image
                 className={classes.cardMedia}
                 key={index}
-                onClick={handleOpen}
+                onClick={() => handleOpen(imageId)}
                 cloudName={"hawkerstorey"}
                 publicId={imageId}
                 crop="scale"
@@ -93,7 +99,19 @@ const FetchImages = () => {
           }}
         >
           <Fade in={open}>
-            <div className={classes.paper}></div>
+            <div className={classes.paper}>
+              <Image
+                // key={index}
+                // onClick={() => handleOpen(imageId)}
+                cloudName={"hawkerstorey"}
+                publicId={modal}
+                crop="scale"
+                width={300}
+              />
+              <Typography variant="h5" align="center">
+                Some text will go here right?
+              </Typography>
+            </div>
           </Fade>
         </Modal>
       </Container>
