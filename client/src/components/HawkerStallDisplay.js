@@ -73,7 +73,7 @@ Loading
       <h4>Closed on: {selectedStall[0]?.closed_days} </h4>
       <h4>Operating hours: {selectedStall[0]?.operating_hours} </h4> 
       <h4>Unit number: #{selectedStall[0]?.unit_number}</h4> 
-      <h4>Shiokmeter: {selectedStall[0]?.score}/5 </h4>
+      <h4>Shiokmeter: {selectedStall[0]?.score}</h4>
 
       <PostArray />
 
