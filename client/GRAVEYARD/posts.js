@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { cloudinary } = require("../utils/cloudinary");
-const upload = require("../utils/multer");
-const Posts = require("../models/posts");
+const { cloudinary } = require("../../utils/cloudinary");
+const upload = require("../../utils/multer");
+const Posts = require("../../models/posts");
 
 //!====================================GRAVEYARD=======================================
 

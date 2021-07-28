@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { Image } from "cloudinary-react";
 
 import {
   makeStyles,
@@ -11,7 +12,9 @@ import {
   CardContent,
   CardMedia,
   Container,
-  Button,
+  Modal,
+  Backdrop,
+  Fade,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,11 +29,29 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  media: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
 }));
 
 const PostArray = () => {
   const classes = useStyles();
   const { stall } = useParams();
+  const [open, setOpen] = useState(false);
+  const [modalData, setModalData] = useState("");
   // const [post, setPost] = useState([]);
 
   /////////// POSTS /////////////
@@ -63,15 +84,23 @@ const PostArray = () => {
     console.log("postarray loading...");
     return <Container className={classes.div}>Loading</Container>;
   }
-  // if (isSuccess && post[0]?._id !== selectedStallPosts[0]?._id) {
-  //   setPost(selectedStallPosts);
-  // }
+
+  //*===============OPEN MODAL==============
+  const handleOpen = (e) => {
+    setOpen(true);
+    setModalData(e);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  console.log("modalData", modalData);
 
   return (
     <>
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {selectedStallPosts?.map((item, key) => {
+          {selectedStallPosts?.map((item, index) => {
             return (
               //  <img src={item.image_url} alt={item.name}>{item.name}</img>
               <>
@@ -79,24 +108,63 @@ const PostArray = () => {
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
+                      key={index}
                       image={item.image_url}
                       title={item.name}
+                      onClick={() => handleOpen(item)}
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h6" component="h2">
                         {item.dishes_id.toUpperCase()}
                       </Typography>
-                      {/* add <Link to> */}
-                      <Button size="medium" color="primary">
-                        See More
-                      </Button>
-                      {/* add </Link> */}
                     </CardContent>
                   </Card>
                 </Grid>
               </>
             );
           })}
+
+          <Modal
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <Image
+                  cloudName={"hawkerstorey"}
+                  publicId={modalData.image_url}
+                  crop="scale"
+                  width={320}
+                />
+                <Typography gutterBottom variant="h6" component="h2">
+                  Dish Name:
+                </Typography>
+                <Typography>{modalData.dishes_id}</Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Hawker Centre:
+                </Typography>
+                <Typography> {modalData.hawkerCentre}</Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Hawker Stall:
+                </Typography>
+                <Typography>{modalData.hawkerStall}</Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Review:
+                </Typography>
+                <Typography>{modalData.review}</Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Rating:
+                </Typography>
+                <Typography>{modalData.rating}</Typography>
+              </div>
+            </Fade>
+          </Modal>
         </Grid>
       </Container>
     </>

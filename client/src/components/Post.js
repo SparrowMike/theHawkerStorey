@@ -4,10 +4,18 @@ import AutocompleteHC from "./Post/AutocompleteHC";
 import AutocompleteHS from "./Post/AutocompleteHS";
 import AutocompleteDishes from "./Post/AutocompleteDishes";
 
-import { makeStyles } from "@material-ui/core/styles";
-import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
+import {
+  makeStyles,
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab/";
 import { DropzoneArea } from "material-ui-dropzone";
+
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -15,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+  },
+  exit: {
+    color: " red",
+    float: "right",
   },
 }));
 
@@ -82,7 +94,11 @@ export default function Post({ handleClosePost }) {
       <React.Fragment>
         <Typography variant="h4" gutterBottom>
           Add New Post AccessToken: {accessToken}
+          <Button className={classes.exit} onClick={handleClosePost}>
+            <CloseIcon className={classes.exit} />
+          </Button>
         </Typography>
+
         {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
