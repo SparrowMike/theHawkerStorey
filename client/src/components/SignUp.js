@@ -88,7 +88,7 @@ export default function SignUp() {
                 id="userName"
                 label="User Name"
                 name="userName"
-                autoComplete="userName"
+                autoFocus
                 onChange={(event) => {
                   setUserName(event.target.value);
                 }}
@@ -103,7 +103,6 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
                 onChange={(event) => {
                   setPassword(event.target.value);
                 }}
@@ -116,7 +115,6 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
                 onChange={(event) => {
                   setEmail(event.target.value);
                 }}
@@ -148,6 +146,11 @@ export default function SignUp() {
           >
             Sign Up
           </Button>
+          {/* ======================Lets work on this when no errors on submit==============================*/}
+          <Link component={RouterLink} to="/" variant="body2">
+            Rerouting example here
+          </Link>
+
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component={RouterLink} to="/login" variant="body2">
