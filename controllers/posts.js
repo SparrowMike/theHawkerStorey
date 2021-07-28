@@ -6,7 +6,7 @@ const Posts = require("../models/posts");
 const { StatusCodes } = require("http-status-codes");
 const session = require("express-session");
 const { cloudinary } = require("../utils/cloudinary");
-// const { authenticateToken } = require("../utils/jwtAuth");
+
 const upload = require("../utils/multer");
 
 const sessionsController = require("./sessions");
