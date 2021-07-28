@@ -39,14 +39,20 @@ const theme = createMuiTheme({
 function App() {
   const queryClient = new QueryClient();
   const [accessToken, setAccessToken] = useState("");
-  const [user, setUser] = useState("");
+  const [userState, setUserState] = useState({
+    accessToken: "",
+    id: "",
+    username: "test",
+  });
+
+  console.log(userState);
 
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <ThemeProvider theme={theme}>
-          <AuthContext.Provider accessToken={accessToken}>
+          <AuthContext.Provider userState={userState}>
             <ReactQueryDevtools initialIsOpen={false} />
             <Navbar />
             <Switch>
@@ -58,7 +64,10 @@ function App() {
                 <SignUp />
               </Route>
               <Route path="/login">
-                <SignIn setUser={setUser} setAccessToken={setAccessToken} />
+                <SignIn
+                  setUserState={setUserState}
+                  setAccessToken={setAccessToken}
+                />
                 <SignIn />
               </Route>
               <Route path="/users/:id">

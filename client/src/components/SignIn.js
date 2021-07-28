@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ setUser, setAccessToken }) {
+export default function SignIn({ setUserState, setAccessToken }) {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -59,7 +59,11 @@ export default function SignIn({ setUser, setAccessToken }) {
         console.log("LOGIN SUCCESS", res.data.accessToken);
         console.log("User is ", res.data.user);
         setAccessToken(res.data.accessToken);
-        setUser(res.data.user);
+        setUserState({
+          accessToken: res.data.accessToken,
+          id: res.data.user,
+          username: "logged in",
+        });
         history.push("/");
       })
       .catch((err) => console.log("error", err));

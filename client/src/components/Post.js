@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Post({ handleClosePost }) {
   const classes = useStyles();
   //!unpack token
-  const accessToken = useContext(AuthContext);
-  console.log(accessToken);
+  const userState = useContext(AuthContext);
+  console.log(userState.username);
 
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
@@ -72,6 +72,7 @@ export default function Post({ handleClosePost }) {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
+          username: userState.username,
           hawkerCentre: hawkerCentre,
           hawkerStall: hawkerStall,
           review: review,
@@ -80,7 +81,7 @@ export default function Post({ handleClosePost }) {
         }),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${userState.accessToken}`,
         },
       });
       setImage("");
@@ -93,7 +94,7 @@ export default function Post({ handleClosePost }) {
     <div className={classes.paper}>
       <React.Fragment>
         <Typography variant="h4" gutterBottom>
-          Add New Post AccessToken: {accessToken}
+          Add New Post I am: {userState.username}
           <Button className={classes.exit} onClick={handleClosePost}>
             <CloseIcon className={classes.exit} />
           </Button>
