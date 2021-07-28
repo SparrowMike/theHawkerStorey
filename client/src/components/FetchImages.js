@@ -69,9 +69,8 @@ const FetchImages = () => {
   };
 
   //* pull posts from mongoose to display images by cloudinary ids
-  const { isLoading, data } = useQuery("get-posts", () => axios("v1/posts"));
-  // const imageIds = data?.data.map((image) => image.cloudinary_id);
-  const postData = data?.data;
+  const { isLoading, data } = useQuery(["get-posts"], () => axios("v1/posts"));
+  const postData = data?.data.reverse();
 
   if (isLoading) {
     return (

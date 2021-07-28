@@ -6,23 +6,22 @@ import TextField from "@material-ui/core/TextField";
 
 const AutocompleteDishes = ({ hawkerCentre, hawkerStall, setDishName }) => {
   const { data: dishes } = useQuery(
-    "dishes",
+    ["dishes-list", hawkerStall, hawkerCentre],
     async () => await axios("/v1/dishes")
   );
 
   const { data: hawkerStallList } = useQuery(
-    "hawkerstalls",
+    ["hawkerstalls", hawkerCentre],
     async () => await axios(`/v1/hawkers/${hawkerCentre}`)
   );
 
+  //* retrieve all dishes that the selected hawker stall sells
   const dishArr = hawkerStallList?.data?.hawker_stalls
     .filter((stall) => stall.name === hawkerStall)[0]
     .dishes.map((dish) => dish);
 
+  //* extract name based on dishes._id
   const dishList = dishes?.data;
-
-  console.log(dishArr, dishList);
-
   let stallDishes = [];
   if (dishList) {
     for (let dish of dishArr) {
@@ -30,19 +29,15 @@ const AutocompleteDishes = ({ hawkerCentre, hawkerStall, setDishName }) => {
         if (dish === item._id) stallDishes.push(item.name);
       }
     }
+    stallDishes.sort((a, b) => a.localeCompare(b, { ignorePunctuation: true }));
   }
-
-  // if (dishList) {
-  //   const myDishes = dishList.filter(
-  //     (dish) => dish._id === dishArr.includes(dish)
-  //   );
-  //   console.log(myDishes);
-  // }
 
   return (
     <Autocomplete
       id="Dish Name"
-      options={stallDishes}
+      autoHighlight
+      clearOnEscape
+      options={stallDishes ? stallDishes : "No Dishes"}
       getOptionLabel={(option) => option}
       onChange={(event, newValue) => {
         setDishName(newValue);

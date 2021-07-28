@@ -4,23 +4,28 @@ import axios from "axios";
 import { Autocomplete } from "@material-ui/lab/";
 import { TextField } from "@material-ui/core/";
 
-const AutocompleteHC = ({ setHawkerCentre }) => {
+const AutocompleteHC = ({ setHawkerCentre, setHawkerStall, setDishName }) => {
   //* Fetching of hawker centres data
   const { data } = useQuery(
-    "hawkercentre-list",
+    ["hawkercentre-list"],
     async () => await axios("/v1/hawkers/")
   );
 
-  const hcList = data?.data?.map((hc) => hc.name);
+  const hcList = data?.data
+    ?.map((hc) => hc.name)
+    ?.sort((a, b) => a.localeCompare(b, { ignorePunctuation: true }));
 
   return (
     <Autocomplete
       id="Hawker Centre"
+      autoHighlight
+      clearOnEscape
       options={hcList}
       getOptionLabel={(option) => option}
       onChange={(event, newValue) => {
-        console.log("CHOSE THIS VALUE", newValue);
         setHawkerCentre(newValue);
+        setHawkerStall("");
+        setDishName("");
       }}
       renderInput={(params) => (
         <TextField {...params} label="Hawker Centre" variant="outlined" />
