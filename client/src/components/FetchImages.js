@@ -47,17 +47,22 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  media: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
 }));
 
 const FetchImages = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [modal, setModal] = useState("");
+  const [modalData, setModalData] = useState("");
 
   //*===============OPEN MODAL==============
   const handleOpen = (e) => {
     setOpen(true);
-    setModal(e);
+    setModalData(e);
   };
   const handleClose = () => {
     setOpen(false);
@@ -65,9 +70,8 @@ const FetchImages = () => {
 
   //* pull posts from mongoose to display images by cloudinary ids
   const { isLoading, data } = useQuery("get-posts", () => axios("v1/posts"));
-  const imageIds = data?.data.map((image) => image.cloudinary_id);
-
-  console.log(data);
+  // const imageIds = data?.data.map((image) => image.cloudinary_id);
+  const testing = data?.data;
 
   return (
     <>
@@ -83,18 +87,16 @@ const FetchImages = () => {
               Hang on while we fetch some yummy photos!
             </Typography>
           ) : (
-            imageIds.map((imageId, index) => (
+            testing.map((data, index) => (
               <Image
                 className={classes.cardMedia}
                 key={index}
-                onClick={() => handleOpen(imageId)}
+                onClick={() => handleOpen(data)}
                 cloudName={"hawkerstorey"}
-                publicId={imageId}
+                publicId={data.image_url}
                 crop="scale"
               />
             ))
-
-            
           )}
         </StackGrid>
         <Modal
@@ -111,13 +113,30 @@ const FetchImages = () => {
             <div className={classes.paper}>
               <Image
                 cloudName={"hawkerstorey"}
-                publicId={modal}
+                publicId={modalData.image_url}
                 crop="scale"
-                width={300}
+                width={320}
               />
-              <Typography variant="h5" align="center">
-                Some text will go here right?
+              <Typography gutterBottom variant="h6" component="h2">
+                Dish Name:
               </Typography>
+              <Typography>{modalData.dishes_id}</Typography>
+              <Typography gutterBottom variant="h6" component="h2">
+                Hawker Centre:
+              </Typography>
+              <Typography> {modalData.hawkerCentre}</Typography>
+              <Typography gutterBottom variant="h6" component="h2">
+                Hawker Stall:
+              </Typography>
+              <Typography>{modalData.hawkerStall}</Typography>
+              <Typography gutterBottom variant="h6" component="h2">
+                Review:
+              </Typography>
+              <Typography>{modalData.review}</Typography>
+              <Typography gutterBottom variant="h6" component="h2">
+                Rating:
+              </Typography>
+              <Typography>{modalData.rating}</Typography>
             </div>
           </Fade>
         </Modal>

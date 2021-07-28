@@ -23,6 +23,13 @@ function App() {
             <Main />
           </Route>
 
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="/login">
+            <SignIn />
+          </Route>
+
           <Route path="/users/:id">
           <UserProfile />
           </Route>
@@ -34,14 +41,7 @@ function App() {
             <HawkerCentreDisplay />
           </Route>
 
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-          <Route path="/login">
-            <SignIn />
 
-
-          </Route>
         </Switch>
       </QueryClientProvider>
     </Router>
