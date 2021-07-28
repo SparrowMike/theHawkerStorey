@@ -18,6 +18,7 @@ router.get("/", (req, res) => {
   });
 });
 
+
 //? Gets all hawkerstalls from all hawker centres
 //localhost:4000/v1/hawkers/stalls
 router.get("/stalls", (req, res)=> { 
@@ -30,8 +31,37 @@ router.get("/stalls", (req, res)=> {
   })
 })
 
-//? Gets all hawkerstalls in hawker centre
-//localhost:4000/v1/hawkers/maxwell-food-centre
+//? seed hawker centres
+//localhost:4000/v1/hawkers/seed
+// router.get("/seed", (req,res)=> {
+//     HawkerCentre.create(
+//       [
+//       {
+//         name: "Maxwell Food Centre",
+//         address: {
+//           street_address: "1, Kadayanallur Street",
+//           postal_code: "069184",
+//         },
+//         description: "We wouldn’t believe anyone who say they haven’t been here, but if you really haven’t, here are the highlights from Singapore’s favourite tourist-approved hawker centre. Starting with Tian Tian Chicken Rice (Anthony Bourdain-approved, mind you), you should take note of other favourites like Zhen Zhen Porridge, and Maxwell Fuzhou Oyster Cake.",
+//         hawker_stalls: ["60fed3ff33402a7cacabf111", "60fed3ff33402a7cacabf112", "60fed3ff33402a7cacabf113", "610146163d28e192ab8f7a21", "610146163d28e192ab8f7a23", "610146c8563ac092c630ead1"]
+//     },
+//     {
+//       name: "Adam Road Food Centre",
+//       address: {
+//         street_address: "2, Adam Road",
+//         postal_code: "289877",
+//       },
+//       description: "Small but mighty, Adam Road FC counts famous stalls such as Selera Nasi Lemak as tenants.",
+//       hawker_stalls:["60fed3ff33402a7cacabf114", "61014b7f5ef1129384bca666", "61014b7f5ef1129384bca667" ]
+//   }
+//     ],
+//     (err, data)=>{
+//       res.redirect("/v1/hawkers")
+//     })
+// })
+
+// ? Gets all hawkerstalls in hawker centre
+// localhost:4000/v1/hawkers/maxwell-food-centre
 router.get("/:centreName/", (req, res)=> { 
   const centreName = req.params.centreName;
   console.log(centreName)
@@ -46,87 +76,35 @@ router.get("/:centreName/", (req, res)=> {
   })
 
 
-
-
-
-//? seed hawker centres
-//localhost:4000/v1/hawkers/seed
-router.get("/seed", (req,res)=> {
-  HawkerCentre.remove({}, (err, hawkerCentres)=>{
-    HawkerCentre.create([
-      {
-        name: "maxwell-food-centre",
-        address: {
-          street_address: "1, Kadayanallur Street",
-          postal_code: "069184",
-          description: "We wouldn’t believe anyone who say they haven’t been here, but if you really haven’t, here are the highlights from Singapore’s favourite tourist-approved hawker centre. Starting with Tian Tian Chicken Rice (Anthony Bourdain-approved, mind you), you should take note of other favourites like Zhen Zhen Porridge, and Maxwell Fuzhou Oyster Cake."
-        },
-        hawker_stalls: ["60fe61511b52676d31e5ea6c", "60fe61511b52676d31e5ea6d", "60fe61511b52676d31e5ea6e" ],
-    },
-    {
-      name: "Adam Road Food Centre",
-      address: {
-        street_address: "2, Adam Road",
-        postal_code: "289877",
-        description: "Small but mighty, Adam Road FC counts famous stalls such as Selera Nasi Lemak as tenants."
-      },
-      hawker_stalls:["60fe60779da27d6bb3d1c2d6"]
-  }
-    ],
-    (err, data)=>{
-      res.redirect("/v1/hawkers")
-    })
-  })
-})
-
 //? seed hawkerstalls
 //localhost:4000/v1/hawkers/stalls/seed
 router.get("/stalls/seed", (req, res) => {
-  HawkerStalls.remove({}, (err, hawkerStalls) => {
     HawkerStalls.create([
       {
-        name: "No1 Maxwell",
-        operating_hours: "0900 - 1800",
+        name: "Maxwell Fuzhou Oyster Cake",
+        operating_hours: "0900 - 2000",
+        closed_days: "Sunday",
+        unit_number: "01-05",
+        score: 10,
+        image_url:
+          "https://res.klook.com/image/upload/activities/huzuuwf3pvy2xmresuna.jpg",
+        dishes: ["60fc155e5dd1ad70705c6f32"],
+      },
+      {
+        name: "Stall 22 Hokkien Mee",
+        operating_hours: "1000 - 2300",
         closed_days: "Monday",
-        unit_number: "01-01",
-        score: 5,
-        image_url: "https://cache-wak-wak-hawker-com.s3-ap-southeast-1.amazonaws.com/data/images/stall/64/864/block/LQO1R82f328jzczp.jpg?v=1612194949",
-        dishes: ["60fc155e5dd1ad70705c6f37", "60fc155e5dd1ad70705c6f39"]
-
-        // dishes: [{ type: Schema.Types.ObjectId, ref: "Dishes" }], //! Reference (DISH id)
+        unit_number: "01-22",
+        score: 7,
+        image_url:
+          "https://www.misstamchiak.com/wp-content/uploads/2018/12/DSCF5515-6-1300x867.jpg",
+        dishes: ["6101131b908984874f998022" ],
       },
-      {
-        name: "Traditional Chinese Claypot",
-        operating_hours: "0900 - 1800",
-        closed_days: "Monday",
-        unit_number: "01-02",
-        score: 10,
-        image_url: "https://hawkerpedia.s3.ap-southeast-1.amazonaws.com/highlight-item/20201123/h1EP4JHfZvdp_RTmMYVaOsywA_traditionalchineseclaypot_sf.jpg",
-        dishes: ["60fc155e5dd1ad70705c6f37"]
-      },
-      {
-        name: "Ah Tai Hainanese Chicken Rice",
-        operating_hours: "1100 - 1930",
-        closed_days: "Tuesday",
-        unit_number: "01-07",
-        score: 10,
-        image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
-        dishes: ["60fc155e5dd1ad70705c6f37"]
-      },
-      {
-        name: "Adam Chicken Rice",
-        operating_hours: "1100 - 1930",
-        closed_days: "Tuesday",
-        unit_number: "01-07",
-        score: 10,
-        image_url: "https://cdn.foodadvisor.com.sg/1/400/tccrg/62pr1o64t583s4tp82o1804269/ah-tai-hainanese-chicken-rice-maxwell-food-centre.jpg",
-        dishes: ["60fc155e5dd1ad70705c6f37"]
-      },
+   
     ],
     (err, data)=>{
-      res.redirect("/v1/hawkers")
+      res.redirect("/v1/hawkers/stalls")
     })
-  });
 });
 
 //? delete a hawker centre
@@ -153,6 +131,16 @@ router.put("/:id", (req,res)=>{ //id = hawker centre id
     }
   )
 })
+
+router.post("/", (req, res) => {
+  HawkerCentre.create(req.body, (error, createdHC) => {
+    if (error) {
+      res.status(400).json({ error: error.message })
+    } 
+    res.status(200).send(createdHC)
+  })
+})
+
 
 //? delete a hawker stall 
 router.delete("/:id", (req,res)=>{ 

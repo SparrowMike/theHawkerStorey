@@ -6,7 +6,7 @@ const postsSchema = new Schema({
   cloudinary_id: String,
   hawkerCentre: { type: String, required: true },
   hawkerStall: { type: String, required: true },
-  dishes_id: { type: String, required: true },
+  dishes_name: { type: String, required: true },
   review: { type: String, required: true },
   rating: { type: Number, required: true },
   timestamp: { type: Date, default: Date.now },
