@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   modal: {
-    // overflow: "scroll",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
