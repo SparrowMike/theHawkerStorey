@@ -71,7 +71,17 @@ const FetchImages = () => {
   //* pull posts from mongoose to display images by cloudinary ids
   const { isLoading, data } = useQuery("get-posts", () => axios("v1/posts"));
   // const imageIds = data?.data.map((image) => image.cloudinary_id);
-  const testing = data?.data;
+  const postData = data?.data;
+
+  if (isLoading) {
+    return (
+      <Container className={classes.container}>
+        <Typography component="h1" variant="h2" align="center" gutterBottom>
+          Hang on while we fetch some yummy photos!
+        </Typography>
+      </Container>
+    );
+  }
 
   return (
     <>
@@ -82,22 +92,16 @@ const FetchImages = () => {
           duration={1000}
           monitorImagesLoaded={true}
         >
-          {isLoading ? (
-            <Typography component="h1" variant="h2" align="center" gutterBottom>
-              Hang on while we fetch some yummy photos!
-            </Typography>
-          ) : (
-            testing.map((data, index) => (
-              <Image
-                className={classes.cardMedia}
-                key={index}
-                onClick={() => handleOpen(data)}
-                cloudName={"hawkerstorey"}
-                publicId={data.image_url}
-                crop="scale"
-              />
-            ))
-          )}
+          {postData.map((data, index) => (
+            <Image
+              className={classes.cardMedia}
+              key={index}
+              onClick={() => handleOpen(data)}
+              cloudName={"hawkerstorey"}
+              publicId={data.image_url}
+              crop="scale"
+            />
+          ))}
         </StackGrid>
         <Modal
           className={classes.modal}
