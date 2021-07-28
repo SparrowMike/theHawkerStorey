@@ -81,7 +81,11 @@ export default function Post({ handleClosePost }) {
         {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <AutocompleteHC setHawkerCentre={setHawkerCentre} />
+            <AutocompleteHC
+              setHawkerCentre={setHawkerCentre}
+              setHawkerStall={setHawkerStall}
+              setDishName={setDishName}
+            />
           </Grid>
           {/* ====================MATERIAL UI Autocomplete for hawkerStall option selection: pairs to hawkerStallsDATA==================== */}
           <Grid item xs={12} md={6}>

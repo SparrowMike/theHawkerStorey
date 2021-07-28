@@ -20,11 +20,7 @@ const AutocompleteHC = ({ setHawkerCentre, setHawkerStall, setDishName }) => {
       id="Hawker Centre"
       autoHighlight
       clearOnEscape
-      //   options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
-      //   groupBy={(option) => option.firstLetter}
-      //   getOptionLabel={(option) => option.title}
       options={hcList}
-      //   groupBy={(option) => option.firstLetter}
       getOptionLabel={(option) => option}
       onChange={(event, newValue) => {
         setHawkerCentre(newValue);

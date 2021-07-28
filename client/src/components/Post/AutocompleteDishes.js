@@ -15,14 +15,13 @@ const AutocompleteDishes = ({ hawkerCentre, hawkerStall, setDishName }) => {
     async () => await axios(`/v1/hawkers/${hawkerCentre}`)
   );
 
+  //* retrieve all dishes that the selected hawker stall sells
   const dishArr = hawkerStallList?.data?.hawker_stalls
     .filter((stall) => stall.name === hawkerStall)[0]
     .dishes.map((dish) => dish);
 
+  //* extract name based on dishes._id
   const dishList = dishes?.data;
-
-  console.log(dishArr, dishList);
-
   let stallDishes = [];
   if (dishList) {
     for (let dish of dishArr) {
@@ -36,6 +35,8 @@ const AutocompleteDishes = ({ hawkerCentre, hawkerStall, setDishName }) => {
   return (
     <Autocomplete
       id="Dish Name"
+      autoHighlight
+      clearOnEscape
       options={stallDishes ? stallDishes : "No Dishes"}
       getOptionLabel={(option) => option}
       onChange={(event, newValue) => {

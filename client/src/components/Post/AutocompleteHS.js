@@ -34,6 +34,8 @@ const AutocompleteHS = ({ hawkerCentre, setHawkerStall }) => {
       ) : (
         <Autocomplete
           id="Hawker Stall"
+          autoHighlight
+          clearOnEscape
           options={hsList}
           getOptionLabel={(option) => option}
           onChange={(event, newValue) => {
