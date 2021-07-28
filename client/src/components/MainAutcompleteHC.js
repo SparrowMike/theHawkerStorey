@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { useHistory } from "react-router-dom";
-
 import axios from "axios";
 import { Autocomplete } from "@material-ui/lab/";
 import { TextField } from "@material-ui/core/";
@@ -17,12 +16,9 @@ const MainAutocompleteHC = () => {
   const hcList = data?.data?.map((hc) => hc.name);
 
   const handleChangeRoute = (event, newValue) => {
-    console.log("hawkercentreSelected",newValue)
-    history.push(`/${newValue}`)
-  }; 
-
-
-
+    console.log("hawkercentreSelected", newValue);
+    history.push(`/${newValue}`);
+  };
 
   return (
     <Autocomplete
@@ -31,7 +27,12 @@ const MainAutocompleteHC = () => {
       getOptionLabel={(option) => option}
       onChange={handleChangeRoute}
       renderInput={(params) => (
-        <TextField {...params} label="select a hawker centre" variant="outlined" />
+        <TextField
+          {...params}
+          label="select a hawker centre"
+          variant="outlined"
+          backGround="white"
+        />
       )}
     />
   );
