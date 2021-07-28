@@ -7,6 +7,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import FetchImages from "./FetchImages";
 
+import MainAutocompleteHC from "./MainAutcompleteHC"
+
+
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -32,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
   header: {
     color: theme.palette.common.black,
-    // fontSize: "25px",
+    fontSize: "32px",
     fontWeight: "500",
   },
 
@@ -58,7 +61,7 @@ export default function Main() {
               className={classes.header}
               gutterBottom
             >
-              Album layout
+              view a story, within our hawker storey
             </Typography>
             <Typography
               variant="h5"
@@ -66,11 +69,9 @@ export default function Main() {
               className={classes.header}
               paragraph
             >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+            <MainAutocompleteHC />
             </Typography>
-            <div className={classes.heroButtons}>
+            {/* <div className={classes.heroButtons}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
                   <Button variant="contained" className={classes.button}>
@@ -83,7 +84,7 @@ export default function Main() {
                   </Button>
                 </Grid>
               </Grid>
-            </div>
+            </div> */}
           </Container>
         </div>
         <FetchImages />

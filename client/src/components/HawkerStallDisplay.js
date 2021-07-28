@@ -36,7 +36,7 @@ const {centreName, stall} = useParams()
 
 ////// STORE INFORMATION /////////
 /////////// FETCHES STALL INFORMATION ////////
-const { data: stalldata, error, isLoading } = useQuery("hawkerstallsQuery", 
+const { data: stalldata, error, isLoading } = useQuery(["hawkerstallsQuery", centreName], 
 () => axios(`/v1/hawkers/${centreName}`)); // this gives stalls from hawker centre
 
 // WHICH HAWKER STALL
