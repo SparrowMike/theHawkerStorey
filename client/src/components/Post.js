@@ -7,10 +7,7 @@ import AutocompleteDishes from "./Post/AutocompleteDishes";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
-import 
-  ToggleButton,
-  ToggleButtonGroup,
-} from "@material-ui/lab/";
+import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab/";
 import { DropzoneArea } from "material-ui-dropzone";
 
 const useStyles = makeStyles((theme) => ({
