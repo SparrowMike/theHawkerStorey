@@ -11,38 +11,42 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import React, { useState } from "react";
 
+export const AuthContext = React.createContext();
+
 function App() {
   const queryClient = new QueryClient();
   const [accessToken, setAccessToken] = useState("");
+  const [user, setUser] = useState("");
 
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <Navbar />
-        <Switch>
-          <Route path="/" exact>
-            <Main />
-          </Route>
+        <AuthContext.Provider accessToken={accessToken}>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact>
+              <Main />
+            </Route>
 
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-          <Route path="/login">
-            <SignIn setAccessToken={setAccessToken} />
-          </Route>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/login">
+              <SignIn setUser={setUser} setAccessToken={setAccessToken} />
+            </Route>
+            <Route path="/users/:id">
+              <UserProfile />
+            </Route>
 
-          <Route path="/users/:id">
-            <UserProfile />
-          </Route>
-
-          <Route path="/:centreName/:stall">
-            <HawkerStallDisplay />
-          </Route>
-          <Route path="/:centreName/">
-            <HawkerCentreDisplay />
-          </Route>
-        </Switch>
+            <Route path="/:centreName/:stall">
+              <HawkerStallDisplay />
+            </Route>
+            <Route path="/:centreName/">
+              <HawkerCentreDisplay />
+            </Route>
+          </Switch>
+        </AuthContext.Provider>
       </QueryClientProvider>
     </Router>
   );

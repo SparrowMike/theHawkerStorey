@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { AuthContext } from "../App";
 import AutocompleteHC from "./Post/AutocompleteHC";
 import AutocompleteHS from "./Post/AutocompleteHS";
 import AutocompleteDishes from "./Post/AutocompleteDishes";
@@ -19,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Post({ handleClosePost }) {
   const classes = useStyles();
-
-  const { user, accessToken } = useContext(AuthContext);
+  //!unpack token
+  const accessToken = useContext(AuthContext);
+  console.log(accessToken);
 
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
@@ -64,7 +66,10 @@ export default function Post({ handleClosePost }) {
           rating: rating,
           dishes_id: dishName,
         }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
       setImage("");
     } catch (err) {
@@ -76,7 +81,7 @@ export default function Post({ handleClosePost }) {
     <div className={classes.paper}>
       <React.Fragment>
         <Typography variant="h4" gutterBottom>
-          Add New Post
+          Add New Post AccessToken: {accessToken}
         </Typography>
         {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
         <Grid container spacing={3}>
