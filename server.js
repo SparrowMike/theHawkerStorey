@@ -90,31 +90,6 @@ app.use("/upload", require("./routes/posts.js"));
 //* =======================================
 //*              LISTENER
 //* =======================================
-//! temporary area for testing cloudinary fetch
-//! to change fetch route to controller
-app.get("/images", async (req, res) => {
-  const { resources } = await cloudinary.search.expression("test*").execute();
-  console.log("fetching", resources);
-  const publicIds = resources.map((file) => file.public_id);
-  res.send(publicIds);
-});
-
-//! temporary area for testing cloudinary upload.
-//! to change fetch route in ImageUpload.js when we move the code from server.js to posts controller
-app.post("/upload", async (req, res) => {
-  try {
-    const fileStr = req.body.data;
-    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-      upload_preset: "hawkerstorey-preset",
-    });
-    res.json({ msg: uploadedResponse });
-    console.log("WE SENT IT TO THE CLOUD!!", uploadedResponse.url);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ err: "Uh oh. Something went wrong" });
-  }
-});
-
 app.listen(PORT, () => {
   console.log("Listening on the port", PORT);
 });
