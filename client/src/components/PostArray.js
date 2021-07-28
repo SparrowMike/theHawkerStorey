@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -11,8 +11,7 @@ import {
   CardContent,
   CardMedia,
   Container,
-  CardActions,
-  Button
+  Button,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -88,10 +87,10 @@ const PostArray = () => {
                         {item.dishes_id.toUpperCase()}
                       </Typography>
                       {/* add <Link to> */}
-                    <Button size="medium" color="primary">
-                      See More
-                    </Button>
-                    {/* add </Link> */}
+                      <Button size="medium" color="primary">
+                        See More
+                      </Button>
+                      {/* add </Link> */}
                     </CardContent>
                   </Card>
                 </Grid>
