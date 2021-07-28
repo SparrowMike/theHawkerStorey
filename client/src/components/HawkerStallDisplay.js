@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -28,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const HawkerStallDisplay = () => {
+
+ 
 const classes = useStyles();
 const {centreName, stall} = useParams()
 
@@ -64,9 +65,9 @@ Loading
 
 
 
-
-return (
+  return (
     <div>
+
 
       <h1>Stall name: {stall}</h1>
       <h4>Closed on: {selectedStall[0]?.closed_days} </h4>

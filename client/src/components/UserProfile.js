@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router'
 import axios from 'axios'
-import Post from './Post'
+// import Post from './Post'
 import UserProfilePosts from './UserProfilePosts'
 
 import { makeStyles } from "@material-ui/core/styles";

@@ -9,11 +9,13 @@ const AutocompleteHS = ({ hawkerCentre, setHawkerStall }) => {
   const test = hawkerCentre;
   console.log(test);
 
+  // const { data, isLoading, error } = useQuery("hawkerstalls", () => //! CODE COMENTED OUT BECAUSE OF DEPLOYMENT WARNING
+
   // Fetching of hawker stalls
-  const { data, isLoading, error } = useQuery("hawkerstalls", () =>
+  const { data } = useQuery("hawkerstalls", () =>
     axios("/v1/hawkers/maxwell-food-centre/")
-    );
- 
+  );
+
   // find out why it doesn't fetch
 
   const stallNames = data?.data?.hawker_stalls;
@@ -22,19 +24,17 @@ const AutocompleteHS = ({ hawkerCentre, setHawkerStall }) => {
     return stall.name;
   });
   return (
-    
-      <Autocomplete
-        id="Hawker Stall"
-        options={hsList}
-        getOptionLabel={(option) => option}
-        onChange={(event, newValue) => {
-          setHawkerStall(newValue);
-        }}
-        renderInput={(params) => (
-          <TextField {...params} label="Hawker Stall" variant="outlined" />
-        )}
-      />
-    
+    <Autocomplete
+      id="Hawker Stall"
+      options={hsList}
+      getOptionLabel={(option) => option}
+      onChange={(event, newValue) => {
+        setHawkerStall(newValue);
+      }}
+      renderInput={(params) => (
+        <TextField {...params} label="Hawker Stall" variant="outlined" />
+      )}
+    />
   );
 };
 
