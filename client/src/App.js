@@ -9,9 +9,11 @@ import HawkerCentreDisplay from "./components/HawkerCentreDisplay";
 import UserProfile from "./components/UserProfile";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import React, { useState } from "react";
 
 function App() {
   const queryClient = new QueryClient();
+  const [accessToken, setAccessToken] = useState("");
 
   return (
     <Router>
@@ -27,21 +29,19 @@ function App() {
             <SignUp />
           </Route>
           <Route path="/login">
-            <SignIn />
+            <SignIn setAccessToken={setAccessToken} />
           </Route>
 
           <Route path="/users/:id">
-          <UserProfile />
+            <UserProfile />
           </Route>
-          
+
           <Route path="/:centreName/:stall">
             <HawkerStallDisplay />
           </Route>
           <Route path="/:centreName/">
             <HawkerCentreDisplay />
           </Route>
-
-
         </Switch>
       </QueryClientProvider>
     </Router>

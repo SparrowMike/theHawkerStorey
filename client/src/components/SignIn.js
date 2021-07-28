@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -35,16 +35,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn({ setAccessToken }) {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [accessToken, setAccessToken] = useState("");
+
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userName);
-    console.log(password);
     createSession();
   };
 
@@ -55,10 +54,10 @@ export default function SignIn() {
         password: password,
       })
       .then((res) => {
-        if (res.ok) {
-          setAccessToken(res.data.accessToken);
-        }
-        throw new Error("Error in network");
+        console.log("LOGIN SUCCESS", res.data.accessToken);
+        console.log("User is ", res.data.user);
+        setAccessToken(res.data.accessToken);
+        history.push("/");
       });
   };
 
