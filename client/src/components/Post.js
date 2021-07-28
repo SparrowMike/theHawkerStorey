@@ -89,8 +89,8 @@ export default function Post({ handleClosePost }) {
       <React.Fragment>
         <Typography variant="h4" gutterBottom>
           Add New Post
-          <Button className={classes.exit}>
-            <CloseIcon className={classes.exit} onClick={handleClosePost} />
+          <Button className={classes.exit} onClick={handleClosePost}>
+            <CloseIcon className={classes.exit} />
           </Button>
         </Typography>
 
