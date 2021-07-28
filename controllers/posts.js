@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
-const { StatusCodes } = require("http-status-codes");
 const Posts = require("../models/posts");
+const { useHistory } = require("react-router-dom");
+
+const { StatusCodes } = require("http-status-codes");
 const session = require("express-session");
 const { cloudinary } = require("../utils/cloudinary");
 const upload = require("../utils/multer");
@@ -80,7 +82,6 @@ router.get("/seed", (req, res) => {
   );
 });
 
-
 //!dave post test
 router.post("/upload", async (req, res) => {
   try {
@@ -88,11 +89,7 @@ router.post("/upload", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "hawkerstorey-preset",
     });
-    // const result = await cloudinary.uploader.upload(req.file.data);
-    // console.log("results", results);
-    // res.json({ msg: uploadedResponse });
     console.log("WE SENT IT TO THE CLOUD!!", uploadedResponse);
-    console.log(req.body)
     //* Create new post
     let post = new Posts({
       image_url: uploadedResponse.secure_url,
@@ -105,6 +102,7 @@ router.post("/upload", async (req, res) => {
     });
     await post.save();
     res.json(post);
+    useHistory().push("/");
   } catch (error) {
     console.log(error);
     res.status(500).json({ err: "Uh oh. Something went wrong" });
@@ -121,7 +119,6 @@ router.post("/new", (req, res) => {
     res.status(200).send(createdPost);
   });
 });
-
 
 // delete a post
 router.delete("/:id", (req, res) => {
@@ -149,4 +146,3 @@ router.put("/:id", (req, res) => {
 });
 
 module.exports = router;
-
