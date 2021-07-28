@@ -31,7 +31,7 @@ router.get("/stalls", (req, res)=> {
 })
 
 //? Gets all hawkerstalls in hawker centre
-//localhost:4000/v1/maxwell-food-centre
+//localhost:4000/v1/hawkers/maxwell-food-centre
 router.get("/:centreName/", (req, res)=> { 
   const centreName = req.params.centreName;
   console.log(centreName)

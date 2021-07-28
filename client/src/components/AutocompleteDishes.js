@@ -9,32 +9,29 @@ const AutocompleteDishes = ({ hawkerStall, setDishName }) => {
   const test = hawkerStall;
   console.log(test);
 
+  // const { data, isLoading, error } = useQuery("dishes", () => //! CODE COMENTED OUT BECAUSE OF DEPLOYMENT WARNING
+
   // Fetching of dishes
-  const { data, isLoading, error } = useQuery("dishes", () => 
-  axios("/v1/dishes")
-  );
-
-
+  const { data } = useQuery("dishes", () => axios("/v1/dishes"));
 
   const dishNames = data?.data;
-  console.log("dishnames", dishNames)
-  const dishList= dishNames?.map((dish) => {
+  console.log("dishnames", dishNames);
+  const dishList = dishNames?.map((dish) => {
     return dish.name;
-  })
+  });
 
   return (
-
     <Autocomplete
-    id="Dish Name"
-    options={dishList}
-    getOptionLabel={(option) => option}
-    onChange={(event, newValue) => {
-      setDishName(newValue);
-    }}
-    // style={{ width: "50vw" }}
-    renderInput={(params) => (
-      <TextField {...params} label="Dish Name" variant="outlined" />
-    )}
+      id="Dish Name"
+      options={dishList}
+      getOptionLabel={(option) => option}
+      onChange={(event, newValue) => {
+        setDishName(newValue);
+      }}
+      // style={{ width: "50vw" }}
+      renderInput={(params) => (
+        <TextField {...params} label="Dish Name" variant="outlined" />
+      )}
     />
   );
 };
