@@ -41,7 +41,27 @@ export default function SignIn() {
     e.preventDefault();
     console.log(userName);
     console.log(password);
+    createSession();
+  };
 
+  const createSession = () => {
+    fetch("/v1/sessions", {
+      method: "POST",
+      body: JSON.stringify({
+        username: userName,
+        password: password,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Error in network");
+      })
+      .then((resJson) => {
+        console.log("resJson: ", resJson);
+      });
   };
 
   return (
