@@ -112,6 +112,7 @@ export default function SignUp() {
               <TextField
                 variant="outlined"
                 fullWidth
+                required
                 id="email"
                 label="Email Address"
                 name="email"
