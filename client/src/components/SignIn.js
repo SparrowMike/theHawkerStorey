@@ -1,16 +1,19 @@
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { useState } from "react";
-
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import axios from "axios";
+
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  Container,
+  Link,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,6 +39,7 @@ export default function SignIn() {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [accessToken, setAccessToken] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,22 +49,16 @@ export default function SignIn() {
   };
 
   const createSession = () => {
-    fetch("/v1/sessions", {
-      method: "POST",
-      body: JSON.stringify({
+    axios
+      .post("/v1/sessions", {
         username: userName,
         password: password,
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
+      })
       .then((res) => {
         if (res.ok) {
-          return res.json();
+          setAccessToken(res.data.accessToken);
         }
         throw new Error("Error in network");
-      })
-      .then((resJson) => {
-        console.log("resJson: ", resJson);
       });
   };
 
