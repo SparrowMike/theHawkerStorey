@@ -12,7 +12,6 @@ import {
   CardContent,
   CardMedia,
   Container,
-  Button,
   Modal,
   Backdrop,
   Fade,
@@ -96,7 +95,7 @@ const PostArray = () => {
     setOpen(false);
   };
 
-  console.log("modalData",modalData)
+  console.log("modalData", modalData);
 
   return (
     <>
@@ -127,48 +126,46 @@ const PostArray = () => {
           })}
 
           <Modal
-          className={classes.modal}
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <div className={classes.paper}>
-              <Image
-                cloudName={"hawkerstorey"}
-                publicId={modalData.image_url}
-                crop="scale"
-                width={320}
-              />
-              <Typography gutterBottom variant="h6" component="h2">
-                Dish Name:
-              </Typography>
-              <Typography>{modalData.dishes_id}</Typography>
-              <Typography gutterBottom variant="h6" component="h2">
-                Hawker Centre:
-              </Typography>
-              <Typography> {modalData.hawkerCentre}</Typography>
-              <Typography gutterBottom variant="h6" component="h2">
-                Hawker Stall:
-              </Typography>
-              <Typography>{modalData.hawkerStall}</Typography>
-              <Typography gutterBottom variant="h6" component="h2">
-                Review:
-              </Typography>
-              <Typography>{modalData.review}</Typography>
-              <Typography gutterBottom variant="h6" component="h2">
-                Rating:
-              </Typography>
-              <Typography>{modalData.rating}</Typography>
-            </div>
-          </Fade>
-        </Modal>
-
-
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <Image
+                  cloudName={"hawkerstorey"}
+                  publicId={modalData.image_url}
+                  crop="scale"
+                  width={320}
+                />
+                <Typography gutterBottom variant="h6" component="h2">
+                  Dish Name:
+                </Typography>
+                <Typography>{modalData.dishes_id}</Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Hawker Centre:
+                </Typography>
+                <Typography> {modalData.hawkerCentre}</Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Hawker Stall:
+                </Typography>
+                <Typography>{modalData.hawkerStall}</Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Review:
+                </Typography>
+                <Typography>{modalData.review}</Typography>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Rating:
+                </Typography>
+                <Typography>{modalData.rating}</Typography>
+              </div>
+            </Fade>
+          </Modal>
         </Grid>
       </Container>
     </>
