@@ -9,6 +9,28 @@ import HawkerCentreDisplay from "./components/HawkerCentreDisplay";
 import UserProfile from "./components/UserProfile";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#000814",
+    },
+    secondary: {
+      main: "#e63946",
+    },
+  },
+  typography: {
+    fontFamily: [
+      "Nunito",
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+    ].join(","),
+  },
+});
 
 function App() {
   const queryClient = new QueryClient();
@@ -16,33 +38,30 @@ function App() {
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <Navbar />
-        <Switch>
-          <Route path="/" exact>
-            <Main />
-          </Route>
-
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-          <Route path="/login">
-            <SignIn />
-          </Route>
-
-          <Route path="/users/:id">
-          <UserProfile />
-          </Route>
-          
-          <Route path="/:centreName/:stall">
-            <HawkerStallDisplay />
-          </Route>
-          <Route path="/:centreName/">
-            <HawkerCentreDisplay />
-          </Route>
-
-
-        </Switch>
+        <ThemeProvider theme={theme}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <Navbar />
+          <Switch>
+            <Route path="/" exact>
+              <Main />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/login">
+              <SignIn />
+            </Route>
+            <Route path="/users/:id">
+              <UserProfile />
+            </Route>
+            <Route path="/:centreName/:stall">
+              <HawkerStallDisplay />
+            </Route>
+            <Route path="/:centreName/">
+              <HawkerCentreDisplay />
+            </Route>
+          </Switch>
+        </ThemeProvider>
       </QueryClientProvider>
     </Router>
   );
