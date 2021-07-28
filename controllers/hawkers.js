@@ -154,6 +154,15 @@ router.put("/:id", (req,res)=>{ //id = hawker centre id
   )
 })
 
+router.post("/", (req, res) => {
+  HawkerCentre.create(req.body, (error, createdHC) => {
+    if (error) {
+      res.status(400).json({ error: error.message })
+    } 
+    res.status(200).send(createdHC)
+  })
+})
+
 //? delete a hawker stall 
 router.delete("/:id", (req,res)=>{ 
   HawkerStalls.findByIdAndRemove(req.params.id, (err, deletedStall)=>{
