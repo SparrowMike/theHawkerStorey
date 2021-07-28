@@ -101,7 +101,6 @@ router.post("/upload", async (req, res) => {
     });
     await post.save();
     res.json(post);
-    useHistory().push("/");
   } catch (error) {
     console.log(error);
     res.status(500).json({ err: "Uh oh. Something went wrong" });
