@@ -8,6 +8,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useState } from "react";
 
 import { Link as RouterLink } from "react-router-dom";
 
@@ -33,6 +34,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userName);
+    console.log(password);
+
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -50,11 +60,14 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="userName"
+            label="User Name"
+            name="userName"
+            autoComplete="userName"
             autoFocus
+            onChange={(event) => {
+              setUserName(event.target.value);
+            }}
           />
           <TextField
             variant="outlined"
@@ -66,6 +79,9 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           />
           <Button
             type="submit"
@@ -73,6 +89,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
