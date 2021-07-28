@@ -4,28 +4,50 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import PostArray from "./PostArray"
 
-import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
-
+import {
+  makeStyles,
+  Paper,
+  Grid,
+  Card,
+  Typography,
+  Container
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
+  mainFeaturedPost: {
+    position: 'relative',
+    backgroundColor: theme.palette.grey[800],
+    color: theme.palette.common.white,
+    marginBottom: theme.spacing(4),
+    // backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
   },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    backgroundColor: 'rgba(0,0,0,.3)',
   },
-  heroButtons: {
-    marginTop: theme.spacing(4),
+  mainFeaturedPostContent: {
+    position: 'relative',
+    padding: theme.spacing(6),
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(8),
+      paddingRight: 0,
+    },
   },
-  div:{
+  div: {
     marginTop: "60px",
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
+  
 }));
 
 const HawkerStallDisplay = () => {
@@ -66,18 +88,40 @@ Loading
 
 
   return (
-    <div>
-
-
-      <h1>Stall name: {stall}</h1>
+    <>
+      <Paper className={classes.mainFeaturedPost}>
+    <div className={classes.overlay} />
+    <Grid container>
+        <Grid item md={6}>
+          <div className={classes.mainFeaturedPostContent}>
+            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+            {stall}
+            </Typography>
+            <Typography variant="h5" color="inherit" paragraph>
+            🔥Shiokmeter: {selectedStall[0]?.score}/5
+            </Typography>
+            <Typography variant="h6" color="inherit">
+            Closed on: {selectedStall[0]?.closed_days}
+            </Typography>
+            <Typography variant="h6" color="inherit">
+            Operating hours: {selectedStall[0]?.operating_hours}
+            </Typography>
+            <Typography variant="h6" color="inherit">
+            Unit number: #{selectedStall[0]?.unit_number}
+            </Typography>
+          </div>
+        </Grid>
+      </Grid>
+    </Paper>
+      {/* <h1>Stall name: {stall}</h1>
       <h4>Closed on: {selectedStall[0]?.closed_days} </h4>
       <h4>Operating hours: {selectedStall[0]?.operating_hours} </h4> 
       <h4>Unit number: #{selectedStall[0]?.unit_number}</h4> 
-      <h4>Shiokmeter: {selectedStall[0]?.score}/5 </h4>
+      <h4>Shiokmeter: {selectedStall[0]?.score}/5 </h4> */}
 
       <PostArray />
 
-    </div>
+    </>
   );
 }
 

@@ -9,26 +9,23 @@ import {
   Card,
   Typography,
   CardContent,
+  CardMedia,
   Container,
+  CardActions,
+  Button
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+  cardMedia: {
+    paddingTop: "70%",
   },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  div: {
-    marginTop: "60px",
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+  cardContent: {
+    flexGrow: 1,
   },
 }));
 
@@ -43,7 +40,6 @@ const PostArray = () => {
     data: postdata,
     error,
     isLoading,
-   
   } = useQuery(["postsQuery", stall], () => axios("/v1/posts"));
   console.log("this is postdata", postdata?.data);
 
@@ -74,11 +70,36 @@ const PostArray = () => {
 
   return (
     <>
-      {selectedStallPosts?.map((item, key) => {
-        return (
-         <img src={item.image_url} alt={item.name}>{item.name}</img>          
-        )
-      })}
+      <Container className={classes.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {selectedStallPosts?.map((item, key) => {
+            return (
+              //  <img src={item.image_url} alt={item.name}>{item.name}</img>
+              <>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={item.image_url}
+                      title={item.name}
+                    />
+                    <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h6" component="h2">
+                        {item.dishes_id.toUpperCase()}
+                      </Typography>
+                      {/* add <Link to> */}
+                    <Button size="medium" color="primary">
+                      See More
+                    </Button>
+                    {/* add </Link> */}
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </>
+            );
+          })}
+        </Grid>
+      </Container>
     </>
   );
 };
