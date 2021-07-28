@@ -80,13 +80,7 @@ router.get("/seed", (req, res) => {
   );
 });
 
-const isAuthenticated = (req, res, next) => {
-  if (req.session.currentUser) {
-    return next();
-  } else {
-    res.redirect("/sessions/new");
-  }
-};
+
 //!dave post test
 router.post("/upload", async (req, res) => {
   try {
@@ -119,7 +113,7 @@ router.post("/upload", async (req, res) => {
 
 // create a post
 //localhost:4000/v1/posts/new (ame: @potcheeks, changed the url to /new for authentication)
-router.post("/new", isAuthenticated, (req, res) => {
+router.post("/new", (req, res) => {
   Posts.create(req.body, (error, createdPost) => {
     if (error) {
       res.status(400).json({ error: error.message });

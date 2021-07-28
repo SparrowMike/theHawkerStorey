@@ -3,6 +3,8 @@ const { cloudinary } = require("../utils/cloudinary");
 const upload = require("../utils/multer");
 const Posts = require("../models/posts");
 
+//!====================================GRAVEYARD=======================================
+
 //*=================UPLOAD A SINGLE IMAGE========================
 router.post("/", upload.single("image"), async (req, res) => {
   try {
@@ -92,3 +94,5 @@ router.get("/:id", async (req, res) => {
 // input type = file name = "image" //! for front end ~13:00
 
 module.exports = router;
+
+//! =================================================================================

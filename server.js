@@ -55,10 +55,21 @@ mongoose.connection.once("open", () => {
 });
 
 //* =======================================
+//*         AUTHENTICATION
+//* =======================================
+const isAuthenticated = (req, res, next) => {
+  if (req.session.currentUser) {
+    return next();
+  } else {
+    res.redirect("/sessions/new");
+  }
+};
+
+//* =======================================
 //*         CONTROLLERS/ROUTES
 //* =======================================
 const postsController = require("./controllers/posts.js");
-app.use("/v1/posts", postsController);
+app.use("/v1/posts", isAuthenticated, postsController); //only users can post
 
 const hawkersController = require("./controllers/hawkers");
 app.use("/v1/hawkers", hawkersController);
@@ -69,8 +80,12 @@ app.use("/v1/dishes", dishesController);
 const usersController = require("./controllers/users.js");
 app.use("/v1/users", usersController);
 
-//!
+const sessionController = require("./controllers/sessions")
+app.use("/v1/sessions", sessionController)
+
+//!  ===============GRAVEYARD=======================
 app.use("/upload", require("./routes/posts.js"));
+//! ================================================
 
 //* =======================================
 //*              LISTENER
