@@ -136,12 +136,12 @@ export default function Navbar() {
             <MenuItem component={RouterLink} to="/">
               <Typography variant="h6">Home</Typography>
             </MenuItem>
-            <MenuItem component={RouterLink} to="/">
+            {/* <MenuItem component={RouterLink} to="/">
               <Typography variant="h6">Hawker</Typography>
             </MenuItem>
             <MenuItem component={RouterLink} to="/">
               <Typography variant="h6">Cuisine</Typography>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={handleOpenPost}>
               <Typography variant="h6">Post</Typography>
             </MenuItem>
