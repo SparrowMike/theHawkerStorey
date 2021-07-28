@@ -44,7 +44,7 @@ const PostArray = () => {
     error,
     isLoading,
    
-  } = useQuery("postsQuery", () => axios("/v1/posts"));
+  } = useQuery(["postsQuery", stall], () => axios("/v1/posts"));
   console.log("this is postdata", postdata?.data);
 
   // POSTS OF SELECTED STALL
