@@ -97,7 +97,7 @@ const HawkerStallDisplay = () => {
                 {stall}
               </Typography>
               <Typography variant="h5" color="inherit" paragraph>
-                🔥Shiokmeter: {selectedStall[0]?.score}/5
+                🔥Shiokmeter: {selectedStall[0]?.score}/10
               </Typography>
               <Typography variant="h6" color="inherit">
                 Closed on: {selectedStall[0]?.closed_days}

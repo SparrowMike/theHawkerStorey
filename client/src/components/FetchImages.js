@@ -67,7 +67,7 @@ const FetchImages = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+console.log("modal from fetch", modalData);
   //* pull posts from mongoose to display images by cloudinary ids
   const { isLoading, data } = useQuery(["get-posts"], () => axios("v1/posts"));
   // const postData = data?.data.reverse();
