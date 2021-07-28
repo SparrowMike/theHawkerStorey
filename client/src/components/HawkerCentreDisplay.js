@@ -32,14 +32,13 @@ const HawkerCentreDisplay = () => {
   const classes = useStyles();
 
   const { centreName } = useParams();
-  const { data, isLoading, error } = useQuery("hawkerCentres", () =>
+  const { data, isLoading, error } = useQuery(["hawkercentres", centreName], () =>
     axios(`/v1/hawkers/${centreName}`)
   );
 
   const centres = data?.data;
   console.log("centreName: ", centreName);
-  console.log("centres: ", centres);
-
+  
   if (error) {
     console.log("error: ", error.message);
     return (
@@ -52,6 +51,7 @@ const HawkerCentreDisplay = () => {
     console.log("loading...");
     return <Container className={classes.div}>Loading</Container>;
   }
+  console.log("centre information: ", centres);
   return (
     <>
       <Container className={classes.div}>
