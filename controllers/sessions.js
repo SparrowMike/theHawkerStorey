@@ -1,25 +1,26 @@
 const express = require("express");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 const router = express.Router();
 const Users = require("../models/users");
 
 //localhost:4000/v1/sessions
-router.get("/", (req, res)=> {
-  res.send("sessions")
-})
+router.get("/", (req, res) => {
+  res.send("sessions");
+});
 
 //new form to log in
 //localhost:4000/v1/sessions/new
-router.get("/new", (req,res)=>{
+router.get("/new", (req, res) => {
   res.send("Log in page");
-})
+});
 
 //create a new session
-router.post("/", (req,res)=>{
-  Users.findOne({
-    username: req.body.username, //finds username first
-   },
-    (err, foundUser)=>{
+router.post("/", (req, res) => {
+  Users.findOne(
+    {
+      username: req.body.username, //finds username first
+    },
+    (err, foundUser) => {
       if (err) {
         console.log(err);
         res.send("oops the db had a problem");
@@ -33,19 +34,22 @@ router.post("/", (req,res)=>{
           // add the user to our session
           req.session.currentUser = foundUser;
           // redirect back to our home page
-          res.redirect("/posts");
+
+          // res.redirect(`/v1/users/${req.body.username}`);
+          res.redirect(`/`);
         } else {
           // passwords do not match
           res.send("password does not match");
         }
+      }
     }
-  });
+  );
 });
 
-router.delete("/", (req,res)=>{
-  req.session.destroy(()=>{
+router.delete("/", (req, res) => {
+  req.session.destroy(() => {
     res.redirect("/");
   });
 });
 
-module.exports = router
+module.exports = router;

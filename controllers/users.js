@@ -76,7 +76,7 @@ router.post("/", (req, res) => {
       res.status(400).json({ error: error.message });
     }
     res.status(200).send(createdUser);
-    // res.redirect("/v1/users");
+    // res.redirect("/");
   });
 });
 
