@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 const Posts = require("../models/posts");
-const { useHistory } = require("react-router-dom");
 
 const { StatusCodes } = require("http-status-codes");
 const session = require("express-session");
