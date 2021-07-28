@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Main from "./components/Main";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
-import HawkerStallDisplay from "./components/HawkerStallDisplay";
-import HawkerCentreDisplay from "./components/HawkerCentreDisplay";
-import UserProfile from "./components/UserProfile";
+import Main from "./components/Pages/Main";
+import SignUp from "./components/Pages/SignUp";
+import SignIn from "./components/Pages/SignIn";
+import HawkerStallDisplay from "./components/Pages/HawkerStallDisplay";
+import HawkerCentreDisplay from "./components/Pages/HawkerCentreDisplay";
+import UserProfile from "./components/Pages/UserProfile";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
@@ -31,17 +31,15 @@ function App() {
           </Route>
 
           <Route path="/users/:id">
-          <UserProfile />
+            <UserProfile />
           </Route>
-          
+
           <Route path="/:centreName/:stall">
             <HawkerStallDisplay />
           </Route>
           <Route path="/:centreName/">
             <HawkerCentreDisplay />
           </Route>
-
-
         </Switch>
       </QueryClientProvider>
     </Router>
