@@ -42,11 +42,11 @@ const UserProfile = () => {
   const classes = useStyles();
 
   const {id} = useParams();
-  const {data, isLoading, error} = useQuery("user",
+  const {data, isLoading, error} = useQuery(["user", id],
   () => axios(`/v1/users/${id}`))
 
   const user = data?.data
-  console.log("user: ", user)
+  console.log("user information: ", user)
 
   if (error){
     console.log("error: ", error.message)
