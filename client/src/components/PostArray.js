@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const PostArray = () => {
   const classes = useStyles();
   const { stall } = useParams();
-  const [post, setPost] = useState([]);
+  // const [post, setPost] = useState([]);
 
   /////////// POSTS /////////////
   ////////// FETCHES POST INFORMATION /////////
@@ -43,7 +43,7 @@ const PostArray = () => {
     data: postdata,
     error,
     isLoading,
-    isSuccess,
+   
   } = useQuery("postsQuery", () => axios("/v1/posts"));
   console.log("this is postdata", postdata?.data);
 
