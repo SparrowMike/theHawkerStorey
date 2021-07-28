@@ -46,23 +46,6 @@ export default function SignUp() {
     createUser();
   };
 
-  // const createUser = async () => {
-  //   try {
-  //     await fetch("/v1/users/", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         username: userName,
-  //         password: password,
-  //         email: email,
-  //         postalCode: postalCode,
-  //       }),
-  //       headers: { "Content-Type": "application/json" },
-  //     });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
   const createUser = () => {
     fetch("/v1/users/", {
       method: "POST",
@@ -154,6 +137,7 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
+            component={RouterLink}
             to="/"
             type="submit"
             fullWidth
@@ -166,7 +150,7 @@ export default function SignUp() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="/" variant="body2">
+              <Link component={RouterLink} to="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
