@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
-import AutocompleteHS from "./AutocompleteHS";
-import AutocompleteDishes from "./AutocompleteDishes";
+// import { useQuery, QueryCache } from "react-query";
+// import axios from "axios";
+import AutocompleteHC from "./Post/AutocompleteHC";
+import AutocompleteHS from "./Post/AutocompleteHS";
+import AutocompleteDishes from "./Post/AutocompleteDishes";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Button, Grid, TextField, Typography } from "@material-ui/core/";
+import { Box, Button, Grid, TextField, Typography } from "@m
 import {
   Autocomplete,
   ToggleButton,
@@ -37,14 +38,6 @@ export default function Post({ handleClosePost }) {
     console.log(rating);
   };
 
-  //* Fetching of hawker centres data
-  const { data } = useQuery("hawkercentres", () => axios("/v1/hawkers"));
-
-  const centreNames = data?.data;
-  const hcList = centreNames?.map((item) => {
-    return item.name;
-  });
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -63,7 +56,6 @@ export default function Post({ handleClosePost }) {
   };
 
   //* convert image binary into string (base64EndcodedImage) and calls fetch route
-  //! to change fetch route to post controller route when we move code from server.js to posts
   const uploadImage = async (base64EncodedImage) => {
     try {
       await fetch("/v1/posts/upload", {
@@ -90,31 +82,29 @@ export default function Post({ handleClosePost }) {
         <Typography variant="h4" gutterBottom>
           Add New Post
         </Typography>
+        {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
         <Grid container spacing={3}>
-          {/* ====================MATERIAL UI Autocomplete for hawkerCentre option selection: pairs to hawkerCentreData==================== */}
           <Grid item xs={12} md={6}>
-            <Autocomplete
-              id="Hawker Centre"
-              options={hcList}
-              getOptionLabel={(option) => option}
-              onChange={(event, newValue) => {
-                setHawkerCentre(newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Hawker Centre"
-                  variant="outlined"
-                />
-              )}
-            />
+            <AutocompleteHC setHawkerCentre={setHawkerCentre} />
           </Grid>
           {/* ====================MATERIAL UI Autocomplete for hawkerStall option selection: pairs to hawkerStallsDATA==================== */}
           <Grid item xs={12} md={6}>
-            <AutocompleteHS
-              hawkerCentre={hawkerCentre}
-              setHawkerStall={setHawkerStall}
-            />
+            {hawkerCentre && (
+              <AutocompleteHS
+                hawkerCentre={hawkerCentre}
+                setHawkerStall={setHawkerStall}
+              />
+            )}
+          </Grid>
+          {/* ====================MATERIAL UI Autocomplete for dishes=================== */}
+          <Grid item xs={12}>
+            {hawkerStall && (
+              <AutocompleteDishes
+                hawkerCentre={hawkerCentre}
+                hawkerStall={hawkerStall}
+                setDishName={setDishName}
+              />
+            )}
           </Grid>
           {/* ====================MATERIAL UI DROPZONE for image uploading: pairs to Cloudinary==================== */}
           <Grid item xs={12}>
@@ -125,13 +115,6 @@ export default function Post({ handleClosePost }) {
               onChange={(files) => {
                 setImage(files[0]);
               }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            {/* ====================MATERIAL UI Autocomplete for dishes=================== */}
-            <AutocompleteDishes
-              hawkerStall={hawkerStall}
-              setDishName={setDishName}
             />
           </Grid>
           {/* ====================MATERIAL UI Textfield for user to write reviews=================== */}
