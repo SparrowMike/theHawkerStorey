@@ -69,7 +69,7 @@ const isAuthenticated = (req, res, next) => {
 //*         CONTROLLERS/ROUTES
 //* =======================================
 const postsController = require("./controllers/posts.js");
-app.use("/v1/posts", isAuthenticated, postsController); //only users can post
+app.use("/v1/posts", postsController); //only users can post
 
 const hawkersController = require("./controllers/hawkers");
 app.use("/v1/hawkers", hawkersController);
@@ -80,8 +80,8 @@ app.use("/v1/dishes", dishesController);
 const usersController = require("./controllers/users.js");
 app.use("/v1/users", usersController);
 
-const sessionController = require("./controllers/sessions")
-app.use("/v1/sessions", sessionController)
+const sessionController = require("./controllers/sessions");
+app.use("/v1/sessions", sessionController);
 
 //!  ===============GRAVEYARD=======================
 app.use("/upload", require("./routes/posts.js"));
