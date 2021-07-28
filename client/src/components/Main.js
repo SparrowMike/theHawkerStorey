@@ -7,8 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import FetchImages from "./FetchImages";
 
-import MainAutocompleteHC from "./MainAutcompleteHC"
-
+import MainAutocompleteHC from "./MainAutcompleteHC";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -37,11 +36,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.black,
     fontSize: "32px",
     fontWeight: "500",
-  },
-
-  button: {
-    // color: theme.palette.primary,
-    // background: theme.palette.secondary,
+    textShadow: "rgba(255,255,255,0.5) 0px 3px 3px",
   },
 }));
 
@@ -64,27 +59,11 @@ export default function Main() {
               view a story, within our hawker storey
             </Typography>
             <Typography
-              variant="h5"
+              variant="h1"
               align="center"
               className={classes.header}
-              paragraph
-            >
+            ></Typography>
             <MainAutocompleteHC />
-            </Typography>
-            {/* <div className={classes.heroButtons}>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item>
-                  <Button variant="contained" className={classes.button}>
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" className={classes.button}>
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div> */}
           </Container>
         </div>
         <FetchImages />
