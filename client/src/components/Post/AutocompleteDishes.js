@@ -6,12 +6,12 @@ import TextField from "@material-ui/core/TextField";
 
 const AutocompleteDishes = ({ hawkerCentre, hawkerStall, setDishName }) => {
   const { data: dishes } = useQuery(
-    "dishes",
+    ["dishes-list", hawkerStall, hawkerCentre],
     async () => await axios("/v1/dishes")
   );
 
   const { data: hawkerStallList } = useQuery(
-    "hawkerstalls",
+    ["hawkerstalls", hawkerCentre],
     async () => await axios(`/v1/hawkers/${hawkerCentre}`)
   );
 
@@ -30,19 +30,13 @@ const AutocompleteDishes = ({ hawkerCentre, hawkerStall, setDishName }) => {
         if (dish === item._id) stallDishes.push(item.name);
       }
     }
+    stallDishes.sort((a, b) => a.localeCompare(b, { ignorePunctuation: true }));
   }
-
-  // if (dishList) {
-  //   const myDishes = dishList.filter(
-  //     (dish) => dish._id === dishArr.includes(dish)
-  //   );
-  //   console.log(myDishes);
-  // }
 
   return (
     <Autocomplete
       id="Dish Name"
-      options={stallDishes}
+      options={stallDishes ? stallDishes : "No Dishes"}
       getOptionLabel={(option) => option}
       onChange={(event, newValue) => {
         setDishName(newValue);
