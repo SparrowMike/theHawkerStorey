@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ setAccessToken }) {
+export default function SignIn({ setUser, setAccessToken }) {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -47,6 +47,7 @@ export default function SignIn({ setAccessToken }) {
     createSession();
   };
 
+  //* use sessions to validate login and receive JWT
   const createSession = () => {
     axios
       .post("/v1/sessions", {
@@ -54,11 +55,14 @@ export default function SignIn({ setAccessToken }) {
         password: password,
       })
       .then((res) => {
+        // lift state to App to provide global context
         console.log("LOGIN SUCCESS", res.data.accessToken);
         console.log("User is ", res.data.user);
         setAccessToken(res.data.accessToken);
+        setUser(res.data.user);
         history.push("/");
-      });
+      })
+      .catch((err) => console.log("error", err));
   };
 
   return (

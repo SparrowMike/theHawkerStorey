@@ -6,10 +6,30 @@ const Posts = require("../models/posts");
 const { StatusCodes } = require("http-status-codes");
 const session = require("express-session");
 const { cloudinary } = require("../utils/cloudinary");
+// const { authenticateToken } = require("../utils/jwtAuth");
 const upload = require("../utils/multer");
 
 const sessionsController = require("./sessions");
 app.use("/sessions", sessionsController);
+
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
+
+//* authenticate token middleware
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  console.log(token);
+  if (token === null) return res.sendStatus(401); //no token received
+
+  // process the secret we receive
+  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
+    if (err) return res.sendStatus(403); //token no longer valid
+    //user can now proceed
+    req.user = user;
+    next();
+  });
+};
 
 //localhost:4000/v1/posts -> shows all the posts from different users
 router.get("/", (req, res) => {
@@ -82,7 +102,8 @@ router.get("/seed", (req, res) => {
 });
 
 //!dave post test
-router.post("/upload", async (req, res) => {
+
+router.post("/upload", authenticateToken, async (req, res) => {
   try {
     const fileStr = req.body.data;
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {

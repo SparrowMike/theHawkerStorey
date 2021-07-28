@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-// import { useQuery, QueryCache } from "react-query";
-// import axios from "axios";
+import React, { useState, useContext } from "react";
 import AutocompleteHC from "./Post/AutocompleteHC";
 import AutocompleteHS from "./Post/AutocompleteHS";
 import AutocompleteDishes from "./Post/AutocompleteDishes";
@@ -21,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Post({ handleClosePost }) {
   const classes = useStyles();
+
+  const { user, accessToken } = useContext(AuthContext);
 
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
