@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
 import PostArray from "./PostArray";
+import { Link } from "react-router-dom";
+
 
 import {
   makeStyles,
@@ -10,6 +12,7 @@ import {
   Grid,
   Typography,
   Container,
+  Button,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -108,15 +111,13 @@ const HawkerStallDisplay = () => {
               <Typography variant="h6" color="inherit">
                 Unit number: #{selectedStall[0]?.unit_number}
               </Typography>
+              <Link to={`/${centreName}/`}>
+              <Button variant="outlined" color="secondary">Back to {centreName} stalls</Button>
+              </Link>
             </div>
           </Grid>
         </Grid>
       </Paper>
-      {/* <h1>Stall name: {stall}</h1>
-      <h4>Closed on: {selectedStall[0]?.closed_days} </h4>
-      <h4>Operating hours: {selectedStall[0]?.operating_hours} </h4> 
-      <h4>Unit number: #{selectedStall[0]?.unit_number}</h4> 
-      <h4>Shiokmeter: {selectedStall[0]?.score}/5 </h4> */}
 
       <PostArray />
     </>

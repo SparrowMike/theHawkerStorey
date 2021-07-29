@@ -85,6 +85,7 @@ const FetchImages = () => {
     setOpen(false);
   };
 console.log("modal from fetch", modalData);
+
   //* pull posts from mongoose to display images by cloudinary ids
   const { isLoading, data } = useQuery(["get-posts"], () => axios("v1/posts"));
   // const postData = data?.data.reverse();
@@ -94,12 +95,12 @@ console.log("modal from fetch", modalData);
     return (
       <Container className={classes.container}>
         <Typography component="h1" variant="h2" align="center" gutterBottom>
-          Hang on while we fetch some yummy photos!
+          cooking up a storm, be with you in a jiffy!
         </Typography>
       </Container>
     );
   }
-
+  console.log("postdata", postData)
   return (
     <>
       <Container className={classes.container}>
