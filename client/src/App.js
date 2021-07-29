@@ -69,7 +69,7 @@ function App() {
                   setAccessToken={setAccessToken}
                 />
               </Route>
-              <Route path="/users/:id">
+              <Route path="/profile/:id">
                 <UserProfile />
               </Route>
 

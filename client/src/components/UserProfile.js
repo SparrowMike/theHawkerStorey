@@ -42,11 +42,10 @@ const UserProfile = () => {
   const classes = useStyles();
 
   const { id } = useParams();
-  const { data, isLoading, error } = useQuery(["user", id], () =>
-    axios(`/v1/users/${id}`)
+  const { data: userProfile, isLoading, error } = useQuery(["user", id], () =>
+    axios(`/v1/users/${id}`) //searching for all information from that user
   );
-
-  const user = data?.data;
+  const user = userProfile?.data;
   console.log("user information: ", user);
 
   if (error) {
@@ -61,6 +60,7 @@ const UserProfile = () => {
     console.log("loading...");
     return <Container className={classes.div}>Loading</Container>;
   }
+
 
   return (
     <>
