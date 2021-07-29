@@ -42,7 +42,7 @@ const AutocompleteDishes = ({ hawkerCentre, hawkerStall, setDishName }) => {
       onChange={(event, newValue) => {
         setDishName(newValue);
       }}
-      style={{ width: "100vw" }}
+      style={{ width: "100%" }}
       renderInput={(params) => (
         <TextField {...params} label="Dish Name" variant="outlined" />
       )}

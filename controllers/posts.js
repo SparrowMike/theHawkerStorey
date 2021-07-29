@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 const Posts = require("../models/posts");
+const Users = require("../models/users");
+const mongoose = require("mongoose");
 
 const { StatusCodes } = require("http-status-codes");
 const session = require("express-session");
@@ -52,6 +54,8 @@ router.get("/:id", (req, res) => {
   });
 });
 
+
+
 //*=================UPLOAD A SINGLE IMAGE========================
 router.post("/upload", async (req, res) => {
   try {
@@ -72,8 +76,13 @@ router.post("/upload", async (req, res) => {
       rating: req.body.rating,
       dishes_name: req.body.dishes_name,
     });
+    // this pushes the new post in the user's post history
     await post.save();
-    res.json(post);
+    console.log("postid", post._id)
+    Users.findByIdAndUpdate (req.body.user_id, { $push: {posts_history: post._id }}, {new:true},
+    (err, foundUser) => 
+    res.json(post))
+    ;
   } catch (error) {
     console.log(error);
     res.status(500).json({ err: "Uh oh. Something went wrong" });
@@ -109,9 +118,9 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     }
     const data = {
       image_url: result?.secure_url || post.secure_url,
+      cloudinary_id: result?.public_id || post.cloudinary_id,
       review: req.body.review || post.review,
       rating: req.body.rating || post.rating,
-      cloudinary_id: result?.public_id || post.cloudinary_id,
       dishes_name: req.body.dishes_name || post.dishes_name,
     };
 

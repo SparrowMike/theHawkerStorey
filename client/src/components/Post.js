@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../App";
+import React, { useState } from "react";
 import AutocompleteHC from "./Post/AutocompleteHC";
 import AutocompleteHS from "./Post/AutocompleteHS";
 import AutocompleteDishes from "./Post/AutocompleteDishes";
@@ -41,11 +40,13 @@ export default function Post({ userState, handleClosePost }) {
   const [image, setImage] = useState("");
   const [dishName, setDishName] = useState("");
   const [review, setReview] = useState("");
+
   const [rating, setRating] = useState("3");
 
   const handleRating = (event, newRating) => {
-    setRating(newRating);
-    console.log(rating);
+    if (newRating !== null) {
+      setRating(newRating);
+    }
   };
 
   const handleSubmit = (e) => {
