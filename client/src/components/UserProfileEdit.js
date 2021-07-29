@@ -70,46 +70,30 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //* code for image upload
-    // const reader = new FileReader();
-
-    // reader.readAsDataURL(image);
-    // reader.onloadend = () => {
-    //   editPost(reader.result);
-    // };
-    // reader.onerror = () => {
-    //   console.error("Something went wrong");
-    // };
     editPost();
-
     handleEditClose();
-    // handleClosePost();
   };
 
-  //* convert image binary into string (base64EndcodedImage) and calls fetch route
-  const editPost = async () => {
-    try {
-      await fetch(`/v1/posts/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-          // data: base64EncodedImage,
-          // hawkerCentre: hawkerCentre,
-          // hawkerStall: hawkerStall,
-          review: review,
-          rating: rating,
-          // dishes_name: dishName,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        console.log("Post submitted", res.data);
-        // setImage("");
+  const editPost = () => {
+    fetch(`/v1/posts/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        review: review,
+        rating: rating,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Error in network");
+      })
+      .then((resJson) => {
+        //* resJson is actually a updated Holiday
       });
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   return (
