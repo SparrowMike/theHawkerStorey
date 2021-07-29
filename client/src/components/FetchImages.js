@@ -84,6 +84,8 @@ const FetchImages = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  console.log("modal from fetch", modalData);
+
 
   //* pull posts from mongoose to display images by cloudinary ids
   const { isLoading, data } = useQuery(["get-posts"], () => axios("v1/posts"));
@@ -99,6 +101,8 @@ const FetchImages = () => {
       </Container>
     );
   }
+
+  console.log("postdata", postData);
 
   return (
     <>
@@ -139,6 +143,7 @@ const FetchImages = () => {
               />
               <div className={styles.post}>
                 <Typography className={classes.wrapAvatar}>
+
                   <Avatar style={{ marginRight: "10px" }}></Avatar>
                   {modalData.username}
                 </Typography>
@@ -151,8 +156,7 @@ const FetchImages = () => {
                 </Typography>
                 <Divider style={{ margin: "10px 0" }} />
                 <Typography gutterBottom variant="body1">
-                  <strong>{modalData.dishes_name}</strong> from{" "}
-                  {modalData.hawkerStall}
+                  <strong>{modalData.dishes_name}</strong> from {modalData.hawkerStall}
                 </Typography>
                 <Typography gutterBottom variant="body1">
                   Hawker Centre: {modalData.hawkerCentre}
