@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useQuery, useQueryClient, useMutation } from "react-query";
+import React from "react";
+import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import axios from "axios";
 // import Post from './Post'
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const UserProfile = ({ loaded }) => {
   const classes = useStyles();
   const { id } = useParams();
-  const { data, isLoading, error, refetch, isSuccess } = useQuery(
+  const { data, isLoading, error } = useQuery(
     ["user", id, loaded],
     () => axios(`/v1/users/${id}`) //searching for all information from that user
   );
@@ -40,7 +40,6 @@ const UserProfile = ({ loaded }) => {
   // const postHistory = user?.posts_history
   // console.log("posthistory",postHistory)
   // queryClient.invalidateQueries("user")
-
   // queryClient.setQueryData("user")
   // console.log("user information: ", user);
 
