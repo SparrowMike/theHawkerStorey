@@ -16,7 +16,6 @@ import { ThemeProvider } from "@material-ui/styles";
 
 export const AuthContext = React.createContext();
 
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -39,11 +38,8 @@ const theme = createMuiTheme({
 
 function App() {
   const queryClient = new QueryClient();
-
-  const [loaded, setLoaded] = useState(false)
-
+  const [loaded, setLoaded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-
   const [userState, setUserState] = useState({
     accessToken: "",
     user_id: "",
@@ -62,16 +58,14 @@ function App() {
         <ThemeProvider theme={theme}>
           <AuthContext.Provider userState={userState}>
             <ReactQueryDevtools initialIsOpen={false} />
-
-            <Navbar userState={userState} setUserState={setUserState} loaded={loaded} setLoaded={setLoaded}/>
-
             <Navbar
               userState={userState}
               setUserState={setUserState}
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
+              loaded={loaded}
+              setLoaded={setLoaded}
             />
-
             <Switch>
               <Route path="/" exact>
                 <Main />
@@ -85,8 +79,7 @@ function App() {
               </Route>
 
               <Route path="/users/:id">
-                <UserProfile userState={userState} loaded={loaded}/>
-
+                <UserProfile userState={userState} loaded={loaded} />
               </Route>
 
               <Route path="/:centreName/:stall">

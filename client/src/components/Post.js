@@ -29,10 +29,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Post({ userState, handleClosePost, setLoaded, loaded }) {
+export default function Post({
+  userState,
+  handleClosePost,
+  setLoaded,
+  loaded,
+}) {
   const classes = useStyles();
 
-  
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
   const [image, setImage] = useState("");
@@ -84,11 +88,9 @@ export default function Post({ userState, handleClosePost, setLoaded, loaded }) 
           // Authorization: `Bearer ${userState.accessToken}`,
         },
       }).then((res) => {
-
-        console.log("Post submitted", res.data);
-        setImage("")
+        setImage("");
         setLoaded(!loaded);
-
+        console.log("Post submitted", res.data);
       });
     } catch (err) {
       console.error(err);
