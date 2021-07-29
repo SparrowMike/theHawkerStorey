@@ -21,11 +21,9 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(8),
-    // width: "300px",
   },
   cardMedia: {
     postition: "fixed",
-    padding: "10px",
     width: "100%",
     heigth: "100%",
     transform: "500ms ease-in-out 25ms",
@@ -86,7 +84,6 @@ const FetchImages = () => {
   };
   console.log("modal from fetch", modalData);
 
-
   //* pull posts from mongoose to display images by cloudinary ids
   const { isLoading, data } = useQuery(["get-posts"], () => axios("v1/posts"));
   // const postData = data?.data.reverse();
@@ -111,6 +108,8 @@ const FetchImages = () => {
           columnWidth={300}
           className={classes.stackGrid}
           duration={1000}
+          gutterHeight={10}
+          gutterWidth={10}
           monitorImagesLoaded={true}
         >
           {postData.map((data, index) => (
@@ -143,7 +142,6 @@ const FetchImages = () => {
               />
               <div className={styles.post}>
                 <Typography className={classes.wrapAvatar}>
-
                   <Avatar style={{ marginRight: "10px" }}></Avatar>
                   {modalData.username}
                 </Typography>
@@ -156,7 +154,8 @@ const FetchImages = () => {
                 </Typography>
                 <Divider style={{ margin: "10px 0" }} />
                 <Typography gutterBottom variant="body1">
-                  <strong>{modalData.dishes_name}</strong> from {modalData.hawkerStall}
+                  <strong>{modalData.dishes_name}</strong> from{" "}
+                  {modalData.hawkerStall}
                 </Typography>
                 <Typography gutterBottom variant="body1">
                   Hawker Centre: {modalData.hawkerCentre}

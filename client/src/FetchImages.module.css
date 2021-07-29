@@ -1,14 +1,18 @@
-.modalImages{
+.modalImages {
   width: 100%;
   max-height: 500px;
 }
 
-.div{
+.div {
   background-color: rgb(245, 237, 222);
-  background-image: linear-gradient(180deg, rgb(245, 219, 219), rgb(214, 214, 184))
+  background-image: linear-gradient(
+    180deg,
+    rgb(245, 219, 219),
+    rgb(214, 214, 184)
+  );
 }
 
-.post{
+.post {
   padding: 10px;
   height: 300px;
 }
