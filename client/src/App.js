@@ -54,7 +54,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <AuthContext.Provider userState={userState}>
             <ReactQueryDevtools initialIsOpen={false} />
-            <Navbar userState={userState} />
+            <Navbar userState={userState} setUserState={setUserState} />
             <Switch>
               <Route path="/" exact>
                 <Main />
