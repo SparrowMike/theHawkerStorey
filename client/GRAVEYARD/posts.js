@@ -63,8 +63,6 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     if (req.file) {
       result = await cloudinary.uploader.upload(req.file.path);
     }
-
-    //! UNSURE ABOUT LINES BELOW
     const data = {
       image_url: result?.secure_url || post.secure_url,
       review: req.body.review || post.review,

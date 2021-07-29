@@ -141,7 +141,7 @@ router.post("/new", (req, res) => {
   });
 });
 
-// delete a post
+//*=====================DELETE BY ID======================
 router.delete("/:id", (req, res) => {
   Posts.findByIdAndRemove(req.params.id, (err, deletedPost) => {
     if (err) {
@@ -152,18 +152,45 @@ router.delete("/:id", (req, res) => {
 });
 
 // update a post
-router.put("/:id", (req, res) => {
-  Posts.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true },
-    (err, updatedPost) => {
-      if (err) {
-        res.status(400).json({ error: err.message });
-      }
-      res.status(200).json(updatedPost);
+// router.put("/:id", (req, res) => {
+//   Posts.findByIdAndUpdate(
+//     req.params.id,
+//     req.body,
+//     { new: true },
+//     (err, updatedPost) => {
+//       if (err) {
+//         res.status(400).json({ error: err.message });
+//       }
+//       res.status(200).json(updatedPost);
+//     }
+//   );
+// });
+
+//*=====================UPDATE THE POST=========================
+router.put("/:id", upload.single("image"), async (req, res) => {
+  try {
+    let post = await Posts.findById(req.params.id);
+    // Delete image from cloudinary
+    await cloudinary.uploader.destroy(post.cloudinary_id);
+    // Upload image to cloudinary
+    let result;
+    if (req.file) {
+      result = await cloudinary.uploader.upload(req.file.path);
     }
-  );
+    const data = {
+      image_url: result?.secure_url || post.secure_url,
+      review: req.body.review || post.review,
+      rating: req.body.rating || post.rating,
+      cloudinary_id: result?.public_id || post.cloudinary_id,
+      dishes_name: req.body.dishes_name || post.dishes_name,
+    };
+
+    post = await Posts.findByIdAndUpdate(req.params.id, data, { new: true });
+    res.json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ err: "Uh oh. Something went wrong" });
+  }
 });
 
 module.exports = router;
