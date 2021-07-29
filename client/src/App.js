@@ -46,8 +46,6 @@ function App() {
     posts_history: [],
   });
 
-  console.log(userState);
-
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
