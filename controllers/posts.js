@@ -63,7 +63,11 @@ router.post("/upload", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "hawkerstorey-preset",
     });
-    // console.log("WE SENT IT TO THE CLOUD!!", uploadedResponse);
+    console.log(
+      "WE SENT IT TO THE CLOUD!!",
+      uploadedResponse,
+      req.body.user_id
+    );
     //* Create new post
     let post = new Posts({
       image_url: uploadedResponse.secure_url,

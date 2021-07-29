@@ -103,7 +103,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({ userState, setUserState }) {
+export default function Navbar({
+  userState,
+  setUserState,
+  loggedIn,
+  setLoggedIn,
+}) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -124,7 +129,9 @@ export default function Navbar({ userState, setUserState }) {
 
   const handleLogout = () => {
     handleDrawerClose();
-    setUserState("");
+    document.cookie = "cookiename= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+    setUserState({});
+    setLoggedIn(false);
   };
 
   //*=================DEALS WITH POST MODAL==================
@@ -149,7 +156,7 @@ export default function Navbar({ userState, setUserState }) {
             <MenuItem component={RouterLink} to="/">
               <Typography variant="h6">Home</Typography>
             </MenuItem>
-            {userState.accessToken ? (
+            {loggedIn ? (
               <>
                 <MenuItem onClick={handleOpenPost}>
                   <Typography variant="h6">Create Post</Typography>
@@ -224,7 +231,7 @@ export default function Navbar({ userState, setUserState }) {
         </div>
         <Divider />
 
-        {userState.accessToken ? (
+        {loggedIn ? (
           <List>
             <ListItem button component={RouterLink} to="/">
               <ListItemText primary="Home" />
