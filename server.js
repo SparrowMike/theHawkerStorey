@@ -83,9 +83,9 @@ app.use("/v1/users", usersController);
 const sessionController = require("./controllers/sessions");
 app.use("/v1/sessions", sessionController);
 
-//!  ===============GRAVEYARD=======================
-app.use("/upload", require("./routes/posts.js"));
-//! ================================================
+// //!  ===============GRAVEYARD=======================
+// app.use("/upload", require("./routes/posts.js"));
+// //! ================================================
 
 //* =======================================
 //*              LISTENER
