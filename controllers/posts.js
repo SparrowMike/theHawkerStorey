@@ -53,7 +53,7 @@ router.get("/:id", (req, res) => {
 });
 
 //*=================UPLOAD A SINGLE IMAGE========================
-router.post("/upload", authenticateToken, async (req, res) => {
+router.post("/upload", async (req, res) => {
   try {
     const fileStr = req.body.data;
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
@@ -64,13 +64,13 @@ router.post("/upload", authenticateToken, async (req, res) => {
     let post = new Posts({
       image_url: uploadedResponse.secure_url,
       cloudinary_id: uploadedResponse.public_id,
+      posted_by: req.body.user_id,
+      username: req.body.username,
       hawkerCentre: req.body.hawkerCentre,
       hawkerStall: req.body.hawkerStall,
       review: req.body.review,
       rating: req.body.rating,
-      dishes_id: req.body.dishes_id,
-      user_id: req.body.user_id,
-      username: req.body.username,
+      dishes_name: req.body.dishes_name,
     });
     await post.save();
     res.json(post);
