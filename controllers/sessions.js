@@ -4,6 +4,7 @@ const router = express.Router();
 const Users = require("../models/users");
 const jwt = require("jsonwebtoken");
 
+require("dotenv").config();
 //localhost:4000/v1/sessions
 router.get("/", (req, res) => {
   res.send("sessions");
@@ -41,9 +42,11 @@ router.post("/", (req, res) => {
           req.session.currentUser = foundUser;
           const accessToken = jwt.sign(user, process.env.JWT_SECRET_KEY);
           console.log("created ", accessToken);
-          res
-            .status(200)
-            .json({ accessToken: accessToken, user: foundUser._id });
+          res.status(200).json({
+            accessToken: accessToken,
+            user_id: foundUser._id,
+            user_name: foundUser.name,
+          });
         } else {
           // passwords do not match
           res.send("password does not match");
