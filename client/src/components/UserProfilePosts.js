@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import {
   makeStyles,
@@ -8,14 +8,13 @@ import {
   CardContent,
   CardActions,
   Button,
-  Container,
   Modal,
   Backdrop,
   Fade,
   Avatar,
-  Divider
+  Divider,
 } from "@material-ui/core";
-import styles from "../../src/FetchImages.module.css"
+import styles from "../../src/FetchImages.module.css";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -29,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     display: "flex",
     flexDirection: "column",
+    "&:hover": {
+      transform: "translateY(-3px)",
+      cursor: "pointer",
+      boxShadow: "rgba(0, 0, 0, 0.56) 0px 12px 12px 4px",
+    },
   },
   cardMedia: {
     // paddingTop: "56.25%", // 16:9
@@ -44,17 +48,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  modalPost:{
-    fontSize: "16px",
-  },
-  modalHeader:{
-    fontSize: "16px",
-  },
-  wrapAvatar:{
-    verticalAlign: 'middle',
-    display: 'inline-flex',
-    alignItems: 'center',
-    marginBottom: '10px',
+  wrapAvatar: {
+    verticalAlign: "middle",
+    display: "inline-flex",
+    alignItems: "center",
+    marginBottom: "10px",
   },
   paper: {
     maxHeight: "800px",
@@ -63,11 +61,6 @@ const useStyles = makeStyles((theme) => ({
     // border: "2px solid #000",
     // boxShadow: theme.shadows[5],
     padding: theme.spacing(0, 0, 3),
-  },
-  media: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
   },
 }));
 
@@ -100,42 +93,53 @@ const UserProfilePosts = ({ post }) => {
         </Card>
       </Grid>
       <Modal
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={open}>
-              <div className={classes.paper}>
-              <img className={styles.modalImages} src={modalData.image_url} alt={modalData.dishes_id}/>
-              <div className={styles.post}>
-              <Typography className={classes.wrapAvatar}><Avatar style={{marginRight: "10px"}}></Avatar>Username</Typography>
-              <Divider style={{margin: "5px 0"}}/>
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <img
+              className={styles.modalImages}
+              src={modalData.image_url}
+              alt={modalData.dishes_id}
+            />
+            <div className={styles.post}>
+              <Typography className={classes.wrapAvatar}>
+                <Avatar style={{ marginRight: "10px" }}></Avatar>Username
+              </Typography>
+              <Divider style={{ margin: "5px 0" }} />
               <Typography gutterBottom variant="body1" component="h2">
-              {modalData.review}
+                {modalData.review}
               </Typography>
               <Typography gutterBottom variant="body1">
                 🔥Shiokmeter: {modalData.rating}
               </Typography>
-              <Divider style={{margin: "10px 0"}}/>
+              <Divider style={{ margin: "10px 0" }} />
               <Typography gutterBottom variant="body1">
-              <strong>{modalData.dishes_id}</strong> from {modalData.hawkerStall}
+                <strong>{modalData.dishes_id}</strong> from{" "}
+                {modalData.hawkerStall}
               </Typography>
               <Typography gutterBottom variant="body1">
                 Hawker Centre: {modalData.hawkerCentre}
               </Typography>
               <CardActions gutterBottom>
-                <Button size="small" variant="contained" color="primary">Edit</Button>
-                <Button size="small" variant="contained">Delete</Button>
+                <Button size="small" variant="contained" color="primary">
+                  Edit
+                </Button>
+                <Button size="small" variant="contained">
+                  Delete
+                </Button>
               </CardActions>
-              </div>
-              </div>
-            </Fade>
-          </Modal>
+            </div>
+          </div>
+        </Fade>
+      </Modal>
     </>
   );
 };
