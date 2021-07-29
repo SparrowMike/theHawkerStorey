@@ -41,7 +41,7 @@ export default function Post({ userState, handleClosePost }) {
   const [dishName, setDishName] = useState("");
   const [review, setReview] = useState("");
 
-  const [rating, setRating] = useState("must go");
+  const [rating, setRating] = useState("3");
 
   const handleRating = (event, newRating) => {
     if (newRating !== null) {

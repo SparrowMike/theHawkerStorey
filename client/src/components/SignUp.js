@@ -9,8 +9,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import axios from "axios";
 
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function SignUp({ setUserState }) {
   const classes = useStyles();
 
   const [userName, setUserName] = useState("");
@@ -40,9 +41,10 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [postalCode, setPostalCode] = useState("");
 
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     createUser();
   };
 
@@ -64,7 +66,17 @@ export default function SignUp() {
         throw new Error("Error in network");
       })
       .then((resJson) => {
-        console.log("resJson: ", resJson);
+        axios
+          .post("/v1/sessions", {
+            username: userName,
+            password: password,
+          })
+          .then((res) => {
+            console.log(res);
+            setUserState(res.data);
+            history.push(`/users/${res.data.user_id}`);
+          })
+          .catch((err) => console.log("error", err));
       });
   };
 
@@ -135,6 +147,7 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
+
           <Button
             component={RouterLink}
             to="/"
@@ -148,10 +161,6 @@ export default function SignUp() {
             Sign Up
           </Button>
           {/* ======================Lets work on this when no errors on submit==============================*/}
-          <Link component={RouterLink} to="/" variant="body2">
-            Rerouting example here
-          </Link>
-
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component={RouterLink} to="/login" variant="body2">
