@@ -15,6 +15,7 @@ import {
   Modal,
   Backdrop,
   Fade,
+  TableContainer,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PostArray = () => {
+const PostArray = ({setRating}) => {
   const classes = useStyles();
   const { stall } = useParams();
   const [open, setOpen] = useState(false);
@@ -72,6 +73,7 @@ const PostArray = () => {
   );
   console.log("this is selectedstallpost", selectedStallPosts);
 
+  
   if (error) {
     console.log("error: ", error.message);
     return (
@@ -84,7 +86,7 @@ const PostArray = () => {
     console.log("postarray loading...");
     return <Container className={classes.div}>Loading</Container>;
   }
-
+  
   //*===============OPEN MODAL==============
   const handleOpen = (e) => {
     setOpen(true);
@@ -93,8 +95,18 @@ const PostArray = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  
   console.log("modalData", modalData);
+  
+  let total = 0
+  for (const each of selectedStallPosts){
+    console.log("score to number: ", parseInt(each.rating))
+    let ratingNum = parseInt(each.rating);
+    console.log("ratingNum: ", ratingNum); 
+    total += ratingNum;
+  }
+  const rating = total / [selectedStallPosts.length]
+  setRating(rating)
 
   return (
     <>
