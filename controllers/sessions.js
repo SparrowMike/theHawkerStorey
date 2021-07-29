@@ -38,14 +38,16 @@ router.post("/", (req, res) => {
         // now let's check if passwords match
         if (bcrypt.compareSync(req.body.password, foundUser.password)) {
           // add the user to our session
-          console.log("password match");
+          console.log("password match. user is ", foundUser);
           req.session.currentUser = foundUser;
           const accessToken = jwt.sign(user, process.env.JWT_SECRET_KEY);
           console.log("created ", accessToken);
           res.status(200).json({
             accessToken: accessToken,
             user_id: foundUser._id,
-            user_name: foundUser.name,
+            username: foundUser.username,
+            email: foundUser.email,
+            posts_history: foundUser.posts_history,
           });
         } else {
           // passwords do not match
