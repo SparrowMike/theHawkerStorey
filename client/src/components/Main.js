@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(18, 0, 16),
     backgroundImage:
       " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://www.visitsingapore.com/editorials/did-you-know-foodies/_jcr_content.renderimage.carousel.rect.835.470.jpg)",
     // " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80)",
