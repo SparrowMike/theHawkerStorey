@@ -42,7 +42,6 @@ const UserProfile = ({ loaded }) => {
   // const postHistory = user?.posts_history
   // console.log("posthistory",postHistory)
   // queryClient.invalidateQueries("user")
-
   // queryClient.setQueryData("user")
   // console.log("user information: ", user);
 

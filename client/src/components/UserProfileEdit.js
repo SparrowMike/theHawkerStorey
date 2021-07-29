@@ -149,13 +149,13 @@ const UserProfileEdit = ({
               onChange={handleRating}
               aria-label="text alignment"
             >
-              <ToggleButton value="3">
+              <ToggleButton value="10">
                 <Typography>MUST GO!</Typography>
               </ToggleButton>
-              <ToggleButton value="2">
+              <ToggleButton value="7">
                 <Typography>CAN GO!</Typography>
               </ToggleButton>
-              <ToggleButton value="1">
+              <ToggleButton value="3">
                 <Typography>NO GO!</Typography>
               </ToggleButton>
             </ToggleButtonGroup>
