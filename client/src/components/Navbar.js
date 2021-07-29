@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({ userState }) {
+export default function Navbar({ userState, setUserState }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -112,6 +112,11 @@ export default function Navbar({ userState }) {
   };
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleLogout = () => {
+    handleDrawerClose();
+    setUserState("");
   };
 
   //*=================DEALS WITH POST MODAL==================
@@ -136,20 +141,20 @@ export default function Navbar({ userState }) {
             <MenuItem component={RouterLink} to="/">
               <Typography variant="h6">Home</Typography>
             </MenuItem>
-            {/* <MenuItem component={RouterLink} to="/">
-              <Typography variant="h6">Hawker</Typography>
-            </MenuItem>
-            <MenuItem component={RouterLink} to="/">
-              <Typography variant="h6">Cuisine</Typography>
-            </MenuItem> */}
-            {userState.accessToken && (
-              <MenuItem onClick={handleOpenPost}>
-                <Typography variant="h6">Create Post</Typography>
+            {userState.accessToken ? (
+              <>
+                <MenuItem onClick={handleOpenPost}>
+                  <Typography variant="h6">Create Post</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>
+                  <Typography variant="h6">Logout</Typography>
+                </MenuItem>
+              </>
+            ) : (
+              <MenuItem component={RouterLink} to="/login">
+                <Typography variant="h6">Login</Typography>
               </MenuItem>
             )}
-            <MenuItem component={RouterLink} to="/login">
-              <Typography variant="h6">Login</Typography>
-            </MenuItem>
             <MenuItem component={RouterLink} to="/signup">
               <Typography variant="h6">Sign Up</Typography>
             </MenuItem>
@@ -200,17 +205,6 @@ export default function Navbar({ userState }) {
         </div>
         <Divider />
 
-        <List>
-          <ListItem
-            button
-            component={RouterLink}
-            onClick={handleDrawerClose}
-            to="/"
-          >
-            <ListItemText primary="Home" />
-          </ListItem>
-        </List>
-
         {userState.accessToken ? (
           <List>
             <ListItem button onClick={handleOpenPost}>
@@ -219,12 +213,20 @@ export default function Navbar({ userState }) {
             <ListItem button onClick={handleOpenPost}>
               <ListItemText primary="Profile" />
             </ListItem>
-            <ListItem button onClick={handleOpenPost}>
+            <ListItem button onClick={handleLogout}>
               <ListItemText primary="Logout" />
             </ListItem>
           </List>
         ) : (
           <List>
+            <ListItem
+              button
+              component={RouterLink}
+              onClick={handleDrawerClose}
+              to="/"
+            >
+              <ListItemText primary="Home" />
+            </ListItem>
             <ListItem
               button
               component={RouterLink}
