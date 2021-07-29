@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Post({ handleClosePost }) {
+export default function Post({ userState, handleClosePost }) {
   const classes = useStyles();
-  //!unpack token
-  const userState = useContext(AuthContext);
+  //! userState not passed by context somehow
+  // const userState = useContext(AuthContext);
   // console.log(userState.username);
 
   const [hawkerCentre, setHawkerCentre] = useState("");
@@ -84,8 +84,10 @@ export default function Post({ handleClosePost }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userState.accessToken}`,
         },
+      }).then((res) => {
+        console.log(res.json());
+        setImage("");
       });
-      setImage("");
     } catch (err) {
       console.error(err);
     }
