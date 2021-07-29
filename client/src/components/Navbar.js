@@ -143,7 +143,7 @@ export default function Navbar() {
               <Typography variant="h6">Cuisine</Typography>
             </MenuItem> */}
             <MenuItem onClick={handleOpenPost}>
-              <Typography variant="h6">Post</Typography>
+              <Typography variant="h6">Create Post</Typography>
             </MenuItem>
             <MenuItem component={RouterLink} to="/login">
               <Typography variant="h6">Login</Typography>

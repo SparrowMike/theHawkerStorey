@@ -9,7 +9,10 @@ import {
   Backdrop,
   Fade,
   Typography,
+  Avatar,
+  Divider
 } from "@material-ui/core";
+import styles from "../../src/FetchImages.module.css"
 
 import StackGrid from "react-stack-grid";
 // import StackGrid, { transitions } from "react-stack-grid";
@@ -36,16 +39,30 @@ const useStyles = makeStyles((theme) => ({
     padding: "40px",
   },
   modal: {
-    // overflow: "scroll",
+    overflow: "scroll",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
+  modalPost:{
+    fontSize: "16px",
+  },
+  modalHeader:{
+    fontSize: "16px",
+  },
+  wrapAvatar:{
+    verticalAlign: 'middle',
+    display: 'inline-flex',
+    alignItems: 'center',
+    marginBottom: '10px',
+  },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    maxHeight: "800px",
+    width: "500px",
+    backgroundColor: "#f5f3f0",
+    // border: "2px solid #000",
+    // boxShadow: theme.shadows[5],
+    padding: theme.spacing(0, 0, 3),
   },
   media: {
     height: "100%",
@@ -68,6 +85,7 @@ const FetchImages = () => {
     setOpen(false);
   };
 console.log("modal from fetch", modalData);
+
   //* pull posts from mongoose to display images by cloudinary ids
   const { isLoading, data } = useQuery(["get-posts"], () => axios("v1/posts"));
   // const postData = data?.data.reverse();
@@ -77,12 +95,12 @@ console.log("modal from fetch", modalData);
     return (
       <Container className={classes.container}>
         <Typography component="h1" variant="h2" align="center" gutterBottom>
-          Hang on while we fetch some yummy photos!
+          cooking up a storm, be with you in a jiffy!
         </Typography>
       </Container>
     );
   }
-
+  console.log("postdata", postData)
   return (
     <>
       <Container className={classes.container}>
@@ -115,33 +133,33 @@ console.log("modal from fetch", modalData);
         >
           <Fade in={open}>
             <div className={classes.paper}>
-              <Image
+              {/* Modal image */}
+              {/* <Image
                 cloudName={"hawkerstorey"}
                 publicId={modalData.image_url}
                 crop="scale"
                 width={320}
-              />
-              <Typography gutterBottom variant="h6" component="h2">
-                Dish Name:
+              /> */}
+              <img className={styles.modalImages} src={modalData.image_url} alt={modalData.dishes_id}/>
+              <div className={styles.post}>
+                
+              <Typography className={classes.wrapAvatar}><Avatar style={{marginRight: "10px"}}></Avatar>Username</Typography>
+              <Divider style={{margin: "5px 0"}}/>
+              <Typography gutterBottom variant="body1" component="h2">
+              {modalData.review}
               </Typography>
-              <Typography>{modalData.dishes_id}</Typography>
-              <Typography gutterBottom variant="h6" component="h2">
-                Hawker Centre:
+              <Typography gutterBottom variant="body1">
+                🔥Shiokmeter: {modalData.rating}
               </Typography>
-              <Typography> {modalData.hawkerCentre}</Typography>
-              <Typography gutterBottom variant="h6" component="h2">
-                Hawker Stall:
+              <Divider style={{margin: "10px 0"}}/>
+              <Typography gutterBottom variant="body1">
+              <strong>{modalData.dishes_id}</strong> from {modalData.hawkerStall}
               </Typography>
-              <Typography>{modalData.hawkerStall}</Typography>
-              <Typography gutterBottom variant="h6" component="h2">
-                Review:
+              <Typography gutterBottom variant="body1">
+                Hawker Centre: {modalData.hawkerCentre}
               </Typography>
-              <Typography>{modalData.review}</Typography>
-              <Typography gutterBottom variant="h6" component="h2">
-                Rating:
-              </Typography>
-              <Typography>{modalData.rating}</Typography>
-            </div>
+              </div>
+              </div>
           </Fade>
         </Modal>
       </Container>
