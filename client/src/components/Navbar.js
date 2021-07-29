@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({ userState }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -142,9 +142,11 @@ export default function Navbar() {
             <MenuItem component={RouterLink} to="/">
               <Typography variant="h6">Cuisine</Typography>
             </MenuItem> */}
-            <MenuItem onClick={handleOpenPost}>
-              <Typography variant="h6">Create Post</Typography>
-            </MenuItem>
+            {userState.accessToken && (
+              <MenuItem onClick={handleOpenPost}>
+                <Typography variant="h6">Create Post</Typography>
+              </MenuItem>
+            )}
             <MenuItem component={RouterLink} to="/login">
               <Typography variant="h6">Login</Typography>
             </MenuItem>
@@ -207,45 +209,40 @@ export default function Navbar() {
           >
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem
-            button
-            component={RouterLink}
-            onClick={handleDrawerClose}
-            to="/"
-          >
-            <ListItemText primary="Hawker" />
-          </ListItem>
-          <ListItem
-            button
-            component={RouterLink}
-            onClick={handleDrawerClose}
-            to="/"
-          >
-            <ListItemText primary="Cuisine" />
-          </ListItem>
-          <ListItem
-            button
-            component={RouterLink}
-            onClick={handleDrawerClose}
-            to="/login"
-          >
-            <ListItemText primary="Login" />
-          </ListItem>
-          <ListItem
-            button
-            component={RouterLink}
-            onClick={handleDrawerClose}
-            to="/signup"
-          >
-            <ListItemText primary="Sign Up" />
-          </ListItem>
         </List>
-        <Divider />
-        <List>
-          <ListItem button onClick={handleOpenPost}>
-            <ListItemText primary="Post" />
-          </ListItem>
-        </List>
+
+        {userState.accessToken ? (
+          <List>
+            <ListItem button onClick={handleOpenPost}>
+              <ListItemText primary="Create Post" />
+            </ListItem>
+            <ListItem button onClick={handleOpenPost}>
+              <ListItemText primary="Profile" />
+            </ListItem>
+            <ListItem button onClick={handleOpenPost}>
+              <ListItemText primary="Logout" />
+            </ListItem>
+          </List>
+        ) : (
+          <List>
+            <ListItem
+              button
+              component={RouterLink}
+              onClick={handleDrawerClose}
+              to="/login"
+            >
+              <ListItemText primary="Login" />
+            </ListItem>
+            <ListItem
+              button
+              component={RouterLink}
+              onClick={handleDrawerClose}
+              to="/signup"
+            >
+              <ListItemText primary="Sign Up" />
+            </ListItem>
+          </List>
+        )}
       </Drawer>
       {/* ====================MODAL FOR POST==================== */}
       <Modal
