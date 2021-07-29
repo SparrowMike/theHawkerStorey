@@ -10,23 +10,9 @@ import Container from "@material-ui/core/Container";
 import { Typography, Avatar, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
   div: {
     marginTop: "60px",
     marginBottom: "40px",
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
   },
   wrapAvatar: {
     verticalAlign: "middle",
@@ -35,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: "10px",
+  },
+  post: {
+    color: "red",
   },
 }));
 
@@ -47,7 +36,7 @@ const UserProfile = () => {
   );
 
   const user = data?.data;
-  console.log("user information: ", user);
+  // console.log("user information: ", user);
 
   if (error) {
     console.log("error: ", error.message);
@@ -68,7 +57,7 @@ const UserProfile = () => {
         <Typography variant="h5" className={classes.wrapAvatar}>
           <Avatar className={classes.avatar}>
             {user.username[0].toUpperCase()}
-          </Avatar>{" "}
+          </Avatar>
           {user.username}
         </Typography>
         <Typography variant="h4" className={classes.div}>
@@ -78,7 +67,12 @@ const UserProfile = () => {
       <Container>
         <Grid container spacing={4}>
           {user.posts_history.map((post, index) => (
-            <UserProfilePosts post={post} key={index} color="primary" />
+            <UserProfilePosts
+              post={post}
+              key={index}
+              color="primary"
+              className={classes.post}
+            />
           ))}
         </Grid>
       </Container>

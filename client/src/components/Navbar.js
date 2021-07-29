@@ -110,6 +110,8 @@ export default function Navbar({ userState, setUserState }) {
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  console.log(userState);
+
   //*=================DEALS WITH MOBILE VIEW DRAWER==================
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -117,6 +119,8 @@ export default function Navbar({ userState, setUserState }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  //*=================DEALS WITH WITH LOGOUT==================
 
   const handleLogout = () => {
     handleDrawerClose();
@@ -150,14 +154,16 @@ export default function Navbar({ userState, setUserState }) {
                 <MenuItem onClick={handleOpenPost}>
                   <Typography variant="h6">Create Post</Typography>
                 </MenuItem>
+
+                {/* <MenuItem onClick={handleUserProfile}> */}
                 <MenuItem
-                  onClick={handleOpenPost}
                   component={RouterLink}
-                  to="/"
+                  to={`/users/${userState.user_id}`}
                 >
                   <Typography variant="h6">My Profile</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleLogout}>
+
+                <MenuItem component={RouterLink} to="/" onClick={handleLogout}>
                   <Typography variant="h6">Logout</Typography>
                 </MenuItem>
               </>
@@ -220,23 +226,13 @@ export default function Navbar({ userState, setUserState }) {
 
         {userState.accessToken ? (
           <List>
-            <ListItem
-              button
-              onClick={handleOpenPost}
-              component={RouterLink}
-              to="/"
-            >
+            <ListItem button component={RouterLink} to="/">
               <ListItemText primary="Home" />
             </ListItem>
             <ListItem button onClick={handleOpenPost}>
               <ListItemText primary="Create Post" />
             </ListItem>
-            <ListItem
-              button
-              component={RouterLink}
-              onClick={handleDrawerClose}
-              to="/"
-            >
+            <ListItem component={RouterLink} to={`/users/${userState.user_id}`}>
               <ListItemText primary="My Profile" />
             </ListItem>
             <ListItem button onClick={handleLogout}>

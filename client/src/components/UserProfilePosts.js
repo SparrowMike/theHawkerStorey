@@ -7,16 +7,52 @@ import {
   Card,
   Typography,
   CardContent,
+
 } from "@material-ui/core";
 
+  CardActions,
+  Button,
+  Modal,
+  Backdrop,
+  Fade,
+  Avatar,
+  Divider,
+} from "@material-ui/core";
+import styles from "../../src/FetchImages.module.css";
 const useStyles = makeStyles((theme) => ({
   card: {
     height: "auto",
     display: "flex",
     flexDirection: "column",
+    "&:hover": {
+      transform: "translateY(-3px)",
+      cursor: "pointer",
+      boxShadow: "rgba(0, 0, 0, 0.56) 0px 12px 12px 4px",
+    },
   },
   cardContent: {
     flexGrow: 1,
+  },
+
+  modal: {
+    overflow: "scroll",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  wrapAvatar: {
+    verticalAlign: "middle",
+    display: "inline-flex",
+    alignItems: "center",
+    marginBottom: "10px",
+  },
+  paper: {
+    maxHeight: "800px",
+    width: "500px",
+    backgroundColor: "#f5f3f0",
+    // border: "2px solid #000",
+    // boxShadow: theme.shadows[5],
+    padding: theme.spacing(0, 0, 3),
   },
 }));
 
@@ -35,7 +71,27 @@ const UserProfilePosts = ({ post }) => {
     setOpen(false);
   };
 
-  console.log("modalData", modalData);
+  //*=============HANDLE DELETE==============
+  const handleDelete = (id) => {
+    fetch(`/v1/posts/${modalData._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Error in network");
+      })
+      .then((resJson) => {
+        console.log("resJson: ", resJson);
+      });
+  };
+
+  //*=============HANDLE EDIT================
+
   return (
     <>
       <Grid item xs={12} sm={6} md={4}>
