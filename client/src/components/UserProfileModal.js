@@ -109,7 +109,7 @@ const UserProfileModal = ({ modalData, handleClose, open, post }) => {
               </Typography>
               <Divider style={{ margin: "10px 0" }} />
               <Typography gutterBottom variant="body1">
-                <strong>{modalData.dishes_id}</strong> from{" "}
+                <strong>{modalData.dishes_name}</strong> from{" "}
                 {modalData.hawkerStall}
               </Typography>
               <Typography gutterBottom variant="body1">
