@@ -265,7 +265,7 @@ export default function Navbar({ userState, setUserState }) {
       >
         <div className={classes.modalContainer}>
           <Fade in={openPost}>
-            <Post handleClosePost={handleClosePost} />
+            <Post handleClosePost={handleClosePost} userState={userState} />
           </Fade>
         </div>
       </Modal>
