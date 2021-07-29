@@ -138,26 +138,24 @@ const FetchImages = () => {
                 alt={modalData.dishes_id}
               />
               <div className={styles.post}>
-                <Typography className={classes.wrapAvatar}>
-                  <Avatar style={{ marginRight: "10px" }}></Avatar>
-                  {modalData.username}
-                </Typography>
-                <Divider style={{ margin: "5px 0" }} />
-                <Typography gutterBottom variant="body1" component="h2">
-                  {modalData.review}
-                </Typography>
-                <Typography gutterBottom variant="body1">
-                  🔥Shiokmeter: {modalData.rating}
-                </Typography>
-                <Divider style={{ margin: "10px 0" }} />
-                <Typography gutterBottom variant="body1">
-                  <strong>{modalData.dishes_id}</strong> from{" "}
-                  {modalData.hawkerStall}
-                </Typography>
-                <Typography gutterBottom variant="body1">
-                  Hawker Centre: {modalData.hawkerCentre}
-                </Typography>
+                
+              <Typography className={classes.wrapAvatar}><Avatar style={{marginRight: "10px"}}>{modalData?.username[0]?.toUpperCase()}</Avatar>{modalData.username}</Typography>
+              <Divider style={{margin: "5px 0"}}/>
+              <Typography gutterBottom variant="body1" component="h2">
+              {modalData.review}
+              </Typography>
+              <Typography gutterBottom variant="body1">
+                🔥Shiokmeter: {modalData.rating}
+              </Typography>
+              <Divider style={{margin: "10px 0"}}/>
+              <Typography gutterBottom variant="body1">
+              <strong>{modalData.dishes_id}</strong> from {modalData.hawkerStall}
+              </Typography>
+              <Typography gutterBottom variant="body1">
+                Hawker Centre: {modalData.hawkerCentre}
+              </Typography>
               </div>
+              
             </div>
           </Fade>
         </Modal>
