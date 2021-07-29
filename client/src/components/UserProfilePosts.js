@@ -74,7 +74,7 @@ const UserProfilePosts = ({ post }) => {
           </CardContent>
         </Card>
       </Grid>
-      
+
       {/*=====   Modal to post info =======*/}
       <UserProfileModal
         modalData={modalData}

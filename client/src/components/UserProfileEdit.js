@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab/";
 
-import { DropzoneArea } from "material-ui-dropzone";
+// import { DropzoneArea } from "material-ui-dropzone";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -54,10 +54,10 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
   const classes = useStyles();
 
   const id = postID;
-  console.log("this is the updated id: ", id);
+  // console.log("this is the updated id: ", id);
   // const [hawkerCentre, setHawkerCentre] = useState(post.hawkerCentre);
   // const [hawkerStall, setHawkerStall] = useState(post.hawkerStall);
-  const [image, setImage] = useState(post.image_url);
+  // const [image, setImage] = useState(post.image_url);
   // const [dishName, setDishName] = useState(post.dishes_name);
   const [review, setReview] = useState(post.review);
   const [rating, setRating] = useState(post.rating);
@@ -74,25 +74,26 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
     //* code for image upload
     const reader = new FileReader();
 
-    reader.readAsDataURL(image);
-    reader.onloadend = () => {
-      uploadImage(reader.result);
-    };
-    reader.onerror = () => {
-      console.error("Something went wrong");
-    };
+    // reader.readAsDataURL(image);
+    // reader.onloadend = () => {
+    //   editPost(reader.result);
+    // };
+    // reader.onerror = () => {
+    //   console.error("Something went wrong");
+    // };
+    editPost();
 
     handleEditClose();
     // handleClosePost();
   };
 
   //* convert image binary into string (base64EndcodedImage) and calls fetch route
-  const uploadImage = async (base64EncodedImage) => {
+  const editPost = async () => {
     try {
       await fetch(`/v1/posts/${id}`, {
         method: "PUT",
         body: JSON.stringify({
-          data: base64EncodedImage,
+          // data: base64EncodedImage,
           // hawkerCentre: hawkerCentre,
           // hawkerStall: hawkerStall,
           review: review,
@@ -104,7 +105,7 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
         },
       }).then((res) => {
         console.log("Post submitted", res.data);
-        setImage("");
+        // setImage("");
       });
     } catch (err) {
       console.error(err);
@@ -127,7 +128,7 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
           <Typography gutterBottom variant="h5">
             Edit Post
           </Typography>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <DropzoneArea
               acceptedFiles={["image/*"]}
               dropzoneText={"Drag and drop an image here or click"}
@@ -136,12 +137,13 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
                 setImage(files[0]);
               }}
             />
-          </Grid>
+          </Grid> */}
           <TextField
             id="outlined-multiline-static"
             label="Review"
             multiline
             rows={4}
+            placeholder={post.review}
             style={{ width: "100%" }}
             variant="outlined"
             onChange={(event) => {

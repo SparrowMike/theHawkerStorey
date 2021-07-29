@@ -54,8 +54,6 @@ router.get("/:id", (req, res) => {
   });
 });
 
-
-
 //*=================UPLOAD A SINGLE IMAGE========================
 router.post("/upload", async (req, res) => {
   try {
@@ -78,11 +76,13 @@ router.post("/upload", async (req, res) => {
     });
     // this pushes the new post in the user's post history
     await post.save();
-    console.log("postid", post._id)
-    Users.findByIdAndUpdate (req.body.user_id, { $push: {posts_history: post._id }}, {new:true},
-    (err, foundUser) => 
-    res.json(post))
-    ;
+    console.log("postid", post._id);
+    Users.findByIdAndUpdate(
+      req.body.user_id,
+      { $push: { posts_history: post._id } },
+      { new: true },
+      (err, foundUser) => res.json(post)
+    );
   } catch (error) {
     console.log(error);
     res.status(500).json({ err: "Uh oh. Something went wrong" });
@@ -106,22 +106,23 @@ router.delete("/:id", async (req, res) => {
 });
 
 //*=====================UPDATE THE POST=========================
-router.put("/:id", upload.single("image"), async (req, res) => {
+// router.put("/:id", upload.single("image"), async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     let post = await Posts.findById(req.params.id);
-    // Delete image from cloudinary
-    await cloudinary.uploader.destroy(post.cloudinary_id);
-    // Upload image to cloudinary
-    let result;
-    if (req.file) {
-      result = await cloudinary.uploader.upload(req.file.path);
-    }
+    // await cloudinary.uploader.destroy(post.cloudinary_id);
+
+    // let result;
+    // if (req.file) {
+    //   result = await cloudinary.uploader.upload(req.file.path);
+    //   console.log(req.file.path);
+    // }
     const data = {
-      image_url: result?.secure_url || post.secure_url,
-      cloudinary_id: result?.public_id || post.cloudinary_id,
+      // image_url: result?.secure_url || post.secure_url,
+      // cloudinary_id: result?.public_id || post.cloudinary_id,
+      // dishes_name: req.body.dishes_name || post.dishes_name,
       review: req.body.review || post.review,
       rating: req.body.rating || post.rating,
-      dishes_name: req.body.dishes_name || post.dishes_name,
     };
 
     post = await Posts.findByIdAndUpdate(req.params.id, data, { new: true });

@@ -18,6 +18,7 @@ import styles from "../../src/FetchImages.module.css";
 const useStyles = makeStyles((theme) => ({
   modal: {
     overflow: "scroll",
+
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+
 }));
 
 const UserProfileModal = ({ modalData, handleClose, open, post }) => {
@@ -50,6 +52,7 @@ const UserProfileModal = ({ modalData, handleClose, open, post }) => {
 
   //*=============HANDLE DELETE==============
   const handleDelete = (id) => {
+    handleClose();
     fetch(`/v1/posts/${modalData._id}`, {
       method: "DELETE",
       headers: {
@@ -79,7 +82,7 @@ const UserProfileModal = ({ modalData, handleClose, open, post }) => {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
       <Modal
         className={classes.modal}
         open={open}
