@@ -71,6 +71,7 @@ const UserProfileModal = ({ modalData, handleClose, open, post }) => {
   const handleEditOpen = (e) => {
     setOpenEdit(true);
     setPostID(modalData._id);
+    handleClose();
     console.log("this is the id of modalData: ", modalData._id);
   };
   const handleEditClose = () => {
@@ -98,7 +99,7 @@ const UserProfileModal = ({ modalData, handleClose, open, post }) => {
             />
             <div className={styles.post}>
               <Typography className={classes.wrapAvatar}>
-                <Avatar style={{ marginRight: "10px" }}>{modalData.username[0]?.toUpperCase()}</Avatar>{modalData.username}
+                {/* <Avatar style={{ marginRight: "10px" }}>{modalData.username[0]?.toUpperCase()}</Avatar>{modalData.username} */}
               </Typography>
               <Divider style={{ margin: "5px 0" }} />
               <Typography gutterBottom variant="body1" component="h2">

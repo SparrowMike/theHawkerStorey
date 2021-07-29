@@ -10,9 +10,9 @@ import {
   Fade,
   Typography,
   Avatar,
-  Divider
+  Divider,
 } from "@material-ui/core";
-import styles from "../../src/FetchImages.module.css"
+import styles from "../../src/FetchImages.module.css";
 
 import StackGrid from "react-stack-grid";
 // import StackGrid, { transitions } from "react-stack-grid";
@@ -44,17 +44,17 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  modalPost:{
+  modalPost: {
     fontSize: "16px",
   },
-  modalHeader:{
+  modalHeader: {
     fontSize: "16px",
   },
-  wrapAvatar:{
-    verticalAlign: 'middle',
-    display: 'inline-flex',
-    alignItems: 'center',
-    marginBottom: '10px',
+  wrapAvatar: {
+    verticalAlign: "middle",
+    display: "inline-flex",
+    alignItems: "center",
+    marginBottom: "10px",
   },
   paper: {
     maxHeight: "800px",
@@ -84,7 +84,7 @@ const FetchImages = () => {
   const handleClose = () => {
     setOpen(false);
   };
-console.log("modal from fetch", modalData);
+  console.log("modal from fetch", modalData);
 
   //* pull posts from mongoose to display images by cloudinary ids
   const { isLoading, data } = useQuery(["get-posts"], () => axios("v1/posts"));
@@ -100,7 +100,7 @@ console.log("modal from fetch", modalData);
       </Container>
     );
   }
-  console.log("postdata", postData)
+  console.log("postdata", postData);
   return (
     <>
       <Container className={classes.container}>
@@ -133,26 +133,35 @@ console.log("modal from fetch", modalData);
         >
           <Fade in={open}>
             <div className={classes.paper}>
-              <img className={styles.modalImages} src={modalData.image_url} alt={modalData.dishes_id}/>
+              <img
+                className={styles.modalImages}
+                src={modalData.image_url}
+                alt={modalData.dishes_id}
+              />
               <div className={styles.post}>
-                
-              <Typography className={classes.wrapAvatar}><Avatar style={{marginRight: "10px"}}>{modalData?.username[0]?.toUpperCase()}</Avatar>{modalData.username}</Typography>
-              <Divider style={{margin: "5px 0"}}/>
-              <Typography gutterBottom variant="body1" component="h2">
-              {modalData.review}
-              </Typography>
-              <Typography gutterBottom variant="body1">
-                🔥Shiokmeter: {modalData.rating}
-              </Typography>
-              <Divider style={{margin: "10px 0"}}/>
-              <Typography gutterBottom variant="body1">
-              <strong>{modalData.dishes_id}</strong> from {modalData.hawkerStall}
-              </Typography>
-              <Typography gutterBottom variant="body1">
-                Hawker Centre: {modalData.hawkerCentre}
-              </Typography>
+                <Typography className={classes.wrapAvatar}>
+                  <Avatar style={{ marginRight: "10px" }}>
+                    {/* {modalData?.username[0]?.toUpperCase()} */}
+                  </Avatar>
+                  {modalData.username}
+                </Typography>
+                <Divider style={{ margin: "5px 0" }} />
+                <Typography gutterBottom variant="body1" component="h2">
+                  {modalData.review}
+                </Typography>
+                <Typography gutterBottom variant="body1">
+                  🔥Shiokmeter: {modalData.rating}
+                </Typography>
+                <Divider style={{ margin: "10px 0" }} />
+                <Typography gutterBottom variant="body1">
+                  <strong>{modalData.dishes_id}</strong> from{" "}
+                  {modalData.hawkerStall}
+                </Typography>
+                <Typography gutterBottom variant="body1">
+                  Hawker Centre: {modalData.hawkerCentre}
+                </Typography>
               </div>
-              </div>
+            </div>
           </Fade>
         </Modal>
       </Container>
