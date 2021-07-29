@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-// import { useQuery, QueryCache } from "react-query";
-// import axios from "axios";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../App";
 import AutocompleteHC from "./Post/AutocompleteHC";
 import AutocompleteHS from "./Post/AutocompleteHS";
 import AutocompleteDishes from "./Post/AutocompleteDishes";
@@ -33,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Post({ handleClosePost }) {
   const classes = useStyles();
+  //!unpack token
+  const userState = useContext(AuthContext);
+  console.log(userState.username);
 
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
@@ -70,13 +72,17 @@ export default function Post({ handleClosePost }) {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
+          username: userState.username,
           hawkerCentre: hawkerCentre,
           hawkerStall: hawkerStall,
           review: review,
           rating: rating,
           dishes_id: dishName,
         }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userState.accessToken}`,
+        },
       });
       setImage("");
     } catch (err) {
@@ -88,7 +94,7 @@ export default function Post({ handleClosePost }) {
     <div className={classes.paper}>
       <React.Fragment>
         <Typography variant="h4" gutterBottom>
-          Add New Post
+          Add New Post I am: {userState.username}
           <Button className={classes.exit} onClick={handleClosePost}>
             <CloseIcon className={classes.exit} />
           </Button>

@@ -1,16 +1,19 @@
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link as RouterLink, useHistory } from "react-router-dom";
+import axios from "axios";
 
-import { Link as RouterLink } from "react-router-dom";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  Container,
+  Link,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,36 +35,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn({ setUserState, setAccessToken }) {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userName);
-    console.log(password);
     createSession();
   };
 
+  //* use sessions to validate login and receive JWT
   const createSession = () => {
-    fetch("/v1/sessions", {
-      method: "POST",
-      body: JSON.stringify({
+    axios
+      .post("/v1/sessions", {
         username: userName,
         password: password,
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error("Error in network");
       })
-      .then((resJson) => {
-        console.log("resJson: ", resJson);
-      });
+      .then((res) => {
+        // lift state to App to provide global context
+        console.log("LOGIN SUCCESS", res.data.accessToken);
+        console.log("User is ", res.data.user);
+        setAccessToken(res.data.accessToken);
+        setUserState({
+          accessToken: res.data.accessToken,
+          id: res.data.user,
+          username: "logged in",
+        });
+        history.push("/");
+      })
+      .catch((err) => console.log("error", err));
   };
 
   return (
