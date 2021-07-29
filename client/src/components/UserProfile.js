@@ -1,5 +1,5 @@
-import React from "react";
-import { useQuery } from "react-query";
+import React, {useState} from "react";
+import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useParams } from "react-router";
 import axios from "axios";
 // import Post from './Post'
@@ -27,15 +27,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserProfile = () => {
+const UserProfile = ({loaded}) => {
   const classes = useStyles();
-
   const { id } = useParams();
-  const { data, isLoading, error } = useQuery(["user", id], () =>
-    axios(`/v1/users/${id}`)
+  const { data, isLoading, error, refetch , isSuccess} = useQuery(["user", id, loaded], () =>
+    axios(`/v1/users/${id}`) //searching for all information from that user
   );
 
   const user = data?.data;
+
+  
+  // const postHistory = user?.posts_history
+  // console.log("posthistory",postHistory)
+  // queryClient.invalidateQueries("user")
+
+
+  // queryClient.setQueryData("user")
   // console.log("user information: ", user);
 
   if (error) {
@@ -51,12 +58,13 @@ const UserProfile = () => {
     return <Container className={classes.div}>Loading</Container>;
   }
 
+
+
   return (
     <>
       <Container className={classes.div}>
         <Typography variant="h5" className={classes.wrapAvatar}>
           <Avatar className={classes.avatar}>
-            {user.username[0].toUpperCase()}
           </Avatar>
           {user.username}
         </Typography>
@@ -66,7 +74,7 @@ const UserProfile = () => {
       </Container>
       <Container>
         <Grid container spacing={4}>
-          {user.posts_history.map((post, index) => (
+          {user?.posts_history.map((post, index) => (
             <UserProfilePosts
               post={post}
               key={index}
