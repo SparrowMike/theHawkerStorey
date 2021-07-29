@@ -220,12 +220,7 @@ export default function Navbar({ userState, setUserState }) {
 
         {userState.accessToken ? (
           <List>
-            <ListItem
-              button
-              onClick={handleOpenPost}
-              component={RouterLink}
-              to="/"
-            >
+            <ListItem button component={RouterLink} to="/">
               <ListItemText primary="Home" />
             </ListItem>
             <ListItem button onClick={handleOpenPost}>
