@@ -133,13 +133,6 @@ console.log("modal from fetch", modalData);
         >
           <Fade in={open}>
             <div className={classes.paper}>
-              {/* Modal image */}
-              {/* <Image
-                cloudName={"hawkerstorey"}
-                publicId={modalData.image_url}
-                crop="scale"
-                width={320}
-              /> */}
               <img className={styles.modalImages} src={modalData.image_url} alt={modalData.dishes_id}/>
               <div className={styles.post}>
                 
