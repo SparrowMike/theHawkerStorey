@@ -57,12 +57,13 @@ export default function SignIn({ setUserState, setAccessToken }) {
       .then((res) => {
         // lift state to App to provide global context
         console.log("LOGIN SUCCESS", res.data.accessToken);
-        console.log("User is ", res.data.user);
+        console.log("User is ", res.data.user_name);
+        console.log("User ID is ", res.data.user_id);
         setAccessToken(res.data.accessToken);
         setUserState({
           accessToken: res.data.accessToken,
-          id: res.data.user,
-          username: "logged in",
+          id: res.data.user_id,
+          username: res.data.user_name,
         });
         history.push("/");
       })

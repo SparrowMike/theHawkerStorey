@@ -68,7 +68,6 @@ function App() {
                   setUserState={setUserState}
                   setAccessToken={setAccessToken}
                 />
-                <SignIn />
               </Route>
               <Route path="/users/:id">
                 <UserProfile />

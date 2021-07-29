@@ -34,7 +34,7 @@ export default function Post({ handleClosePost }) {
   const classes = useStyles();
   //!unpack token
   const userState = useContext(AuthContext);
-  console.log(userState.username);
+  // console.log(userState.username);
 
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
@@ -73,6 +73,7 @@ export default function Post({ handleClosePost }) {
         body: JSON.stringify({
           data: base64EncodedImage,
           username: userState.username,
+          user_id: userState.id,
           hawkerCentre: hawkerCentre,
           hawkerStall: hawkerStall,
           review: review,
