@@ -33,6 +33,7 @@ router.post("/", (req, res) => {
       } else if (!foundUser) {
         // if found user is undefined/null not found etc
         res.send("Sorry, no user found");
+        // res.status(404);
       } else {
         console.log("user is found yay!");
         // now let's check if passwords match
@@ -48,10 +49,12 @@ router.post("/", (req, res) => {
             username: foundUser.username,
             email: foundUser.email,
             posts_history: foundUser.posts_history,
+            logged_in: true,
           });
         } else {
           // passwords do not match
           res.send("password does not match");
+          // res.status(401);
         }
       }
     }
