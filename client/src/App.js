@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import qs from "qs";
-import { createBrowserHistory } from "history";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -49,24 +47,6 @@ function App() {
     posts_history: [],
     loggedIn: false,
   });
-
-  console.log(userState);
-  console.log("logged in? ", loggedIn);
-
-  const history = createBrowserHistory();
-
-  // useEffect(()=> {
-  //   userState.logged_in ?
-  // })
-
-  // useEffect(() => {
-  //   const filterParams = history.location.search.substr(1);
-  //   console.log(filterParams);
-  //   const filtersFromParams = qs.parse(filterParams);
-  //   console.log(filtersFromParams);
-
-  //   history.push(userState);
-  // }, [history, userState]);
 
   return (
     <Router>
