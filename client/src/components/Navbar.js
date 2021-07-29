@@ -114,6 +114,11 @@ export default function Navbar({ userState, setUserState }) {
     setOpen(false);
   };
 
+  const handleLogout = () => {
+    handleDrawerClose();
+    setUserState("");
+  };
+
   //*=================DEALS WITH POST MODAL==================
   const [openPost, setOpenPost] = useState(false);
   const handleOpenPost = () => {
@@ -136,14 +141,20 @@ export default function Navbar({ userState, setUserState }) {
             <MenuItem component={RouterLink} to="/">
               <Typography variant="h6">Home</Typography>
             </MenuItem>
-            {userState.accessToken && (
-              <MenuItem onClick={handleOpenPost}>
-                <Typography variant="h6">Create Post</Typography>
+            {userState.accessToken ? (
+              <>
+                <MenuItem onClick={handleOpenPost}>
+                  <Typography variant="h6">Create Post</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>
+                  <Typography variant="h6">Logout</Typography>
+                </MenuItem>
+              </>
+            ) : (
+              <MenuItem component={RouterLink} to="/login">
+                <Typography variant="h6">Login</Typography>
               </MenuItem>
             )}
-            <MenuItem component={RouterLink} to="/login">
-              <Typography variant="h6">Login</Typography>
-            </MenuItem>
             <MenuItem component={RouterLink} to="/signup">
               <Typography variant="h6">Sign Up</Typography>
             </MenuItem>
@@ -202,7 +213,7 @@ export default function Navbar({ userState, setUserState }) {
             <ListItem button onClick={handleOpenPost}>
               <ListItemText primary="Profile" />
             </ListItem>
-            <ListItem button onClick={setUserState("")}>
+            <ListItem button onClick={handleLogout}>
               <ListItemText primary="Logout" />
             </ListItem>
           </List>
