@@ -41,11 +41,13 @@ export default function Post({ userState, handleClosePost }) {
   const [image, setImage] = useState("");
   const [dishName, setDishName] = useState("");
   const [review, setReview] = useState("");
-  const [rating, setRating] = useState("3");
+
+  const [rating, setRating] = useState("must go");
 
   const handleRating = (event, newRating) => {
-    setRating(newRating);
-    console.log(rating);
+    if (newRating !== null) {
+      setRating(newRating);
+    }
   };
 
   const handleSubmit = (e) => {
