@@ -109,9 +109,9 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     }
     const data = {
       image_url: result?.secure_url || post.secure_url,
+      cloudinary_id: result?.public_id || post.cloudinary_id,
       review: req.body.review || post.review,
       rating: req.body.rating || post.rating,
-      cloudinary_id: result?.public_id || post.cloudinary_id,
       dishes_name: req.body.dishes_name || post.dishes_name,
     };
 
