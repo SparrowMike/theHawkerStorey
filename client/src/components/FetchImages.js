@@ -139,7 +139,7 @@ const FetchImages = () => {
               />
               <div className={styles.post}>
                 
-              <Typography className={classes.wrapAvatar}><Avatar style={{marginRight: "10px"}}>{modalData?.username[0]?.toUpperCase()}</Avatar>{modalData.username}</Typography>
+              <Typography className={classes.wrapAvatar}><Avatar style={{marginRight: "10px"}}></Avatar>{modalData.username}</Typography>
               <Divider style={{margin: "5px 0"}}/>
               <Typography gutterBottom variant="body1" component="h2">
               {modalData.review}
