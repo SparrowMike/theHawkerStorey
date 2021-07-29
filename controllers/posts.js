@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 const Posts = require("../models/posts");
+const Users = require("../models/users");
+const mongoose = require("mongoose");
 
 const { StatusCodes } = require("http-status-codes");
 const session = require("express-session");
@@ -72,8 +74,13 @@ router.post("/upload", async (req, res) => {
       rating: req.body.rating,
       dishes_name: req.body.dishes_name,
     });
+    // this pushes the new post in the user's post history
     await post.save();
-    res.json(post);
+    console.log("postid", post._id)
+    Users.findByIdAndUpdate (req.body.user_id, { $push: {posts_history: post._id }}, {new:true},
+    (err, foundUser) => 
+    res.json(post))
+    ;
   } catch (error) {
     console.log(error);
     res.status(500).json({ err: "Uh oh. Something went wrong" });
