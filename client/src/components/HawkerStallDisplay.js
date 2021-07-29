@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 const HawkerStallDisplay = () => {
   const classes = useStyles();
   const { centreName, stall } = useParams();
-
+  const [rating, setRating] = useState()
   ////// STORE INFORMATION /////////
   /////////// FETCHES STALL INFORMATION ////////
   const {
@@ -67,9 +67,12 @@ const HawkerStallDisplay = () => {
 
   // WHICH HAWKER STALL
   const stallsArray = stalldata?.data?.hawker_stalls; // this gives stalls from hawker centre in object
+
   // SELECT THE STALL
   const selectedStall = stallsArray?.filter((item) => item.name === stall);
   console.log("this is selectedStall", selectedStall); // this is stall description => map it out
+  
+
 
   if (error) {
     console.log("error: ", error.message);
@@ -83,6 +86,8 @@ const HawkerStallDisplay = () => {
     console.log("loading...");
     return <Container className={classes.div}>Loading</Container>;
   }
+
+  
 
   return (
     <>
@@ -100,7 +105,7 @@ const HawkerStallDisplay = () => {
                 {stall}
               </Typography>
               <Typography variant="h5" color="inherit" paragraph>
-                🔥Shiokmeter: {selectedStall[0]?.score}/10 
+                🔥Shiokmeter: {rating}/10 
               </Typography>
               <Typography variant="h6" color="inherit">
                 Closed on: {selectedStall[0]?.closed_days}
@@ -119,7 +124,7 @@ const HawkerStallDisplay = () => {
         </Grid>
       </Paper>
 
-      <PostArray />
+      <PostArray setRating={setRating} />
     </>
   );
 };
