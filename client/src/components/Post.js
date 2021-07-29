@@ -34,7 +34,6 @@ export default function Post({ userState, handleClosePost }) {
   const classes = useStyles();
   //! userState not passed by context somehow
   // const userState = useContext(AuthContext);
-  console.log(userState.username);
 
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
@@ -180,13 +179,24 @@ export default function Post({ userState, handleClosePost }) {
             </ToggleButtonGroup>
 
             <Box textAlign="right">
-              <Button
-                onClick={handleSubmit}
-                variant="contained"
-                color="secondary"
-              >
-                Submit
-              </Button>
+              {hawkerCentre &&
+              hawkerStall &&
+              image &&
+              dishName &&
+              review &&
+              rating ? (
+                <Button
+                  onClick={handleSubmit}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button disabled variant="contained">
+                  Submit
+                </Button>
+              )}
             </Box>
           </Grid>
         </Grid>
