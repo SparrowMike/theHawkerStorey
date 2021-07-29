@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import qs from "qs";
+import { createBrowserHistory } from "history";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -38,15 +40,32 @@ const theme = createMuiTheme({
 
 function App() {
   const queryClient = new QueryClient();
+  const [loggedIn, setLoggedIn] = useState(false);
   const [userState, setUserState] = useState({
     accessToken: "",
     user_id: "",
     username: "",
     email: "",
     posts_history: [],
+    loggedIn: false,
   });
 
   console.log(userState);
+
+  const history = createBrowserHistory();
+
+  // useEffect(()=> {
+  //   userState.logged_in ?
+  // })
+
+  // useEffect(() => {
+  //   const filterParams = history.location.search.substr(1);
+  //   console.log(filterParams);
+  //   const filtersFromParams = qs.parse(filterParams);
+  //   console.log(filtersFromParams);
+
+  //   history.push(userState);
+  // }, [history, userState]);
 
   return (
     <Router>
@@ -55,7 +74,11 @@ function App() {
         <ThemeProvider theme={theme}>
           <AuthContext.Provider userState={userState}>
             <ReactQueryDevtools initialIsOpen={false} />
-            <Navbar userState={userState} setUserState={setUserState} />
+            <Navbar
+              userState={userState}
+              setUserState={setUserState}
+              loggedIn={loggedIn}
+            />
             <Switch>
               <Route path="/" exact>
                 <Main />
@@ -65,7 +88,7 @@ function App() {
                 <SignUp />
               </Route>
               <Route path="/login">
-                <SignIn setUserState={setUserState} />
+                <SignIn setUserState={setUserState} setLoggedIn={setLoggedIn} />
               </Route>
               <Route path="/users/:id">
                 <UserProfile userState={userState} />

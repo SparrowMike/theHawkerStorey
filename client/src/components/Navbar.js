@@ -120,7 +120,8 @@ export default function Navbar({ userState, setUserState }) {
 
   const handleLogout = () => {
     handleDrawerClose();
-    setUserState("");
+    document.cookie = "";
+    setUserState({});
   };
 
   //*=================DEALS WITH POST MODAL==================
@@ -145,7 +146,7 @@ export default function Navbar({ userState, setUserState }) {
             <MenuItem component={RouterLink} to="/">
               <Typography variant="h6">Home</Typography>
             </MenuItem>
-            {userState.accessToken ? (
+            {document.cookie.length ? (
               <>
                 <MenuItem onClick={handleOpenPost}>
                   <Typography variant="h6">Create Post</Typography>
@@ -218,7 +219,7 @@ export default function Navbar({ userState, setUserState }) {
         </div>
         <Divider />
 
-        {userState.accessToken ? (
+        {document.cookie.length ? (
           <List>
             <ListItem button component={RouterLink} to="/">
               <ListItemText primary="Home" />
