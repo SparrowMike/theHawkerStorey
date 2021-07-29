@@ -55,10 +55,17 @@ export default function SignIn({ setUserState }) {
         password: password,
       })
       .then((res) => {
-        console.log(res);
-        setUserState(res.data);
-        console.log("LOGIN SUCCESS", res.data);
-        history.push("/");
+        if (res.status === 401 || res.status === 404) {
+          console.log("LOGIN FAILED", res);
+          history.push("/v1/users");
+        } else if (res.status === 200) {
+          const sessionCookie =
+            (document.cookie = `username=${res.data.username} accessToken=${res.data.accessToken}`);
+          console.log("cookie", sessionCookie);
+          setUserState(res.data);
+          console.log("LOGIN SUCCESS", res.data);
+          history.push("/");
+        }
       })
       .catch((err) => console.log("error", err));
   };
