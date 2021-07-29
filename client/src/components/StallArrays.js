@@ -5,7 +5,7 @@ import {
   Card,
   Typography,
   CardContent,
-  CardMedia
+  CardMedia,
 } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
@@ -14,12 +14,12 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   cardMedia: {
-    paddingTop: '70%',
+    paddingTop: "70%",
   },
   cardContent: {
     flexGrow: 1,
@@ -35,10 +35,11 @@ const StallArrays = ({ stall, index, centreName }) => {
           <Card className={classes.card}>
             <CardMedia
               className={classes.cardMedia}
-              image= {stall.image_url}
-              title={stall.name} />
+              image={stall.image_url}
+              title={stall.name}
+            />
             <CardContent className={classes.cardContent}>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom className={classes.text}>
                 {stall.name}
               </Typography>
             </CardContent>
