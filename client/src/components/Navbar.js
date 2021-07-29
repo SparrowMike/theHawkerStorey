@@ -1,28 +1,32 @@
 import React from "react";
 import clsx from "clsx";
 import { useState } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  makeStyles,
+  useTheme,
+  Drawer,
+  AppBar,
+  Toolbar,
+  CssBaseline,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  useMediaQuery,
+  MenuItem,
+  ListItemText,
+  ListItem,
+  Modal,
+  Backdrop,
+  Fade,
+} from "@material-ui/core";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { useMediaQuery, MenuItem } from "@material-ui/core";
-
-import { Link as RouterLink } from "react-router-dom";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import { Link as RouterLink } from "react-router-dom";
 
 import Post from "./Post";
 
