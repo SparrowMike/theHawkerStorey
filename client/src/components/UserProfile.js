@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery, useQueryClient, useMutation } from "react-query";
+import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import axios from "axios";
 // import Post from './Post'
@@ -29,9 +29,11 @@ const useStyles = makeStyles((theme) => ({
 
 const UserProfile = ({ loaded }) => {
   const classes = useStyles();
+  const [edited, setEdited] = useState(false);
+  const [deleted, setDeleted] = useState(false);
   const { id } = useParams();
-  const { data, isLoading, error, refetch, isSuccess } = useQuery(
-    ["user", id, loaded],
+  const { data, isLoading, error } = useQuery(
+    ["user", id, loaded, edited, deleted],
     () => axios(`/v1/users/${id}`) //searching for all information from that user
   );
 
@@ -70,12 +72,16 @@ const UserProfile = ({ loaded }) => {
       </Container>
       <Container>
         <Grid container spacing={4}>
-          {user?.posts_history.map((post, index) => (
+          {user?.posts_history.reverse().map((post, index) => (
             <UserProfilePosts
               post={post}
               key={index}
               color="primary"
               className={classes.post}
+              edited={edited}
+              setEdited={setEdited}
+              deleted={deleted}
+              setDeleted={setDeleted}
             />
           ))}
         </Grid>
