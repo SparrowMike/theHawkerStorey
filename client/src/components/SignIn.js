@@ -64,7 +64,7 @@ export default function SignIn({ setUserState }) {
           console.log("cookie", sessionCookie);
           setUserState(res.data);
           console.log("LOGIN SUCCESS", res.data);
-          history.push("/");
+          history.push(`/users/${res.data.user_id}`);
         }
       })
       .catch((err) => console.log("error", err));

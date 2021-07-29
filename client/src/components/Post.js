@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../App";
+import React, { useState } from "react";
 import AutocompleteHC from "./Post/AutocompleteHC";
 import AutocompleteHS from "./Post/AutocompleteHS";
 import AutocompleteDishes from "./Post/AutocompleteDishes";

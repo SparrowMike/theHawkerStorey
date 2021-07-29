@@ -50,6 +50,7 @@ function App() {
     loggedIn: false,
   });
 
+<<<<<<< HEAD
   console.log(userState);
 
   const history = createBrowserHistory();
@@ -67,6 +68,8 @@ function App() {
   //   history.push(userState);
   // }, [history, userState]);
 
+=======
+>>>>>>> master
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
