@@ -87,7 +87,7 @@ function App() {
               </Route>
 
               <Route path="/signup">
-                <SignUp />
+                <SignUp setUserState={setUserState} />
               </Route>
               <Route path="/login">
                 <SignIn setUserState={setUserState} setLoggedIn={setLoggedIn} />

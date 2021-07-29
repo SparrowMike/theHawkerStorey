@@ -242,7 +242,12 @@ export default function Navbar({
             <ListItem component={RouterLink} to={`/users/${userState.user_id}`}>
               <ListItemText primary="My Profile" />
             </ListItem>
-            <ListItem button onClick={handleLogout}>
+            <ListItem
+              button
+              component={RouterLink}
+              to="/"
+              onClick={handleLogout}
+            >
               <ListItemText primary="Logout" />
             </ListItem>
           </List>

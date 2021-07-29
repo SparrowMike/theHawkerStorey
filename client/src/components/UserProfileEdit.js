@@ -63,8 +63,9 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
   const [rating, setRating] = useState(post.rating);
 
   const handleRating = (event, newRating) => {
-    setRating(newRating);
-    console.log(rating);
+    if (newRating !== null) {
+      setRating(newRating);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -157,11 +158,9 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
               <ToggleButton value="3">
                 <Typography>MUST GO!</Typography>
               </ToggleButton>
-
               <ToggleButton value="2">
                 <Typography>CAN GO!</Typography>
               </ToggleButton>
-
               <ToggleButton value="1">
                 <Typography>NO GO!</Typography>
               </ToggleButton>

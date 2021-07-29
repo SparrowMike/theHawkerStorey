@@ -54,6 +54,8 @@ router.get("/:id", (req, res) => {
   });
 });
 
+
+
 //*=================UPLOAD A SINGLE IMAGE========================
 router.post("/upload", async (req, res) => {
   try {
