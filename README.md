@@ -7,6 +7,7 @@
 - npm i express dotenv nodemon mongoose bcrypt express-session cors
 - npm i cloudinary multer path cors
 - npm i http-status-codes
+- npm i jsonwebtoken
 
 ### 2. Front-End
 
