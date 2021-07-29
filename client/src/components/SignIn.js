@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ setUserState, setAccessToken }) {
+export default function SignIn({ setUserState }) {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -55,16 +55,9 @@ export default function SignIn({ setUserState, setAccessToken }) {
         password: password,
       })
       .then((res) => {
-        // lift state to App to provide global context
-        console.log("LOGIN SUCCESS", res.data.accessToken);
-        console.log("User is ", res.data.user_name);
-        console.log("User ID is ", res.data.user_id);
-        setAccessToken(res.data.accessToken);
-        setUserState({
-          accessToken: res.data.accessToken,
-          id: res.data.user_id,
-          username: res.data.user_name,
-        });
+        console.log(res);
+        setUserState(res.data);
+        console.log("LOGIN SUCCESS", res.data);
         history.push("/");
       })
       .catch((err) => console.log("error", err));

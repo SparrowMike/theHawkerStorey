@@ -119,6 +119,8 @@ router.post("/upload", authenticateToken, async (req, res) => {
       review: req.body.review,
       rating: req.body.rating,
       dishes_id: req.body.dishes_id,
+      user_id: req.body.user_id,
+      username: req.body.username,
     });
     await post.save();
     res.json(post);
