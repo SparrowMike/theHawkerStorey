@@ -105,7 +105,7 @@ const PostArray = ({setRating}) => {
     console.log("ratingNum: ", ratingNum); 
     total += ratingNum;
   }
-  const rating = total / [selectedStallPosts.length]
+  const rating = Math.ceil(total / [selectedStallPosts.length])
   setRating(rating)
 
   return (
