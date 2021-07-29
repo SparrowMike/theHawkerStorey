@@ -29,12 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Post({ userState, handleClosePost }) {
+export default function Post({ userState, handleClosePost, setLoaded, loaded }) {
   const classes = useStyles();
-  //! userState not passed by context somehow
-  // const userState = useContext(AuthContext);
-  console.log(userState.username);
-
+  
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
   const [image, setImage] = useState("");
@@ -87,7 +84,8 @@ export default function Post({ userState, handleClosePost }) {
         },
       }).then((res) => {
         console.log("Post submitted", res.data);
-        setImage("");
+        setImage("")
+        setLoaded(!loaded);
       });
     } catch (err) {
       console.error(err);

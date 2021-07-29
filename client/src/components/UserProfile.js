@@ -1,5 +1,5 @@
-import React from "react";
-import { useQuery } from "react-query";
+import React, {useState} from "react";
+import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useParams } from "react-router";
 import axios from "axios";
 // import Post from './Post'
@@ -27,21 +27,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserProfile = () => {
+const UserProfile = ({loaded}) => {
   const classes = useStyles();
-
   const { id } = useParams();
-  const { data: userProfile, isLoading, error } = useQuery(["user", id], () =>
+  const { data, isLoading, error, refetch , isSuccess} = useQuery(["user", id, loaded], () =>
     axios(`/v1/users/${id}`) //searching for all information from that user
   );
-<<<<<<< HEAD
-  const user = userProfile?.data;
-  console.log("user information: ", user);
-=======
 
   const user = data?.data;
+
+  
+  // const postHistory = user?.posts_history
+  // console.log("posthistory",postHistory)
+  // queryClient.invalidateQueries("user")
+
+
+  // queryClient.setQueryData("user")
   // console.log("user information: ", user);
->>>>>>> master
 
   if (error) {
     console.log("error: ", error.message);
@@ -55,6 +57,7 @@ const UserProfile = () => {
     console.log("loading...");
     return <Container className={classes.div}>Loading</Container>;
   }
+
 
 
   return (
@@ -72,7 +75,7 @@ const UserProfile = () => {
       </Container>
       <Container>
         <Grid container spacing={4}>
-          {user.posts_history.map((post, index) => (
+          {user?.posts_history.map((post, index) => (
             <UserProfilePosts
               post={post}
               key={index}

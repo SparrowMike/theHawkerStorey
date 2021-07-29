@@ -115,7 +115,7 @@ const PostArray = () => {
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h6" component="h2">
-                        {item.dishes_id.toUpperCase()}
+                        {item.dishes_id?.toUpperCase()}
                       </Typography>
                     </CardContent>
                   </Card>
