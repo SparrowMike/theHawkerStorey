@@ -84,7 +84,7 @@ const sessionController = require("./controllers/sessions");
 app.use("/v1/sessions", sessionController);
 
 //!  ===============GRAVEYARD=======================
-app.use("/upload", require("./routes/posts.js"));
+// app.use("/upload", require("./routes/posts.js"));
 //! ================================================
 
 //* =======================================
