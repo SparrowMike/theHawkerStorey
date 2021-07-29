@@ -34,7 +34,7 @@ export default function Post({ userState, handleClosePost }) {
   const classes = useStyles();
   //! userState not passed by context somehow
   // const userState = useContext(AuthContext);
-  // console.log(userState.username);
+  console.log(userState.username);
 
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
@@ -73,19 +73,19 @@ export default function Post({ userState, handleClosePost }) {
         body: JSON.stringify({
           data: base64EncodedImage,
           username: userState.username,
-          user_id: userState.id,
+          user_id: userState.user_id,
           hawkerCentre: hawkerCentre,
           hawkerStall: hawkerStall,
           review: review,
           rating: rating,
-          dishes_id: dishName,
+          dishes_name: dishName,
         }),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userState.accessToken}`,
+          // Authorization: `Bearer ${userState.accessToken}`,
         },
       }).then((res) => {
-        console.log(res.json());
+        console.log("Post submitted", res.data);
         setImage("");
       });
     } catch (err) {
