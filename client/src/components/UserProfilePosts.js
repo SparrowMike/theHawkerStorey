@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import UserProfileModal from "./UserProfileModal";
 
 import {
@@ -7,18 +7,8 @@ import {
   Card,
   Typography,
   CardContent,
-
 } from "@material-ui/core";
 
-  CardActions,
-  Button,
-  Modal,
-  Backdrop,
-  Fade,
-  Avatar,
-  Divider,
-} from "@material-ui/core";
-import styles from "../../src/FetchImages.module.css";
 const useStyles = makeStyles((theme) => ({
   card: {
     height: "auto",
@@ -61,7 +51,6 @@ const UserProfilePosts = ({ post }) => {
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState("");
 
-
   //*===============OPEN MODAL==============
   const handleOpen = (e) => {
     setOpen(true);
@@ -69,25 +58,6 @@ const UserProfilePosts = ({ post }) => {
   };
   const handleClose = () => {
     setOpen(false);
-  };
-
-  //*=============HANDLE DELETE==============
-  const handleDelete = (id) => {
-    fetch(`/v1/posts/${modalData._id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error("Error in network");
-      })
-      .then((resJson) => {
-        console.log("resJson: ", resJson);
-      });
   };
 
   //*=============HANDLE EDIT================
@@ -105,7 +75,12 @@ const UserProfilePosts = ({ post }) => {
         </Card>
       </Grid>
       {/*=====   Modal to post info =======*/}
-      <UserProfileModal modalData={modalData} handleClose={handleClose} open={open} post={post}/>
+      <UserProfileModal
+        modalData={modalData}
+        handleClose={handleClose}
+        open={open}
+        post={post}
+      />
     </>
   );
 };

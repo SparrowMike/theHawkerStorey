@@ -1,6 +1,5 @@
-import React from 'react'
-import { useState } from 'react';
-// import {useQuery, useMutation} from 'react-query'
+import React from "react";
+import { useState } from "react";
 
 import {
   makeStyles,
@@ -8,19 +7,14 @@ import {
   Typography,
   Grid,
   Box,
-  CardActions,
   Button,
   Modal,
   Backdrop,
   Fade,
-  Avatar,
-  Divider
 } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab/";
 
 import { DropzoneArea } from "material-ui-dropzone";
-
-import styles from "../../src/FetchImages.module.css"
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,17 +23,17 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  modalPost:{
+  modalPost: {
     fontSize: "16px",
   },
-  modalHeader:{
+  modalHeader: {
     fontSize: "16px",
   },
-  wrapAvatar:{
-    verticalAlign: 'middle',
-    display: 'inline-flex',
-    alignItems: 'center',
-    marginBottom: '10px',
+  wrapAvatar: {
+    verticalAlign: "middle",
+    display: "inline-flex",
+    alignItems: "center",
+    marginBottom: "10px",
   },
   paper: {
     maxHeight: "800px",
@@ -56,12 +50,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserProfileEdit = ({openEdit, handleEditClose, post, postID}) => {
-
+const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
   const classes = useStyles();
 
-  const id = postID
-  console.log("this is the updated id: ", id)
+  const id = postID;
+  console.log("this is the updated id: ", id);
   // const [hawkerCentre, setHawkerCentre] = useState(post.hawkerCentre);
   // const [hawkerStall, setHawkerStall] = useState(post.hawkerStall);
   const [image, setImage] = useState(post.image_url);
@@ -117,46 +110,44 @@ const UserProfileEdit = ({openEdit, handleEditClose, post, postID}) => {
     }
   };
 
-
   return (
-      <Modal
-            className={classes.modal}
-            open={openEdit}
-            onClose={handleEditClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={openEdit}>
-              <div className={classes.paper}>
-              
-              <Typography gutterBottom variant="h5">
-                Edit Post
-              </Typography>
-              <Grid item xs={12}>
-              <DropzoneArea
-                acceptedFiles={["image/*"]}
-                dropzoneText={"Drag and drop an image here or click"}
-                filesLimit={1}
-                onChange={(files) => {
-                  setImage(files[0]);
-                }}
-              />
-              </Grid>
-              <TextField
-              id="outlined-multiline-static"
-              label="Review"
-              multiline
-              rows={4}
-              style={{ width: "100%" }}
-              variant="outlined"
-              onChange={(event) => {
-                setReview(event.target.value);
+    <Modal
+      className={classes.modal}
+      open={openEdit}
+      onClose={handleEditClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <Fade in={openEdit}>
+        <div className={classes.paper}>
+          <Typography gutterBottom variant="h5">
+            Edit Post
+          </Typography>
+          <Grid item xs={12}>
+            <DropzoneArea
+              acceptedFiles={["image/*"]}
+              dropzoneText={"Drag and drop an image here or click"}
+              filesLimit={1}
+              onChange={(files) => {
+                setImage(files[0]);
               }}
-              />
-              <Grid item xs={12}>
+            />
+          </Grid>
+          <TextField
+            id="outlined-multiline-static"
+            label="Review"
+            multiline
+            rows={4}
+            style={{ width: "100%" }}
+            variant="outlined"
+            onChange={(event) => {
+              setReview(event.target.value);
+            }}
+          />
+          <Grid item xs={12}>
             <ToggleButtonGroup
               value={rating}
               exclusive
@@ -184,11 +175,11 @@ const UserProfileEdit = ({openEdit, handleEditClose, post, postID}) => {
                 Submit
               </Button>
             </Box>
-              </Grid>
-              </div>
-            </Fade>
-          </Modal>
-  )
-}
+          </Grid>
+        </div>
+      </Fade>
+    </Modal>
+  );
+};
 
-export default UserProfileEdit
+export default UserProfileEdit;
