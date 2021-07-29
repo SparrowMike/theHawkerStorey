@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ setUserState }) {
+export default function SignIn({ setUserState, setLoggedIn }) {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -63,6 +63,7 @@ export default function SignIn({ setUserState }) {
             (document.cookie = `username=${res.data.username} accessToken=${res.data.accessToken}`);
           console.log("cookie", sessionCookie);
           setUserState(res.data);
+          setLoggedIn(true);
           console.log("LOGIN SUCCESS", res.data);
           history.push(`/users/${res.data.user_id}`);
         }

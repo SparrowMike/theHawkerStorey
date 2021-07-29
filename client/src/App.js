@@ -51,6 +51,7 @@ function App() {
   });
 
   console.log(userState);
+  console.log("logged in? ", loggedIn);
 
   const history = createBrowserHistory();
 
@@ -78,6 +79,7 @@ function App() {
               userState={userState}
               setUserState={setUserState}
               loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
             />
             <Switch>
               <Route path="/" exact>
