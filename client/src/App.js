@@ -39,13 +39,18 @@ const theme = createMuiTheme({
 
 function App() {
   const queryClient = new QueryClient();
+
   const [loaded, setLoaded] = useState(false)
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const [userState, setUserState] = useState({
     accessToken: "",
     user_id: "",
     username: "",
     email: "",
     posts_history: [],
+    loggedIn: false,
   });
 
   // queryClient.invalidateQueries("user")
@@ -57,7 +62,16 @@ function App() {
         <ThemeProvider theme={theme}>
           <AuthContext.Provider userState={userState}>
             <ReactQueryDevtools initialIsOpen={false} />
+
             <Navbar userState={userState} setUserState={setUserState} loaded={loaded} setLoaded={setLoaded}/>
+
+            <Navbar
+              userState={userState}
+              setUserState={setUserState}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+            />
+
             <Switch>
               <Route path="/" exact>
                 <Main />
@@ -67,7 +81,7 @@ function App() {
                 <SignUp setUserState={setUserState} />
               </Route>
               <Route path="/login">
-                <SignIn setUserState={setUserState} />
+                <SignIn setUserState={setUserState} setLoggedIn={setLoggedIn} />
               </Route>
 
               <Route path="/users/:id">

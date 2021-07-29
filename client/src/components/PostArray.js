@@ -115,7 +115,10 @@ const PostArray = () => {
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h6" component="h2">
-                        {item.dishes_id?.toUpperCase()}
+
+              
+                        {item.dishes_name.toUpperCase()}
+
                       </Typography>
                     </CardContent>
                   </Card>
@@ -145,7 +148,7 @@ const PostArray = () => {
                 <Typography gutterBottom variant="h6" component="h2">
                   Dish Name:
                 </Typography>
-                <Typography>{modalData.dishes_id}</Typography>
+                <Typography>{modalData.dishes_name}</Typography>
                 <Typography gutterBottom variant="h6" component="h2">
                   Hawker Centre:
                 </Typography>

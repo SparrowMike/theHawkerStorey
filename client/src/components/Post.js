@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Post({ userState, handleClosePost, setLoaded, loaded }) {
   const classes = useStyles();
+
   
   const [hawkerCentre, setHawkerCentre] = useState("");
   const [hawkerStall, setHawkerStall] = useState("");
@@ -83,9 +84,11 @@ export default function Post({ userState, handleClosePost, setLoaded, loaded }) 
           // Authorization: `Bearer ${userState.accessToken}`,
         },
       }).then((res) => {
+
         console.log("Post submitted", res.data);
         setImage("")
         setLoaded(!loaded);
+
       });
     } catch (err) {
       console.error(err);
@@ -177,13 +180,24 @@ export default function Post({ userState, handleClosePost, setLoaded, loaded }) 
             </ToggleButtonGroup>
 
             <Box textAlign="right">
-              <Button
-                onClick={handleSubmit}
-                variant="contained"
-                color="secondary"
-              >
-                Submit
-              </Button>
+              {hawkerCentre &&
+              hawkerStall &&
+              image &&
+              dishName &&
+              review &&
+              rating ? (
+                <Button
+                  onClick={handleSubmit}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button disabled variant="contained">
+                  Submit
+                </Button>
+              )}
             </Box>
           </Grid>
         </Grid>

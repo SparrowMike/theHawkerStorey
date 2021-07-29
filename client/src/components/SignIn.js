@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ setUserState }) {
+export default function SignIn({ setUserState, setLoggedIn }) {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -55,10 +55,18 @@ export default function SignIn({ setUserState }) {
         password: password,
       })
       .then((res) => {
-        console.log(res);
-        setUserState(res.data);
-        // console.log("LOGIN SUCCESS", res.data);
-        history.push(`/users/${res.data.user_id}`);
+        if (res.status === 401 || res.status === 404) {
+          console.log("LOGIN FAILED", res);
+          history.push("/v1/users");
+        } else if (res.status === 200) {
+          const sessionCookie =
+            (document.cookie = `username=${res.data.username} accessToken=${res.data.accessToken}`);
+          console.log("cookie", sessionCookie);
+          setUserState(res.data);
+          setLoggedIn(true);
+          console.log("LOGIN SUCCESS", res.data);
+          history.push(`/users/${res.data.user_id}`);
+        }
       })
       .catch((err) => console.log("error", err));
   };

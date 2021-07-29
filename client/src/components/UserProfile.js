@@ -65,7 +65,6 @@ const UserProfile = ({loaded}) => {
       <Container className={classes.div}>
         <Typography variant="h5" className={classes.wrapAvatar}>
           <Avatar className={classes.avatar}>
-            {user.username[0].toUpperCase()}
           </Avatar>
           {user.username}
         </Typography>
