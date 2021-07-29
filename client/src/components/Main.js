@@ -16,13 +16,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(18, 0, 16),
     backgroundImage:
-      " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://www.visitsingapore.com/editorials/did-you-know-foodies/_jcr_content.renderimage.carousel.rect.835.470.jpg)",
-    // " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80)",
-    // " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://www.visitsingapore.com/singapore-itineraries/singapore-food-paradise-a-three-day-guide/_jcr_content/par-carousel/carousel_detailpage/carousel/item0.thumbnail.carousel-img.740.416.jpg)",
+      // " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://www.visitsingapore.com/editorials/did-you-know-foodies/_jcr_content.renderimage.carousel.rect.835.470.jpg)",
+      // " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80)",
+      // " linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(https://www.visitsingapore.com/singapore-itineraries/singapore-food-paradise-a-three-day-guide/_jcr_content/par-carousel/carousel_detailpage/carousel/item0.thumbnail.carousel-img.740.416.jpg)",
+      "url(https://i.imgur.com/QR246Ub.png)",
 
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
+    height: "520px",
+    width: "100vw",
   },
 
   heroButtons: {
@@ -47,15 +50,6 @@ export default function Main() {
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              className={classes.header}
-              gutterBottom
-            >
-              view a story, within our hawker storey
-            </Typography>
             <Typography
               variant="h1"
               align="center"
