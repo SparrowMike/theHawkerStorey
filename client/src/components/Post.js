@@ -86,7 +86,7 @@ export default function Post({ userState, handleClosePost }) {
           // Authorization: `Bearer ${userState.accessToken}`,
         },
       }).then((res) => {
-        console.log("Post submitted", res.data);
+        console.log("Post submitted");
         setImage("");
       });
     } catch (err) {
