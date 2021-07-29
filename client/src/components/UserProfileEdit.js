@@ -72,7 +72,7 @@ const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
     e.preventDefault();
 
     //* code for image upload
-    const reader = new FileReader();
+    // const reader = new FileReader();
 
     // reader.readAsDataURL(image);
     // reader.onloadend = () => {
