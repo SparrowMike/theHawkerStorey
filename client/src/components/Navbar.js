@@ -103,14 +103,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-export default function Navbar({ userState, setUserState, setLoaded, loaded }) {
+export default function Navbar({
   userState,
   setUserState,
   loggedIn,
   setLoggedIn,
+  setLoaded,
+  loaded,
 }) {
-
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -297,7 +297,12 @@ export default function Navbar({ userState, setUserState, setLoaded, loaded }) {
       >
         <div className={classes.modalContainer}>
           <Fade in={openPost}>
-            <Post handleClosePost={handleClosePost} userState={userState} loaded={loaded} setLoaded={setLoaded}/>
+            <Post
+              handleClosePost={handleClosePost}
+              userState={userState}
+              loaded={loaded}
+              setLoaded={setLoaded}
+            />
           </Fade>
         </div>
       </Modal>
