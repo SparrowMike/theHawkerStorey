@@ -36,7 +36,7 @@ const UserProfile = () => {
   );
 
   const user = data?.data;
-  console.log("user information: ", user);
+  // console.log("user information: ", user);
 
   if (error) {
     console.log("error: ", error.message);

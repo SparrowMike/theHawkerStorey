@@ -78,7 +78,27 @@ const UserProfilePosts = ({ post }) => {
     setOpen(false);
   };
 
-  console.log("modalData", modalData);
+  //*=============HANDLE DELETE==============
+  const handleDelete = (id) => {
+    fetch(`/v1/posts/${modalData._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Error in network");
+      })
+      .then((resJson) => {
+        console.log("resJson: ", resJson);
+      });
+  };
+
+  //*=============HANDLE EDIT================
+
   return (
     <>
       <Grid item xs={12} sm={6} md={4}>
@@ -92,6 +112,7 @@ const UserProfilePosts = ({ post }) => {
           </CardContent>
         </Card>
       </Grid>
+
       <Modal
         className={classes.modal}
         open={open}
@@ -132,7 +153,7 @@ const UserProfilePosts = ({ post }) => {
                 <Button size="small" variant="contained" color="primary">
                   Edit
                 </Button>
-                <Button size="small" variant="contained">
+                <Button size="small" variant="contained" onClick={handleDelete}>
                   Delete
                 </Button>
               </CardActions>
