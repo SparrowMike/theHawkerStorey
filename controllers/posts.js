@@ -113,10 +113,22 @@ router.delete("/:id", async (req, res) => {
 // router.put("/:id", upload.single("image"), async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
+    let post = await Posts.findById(req.params.id);
+    // await cloudinary.uploader.destroy(post.cloudinary_id);
+
+    // let result;
+    // if (req.file) {
+    //   result = await cloudinary.uploader.upload(req.file.path);
+    //   console.log(req.file.path);
+    // }
     const data = {
-      review: req.body.review,
-      rating: req.body.rating,
+      // image_url: result?.secure_url || post.secure_url,
+      // cloudinary_id: result?.public_id || post.cloudinary_id,
+      // dishes_name: req.body.dishes_name || post.dishes_name,
+      review: req.body.review || post.review,
+      rating: req.body.rating || post.rating,
     };
+
     post = await Posts.findByIdAndUpdate(req.params.id, data, { new: true });
     res.json(post);
   } catch (error) {

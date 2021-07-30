@@ -50,14 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserProfileEdit = ({
-  openEdit,
-  handleEditClose,
-  post,
-  postID,
-  edited,
-  setEdited,
-}) => {
+const UserProfileEdit = ({ openEdit, handleEditClose, post, postID }) => {
   const classes = useStyles();
 
   const id = postID;
@@ -85,8 +78,8 @@ const UserProfileEdit = ({
     fetch(`/v1/posts/${id}`, {
       method: "PUT",
       body: JSON.stringify({
-        review: review || post.review,
-        rating: rating || post.rating,
+        review: review,
+        rating: rating,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +87,6 @@ const UserProfileEdit = ({
     })
       .then((res) => {
         if (res.ok) {
-          setEdited(!edited);
           return res.json();
         }
         throw new Error("Error in network");

@@ -42,18 +42,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+
 }));
 
-const UserProfileModal = ({
-  modalData,
-  handleClose,
-  open,
-  post,
-  edited,
-  setEdited,
-  deleted,
-  setDeleted,
-}) => {
+const UserProfileModal = ({ modalData, handleClose, open, post }) => {
   const classes = useStyles();
   const [openEdit, setOpenEdit] = useState(false);
   const [postID, setPostID] = useState();
@@ -69,7 +61,6 @@ const UserProfileModal = ({
     })
       .then((res) => {
         if (res.ok) {
-          setDeleted(!deleted);
           return res.json();
         }
         throw new Error("Error in network");
@@ -111,8 +102,7 @@ const UserProfileModal = ({
             />
             <div className={styles.post}>
               <Typography className={classes.wrapAvatar}>
-                <Avatar style={{ marginRight: "10px" }}></Avatar>
-                {modalData.username}
+                <Avatar style={{ marginRight: "10px" }}></Avatar>{modalData.username}
               </Typography>
               <Divider style={{ margin: "5px 0" }} />
               <Typography gutterBottom variant="body1" component="h2">
@@ -151,8 +141,6 @@ const UserProfileModal = ({
         handleEditClose={handleEditClose}
         post={post}
         postID={postID}
-        edited={edited}
-        setEdited={setEdited}
       />
     </div>
   );

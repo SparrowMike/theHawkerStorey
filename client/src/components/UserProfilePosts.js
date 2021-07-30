@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserProfilePosts = ({ post, edited, setEdited, deleted, setDeleted }) => {
+const UserProfilePosts = ({ post }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState("");
@@ -81,10 +81,6 @@ const UserProfilePosts = ({ post, edited, setEdited, deleted, setDeleted }) => {
         handleClose={handleClose}
         open={open}
         post={post}
-        edited={edited}
-        setEdited={setEdited}
-        deleted={deleted}
-        setDeleted={setDeleted}
       />
     </>
   );
