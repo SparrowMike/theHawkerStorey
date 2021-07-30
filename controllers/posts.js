@@ -55,7 +55,7 @@ router.get("/:id", (req, res) => {
 });
 
 //*=================UPLOAD A SINGLE IMAGE========================
-router.post("/upload", async (req, res) => {
+router.post("/upload", authenticateToken, async (req, res) => {
   try {
     const fileStr = req.body.data;
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {

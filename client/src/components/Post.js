@@ -85,7 +85,7 @@ export default function Post({
         }),
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${userState.accessToken}`,
+          Authorization: `Bearer ${userState.accessToken}`,
         },
       }).then((res) => {
         setImage("");
