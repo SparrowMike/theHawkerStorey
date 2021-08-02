@@ -6,7 +6,6 @@ const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
 const cors = require("cors");
-const { cloudinary } = require("./utils/cloudinary");
 const path = require("path");
 
 //* =======================================
@@ -32,11 +31,6 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.static("public"));
 app.use(express.static("./client/build"));
-//* allow for pathing on deployment e.g. Heroku
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build", "index.html"));
-});
 
 //* =======================================
 //*            MONGOOSE CONNECTION
@@ -86,6 +80,13 @@ app.use("/v1/users", usersController);
 
 const sessionController = require("./controllers/sessions");
 app.use("/v1/sessions", sessionController);
+
+//* allow for pathing on deployment e.g. Heroku
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build", "index.html"));
+});
 
 //* =======================================
 //*              LISTENER
