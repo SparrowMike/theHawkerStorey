@@ -73,5 +73,3 @@ CLOUDINARY_API_KEY
 CLOUDINARY_API_SECRET
 CLOUDINARY_UPLOAD_PRESET (optional - preset for unsigned uploading)
 ```
-
-TESTING FOR GIT
