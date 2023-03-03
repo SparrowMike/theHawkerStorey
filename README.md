@@ -1,6 +1,3 @@
-A social app with CRUD feature for hawker stall reviews with user ability to upload
-images
-
 # Dependencies and Installation Guide
 
 ### 1. Back-End
